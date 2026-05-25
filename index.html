@@ -29,7 +29,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;b
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:54px;padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background .4s,border-color .4s;}
-.nav-logo{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.3px;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.3px;cursor:pointer;user-select:none;}
 .nav-logo span{color:var(--accent);}
 .nav-right{display:flex;align-items:center;gap:.6rem;}
 .dot-nav{display:flex;gap:5px;align-items:center;}
@@ -66,8 +66,11 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 .btn-primary:hover{background:var(--accent2);transform:translateY(-1px);}
 .btn-ghost{background:var(--surface);color:var(--text2);border:1px solid var(--border2);}
 .btn-ghost:hover{border-color:var(--accent);color:var(--text);transform:translateY(-1px);}
+.btn-danger{background:rgba(255,69,58,.15);color:var(--red);border:1px solid rgba(255,69,58,.3);}
+.btn-danger:hover{background:rgba(255,69,58,.25);}
+.btn-sm{padding:.35rem .75rem;font-size:.75rem;border-radius:8px;}
 
-/* CARDS — tap to expand */
+/* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.3rem 1.4rem;margin-bottom:.7rem;transition:border-color .25s,transform .2s,box-shadow .25s;cursor:pointer;position:relative;overflow:hidden;}
 .card::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,rgba(91,141,238,.06),transparent);opacity:0;transition:opacity .3s;pointer-events:none;}
 .card:hover{border-color:var(--border2);box-shadow:0 6px 28px var(--shadow);}
@@ -85,7 +88,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 .tag.green{background:rgba(50,215,75,.1);border-color:rgba(50,215,75,.2);color:var(--green);}
 .tag.yellow{background:rgba(255,214,10,.1);border-color:rgba(255,214,10,.2);color:var(--yellow);}
 
-/* EXPAND PANEL — typewriter reveal */
+/* EXPAND PANEL */
 .expand-panel{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
 .expand-panel.open{max-height:600px;}
 .expand-body{padding-top:.9rem;border-top:1px solid var(--border);margin-top:.9rem;}
@@ -94,10 +97,6 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 .expand-body strong{color:var(--text);font-weight:600;}
 .expand-body .src{font-family:'Lora',serif;font-style:italic;font-size:.75rem;color:var(--text3);margin-top:.7rem;display:block;}
 .expand-stat{display:inline-flex;align-items:center;gap:.4rem;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:.3rem .75rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);margin-top:.7rem;}
-
-/* Typewriter chars */
-.tw-char{opacity:0;animation:twIn .02s ease forwards;}
-@keyframes twIn{to{opacity:1;}}
 
 /* SKILL BARS */
 .skill-wrap{margin-bottom:1rem;}
@@ -118,8 +117,8 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 .tl-title{font-family:'Syne',sans-serif;font-size:.97rem;font-weight:700;letter-spacing:-.3px;margin-bottom:.25rem;}
 .tl-short{color:var(--text2);font-size:.8rem;line-height:1.6;}
 
-/* BLOG */
-.blog-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:.7rem;transition:all .25s;cursor:pointer;}
+/* ══ BLOG ══ */
+.blog-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:.7rem;transition:all .25s;cursor:pointer;position:relative;}
 .blog-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 28px var(--shadow);}
 .blog-card.expanded{border-color:var(--accent);}
 .blog-img{height:90px;background:linear-gradient(135deg,var(--bg3),var(--bg2));display:flex;align-items:center;justify-content:center;font-size:2.8rem;}
@@ -128,9 +127,38 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 .blog-card h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:-.3px;margin-bottom:.35rem;}
 .blog-card .blog-preview{color:var(--text2);font-size:.79rem;line-height:1.6;}
 .blog-full{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);padding:0 1.15rem;}
-.blog-full.open{max-height:800px;padding:0 1.15rem .9rem;}
+.blog-full.open{max-height:1000px;padding:0 1.15rem .9rem;}
 .blog-full p{color:var(--text2);font-size:.81rem;line-height:1.8;margin-top:.6rem;}
 .blog-full p+p{margin-top:.5rem;}
+.blog-admin-btns{display:flex;gap:.4rem;padding:.6rem 1.15rem .9rem;border-top:1px solid var(--border);}
+
+/* ADMIN MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:1.75rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;transform:translateY(20px);transition:transform .3s;}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal h2{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.25rem;letter-spacing:-.5px;}
+.modal-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:8px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.form-group{margin-bottom:1rem;}
+.form-label{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem;display:block;}
+.form-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:.65rem .85rem;color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.form-input:focus{border-color:var(--accent);}
+.form-textarea{min-height:120px;resize:vertical;line-height:1.6;}
+.form-row{display:flex;gap:.6rem;}
+.form-row .form-group{flex:1;}
+.admin-bar{display:flex;align-items:center;gap:.5rem;background:rgba(91,141,238,.08);border:1px solid rgba(91,141,238,.2);border-radius:12px;padding:.6rem 1rem;margin-bottom:1rem;}
+.admin-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);flex-shrink:0;}
+.admin-bar span{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--accent);flex:1;}
+.loading-spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:.6rem 1.2rem;font-size:.8rem;font-weight:500;z-index:2000;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.success{border-color:var(--green);color:var(--green);}
+.toast.error{border-color:var(--red);color:var(--red);}
+.firebase-notice{background:rgba(255,214,10,.06);border:1px solid rgba(255,214,10,.2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1rem;}
+.firebase-notice p{color:var(--text2);font-size:.79rem;line-height:1.7;}
+.firebase-notice strong{color:var(--yellow);}
+.firebase-notice code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--bg3);padding:.1rem .35rem;border-radius:4px;color:var(--accent2);}
 
 /* QUOTE */
 .quote-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:.7rem;position:relative;overflow:hidden;transition:all .25s;cursor:pointer;}
@@ -179,12 +207,8 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 .about-box strong{color:var(--text);font-weight:600;}
 .birth-tag{display:inline-flex;align-items:center;gap:.35rem;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:.28rem .75rem;margin-top:.85rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2);}
 .birth-tag span{color:var(--accent);}
-
-/* ANIMAL GRID */
 .animal-grid{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem;}
 .animal-tag{background:rgba(50,215,75,.08);border:1px solid rgba(50,215,75,.2);color:var(--green);font-size:.75rem;padding:.22rem .6rem;border-radius:8px;display:flex;align-items:center;gap:.3rem;}
-
-/* ORG ITEM */
 .org-item{display:flex;align-items:center;gap:.8rem;padding:.65rem 0;border-bottom:1px solid var(--border);}
 .org-item:last-child{border-bottom:none;}
 .org-icon{font-size:1.3rem;flex-shrink:0;}
@@ -213,8 +237,72 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 <div class="glow-orb a"></div>
 <div class="glow-orb b"></div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h2>🔐 Admin Login</h2>
+    <div class="firebase-notice">
+      <p>Masukkan password untuk mengakses mode admin blog.</p>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <div id="loginError" style="color:var(--red);font-size:.78rem;margin-bottom:.8rem;display:none;">Password salah. Coba lagi.</div>
+    <button class="btn btn-primary" style="width:100%;" onclick="doLogin()">Masuk</button>
+  </div>
+</div>
+
+<!-- ADD/EDIT BLOG MODAL -->
+<div class="modal-overlay" id="blogModal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModal('blogModal')">✕</button>
+    <h2 id="blogModalTitle">✍️ Tulis Blog Baru</h2>
+    <div class="form-group">
+      <label class="form-label">Emoji / Ikon Post</label>
+      <input class="form-input" id="blogEmoji" placeholder="🔧" maxlength="4"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Judul</label>
+      <input class="form-input" id="blogTitle" placeholder="Judul blog kamu..."/>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Tanggal</label>
+        <input class="form-input" id="blogDate" type="date"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tag 1</label>
+        <input class="form-input" id="blogTag1" placeholder="Pengalaman"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tag 2 (opsional)</label>
+      <input class="form-input" id="blogTag2" placeholder="PKL"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Preview (1 kalimat)</label>
+      <input class="form-input" id="blogPreview" placeholder="Ringkasan singkat yang muncul di kartu..."/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Isi Blog (paragraf, pisahkan dengan baris kosong)</label>
+      <textarea class="form-input form-textarea" id="blogContent" placeholder="Tulis isi blog di sini...&#10;&#10;Paragraf baru dengan baris kosong di antaranya."></textarea>
+    </div>
+    <div style="display:flex;gap:.6rem;">
+      <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('blogModal')">Batal</button>
+      <button class="btn btn-primary" style="flex:1;" id="saveBlogBtn" onclick="saveBlog()">
+        <span id="saveBlogLabel">Simpan</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <nav>
-  <div class="nav-logo">~/<span>Fastend</span></div>
+  <div class="nav-logo" id="navLogo">~/<span>Fastend</span></div>
   <div class="nav-right">
     <div class="dot-nav" id="dotNav"></div>
     <button class="theme-btn" id="themeBtn">🌙</button>
@@ -223,7 +311,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 
 <div id="carousel">
 
-<!-- ══ SLIDE 0 : HOME ══ -->
+<!-- SLIDE 0: HOME -->
 <div class="slide" id="s0">
 <div class="slide-inner">
   <div class="status-badge a1"><div class="status-dot"></div>Open to Collaborate</div>
@@ -231,7 +319,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
   <p class="hero-bio a3">Teknisi hardware, Duta Genre &amp; fast learner dari Banjarnegara yang selalu penasaran sama hal baru — dari PCB sampai ngoding, dari catur sampai reptil.</p>
   <div class="btn-row a4">
     <button class="btn btn-primary" onclick="goTo(1)">Kenalan dulu →</button>
-    <button class="btn btn-ghost" onclick="goTo(7)">Hubungi</button>
+    <button class="btn btn-ghost" onclick="goTo(8)">Hubungi</button>
   </div>
   <div class="sdiv a5"></div>
   <div class="about-box a5">
@@ -242,26 +330,23 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 </div>
 
-<!-- ══ SLIDE 1 : TENTANG ══ -->
+<!-- SLIDE 1: TENTANG -->
 <div class="slide" id="s1">
 <div class="slide-inner">
   <div class="section-tag a1">👤 Tentang Saya</div>
   <h2 class="page-title a2">Siapa itu<br>Fastend?</h2>
   <p class="page-subtitle a3">Lebih dari sekadar nama — ini orangnya.</p>
-
   <div class="about-box a3">
-    <p>Nama lengkapku <strong>Fastend Muchammad</strong>, tapi orang-orang biasa manggil aku <strong>Sten</strong> atau cukup <strong>Ten</strong>. Dua huruf, tapi sudah cukup buat kenalan.</p>
+    <p>Nama lengkapku <strong>Fastend Muchammad</strong>, tapi orang-orang biasa manggil aku <strong>Sten</strong> atau cukup <strong>Ten</strong>.</p>
     <p>Aku lahir dan besar di <strong>Banjarnegara, Jawa Tengah</strong> — kota kecil yang justru bikin aku belajar banyak tentang kreativitas dan keterbatasan yang jadi kekuatan.</p>
     <div class="birth-tag">🎂 <span>14 Maret 2007</span> · Banjarnegara, Jawa Tengah</div>
   </div>
-
   <div class="sec-label a4">— Nickname</div>
   <div class="a4" style="margin-bottom:1.2rem;">
     <span class="nickname-badge">⚡ Fastend</span>
     <span class="nickname-badge">🔹 Sten</span>
     <span class="nickname-badge">✦ Ten</span>
   </div>
-
   <div class="sec-label a4">— Hewan Favorit</div>
   <div class="about-box a4" style="margin-bottom:1.2rem;">
     <p>Aku suka hampir semua hewan — punya rasa penasaran tinggi sama makhluk hidup. Yang paling aku suka:</p>
@@ -273,13 +358,11 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     </div>
     <p style="margin-top:.7rem;font-size:.78rem;color:var(--text3);">Satu-satunya yang kurang: serangga kecil. Bukan fobia, cuma kurang nyaman aja.</p>
   </div>
-
   <div class="sec-label a5">— Minat Utama</div>
   <div class="about-box a5" style="margin-bottom:1.2rem;">
     <p>Dua hal yang selalu bikin aku excited: <strong>Game</strong> dan <strong>Teknologi</strong>. Tapi bukan cuma main atau pakai — aku suka ngerti cara kerjanya, bongkar-pasang, dan eksplorasi lebih dalam.</p>
-    <p>Selain itu, aku juga doyan banget nyerap <strong>ilmu baru</strong> — khususnya yang disajikan dengan pendekatan unik, bukan hafalan kaku. Kalau cara penyampaiannya menarik, materi sepenting apapun langsung nyantol.</p>
+    <p>Selain itu, aku juga doyan banget nyerap <strong>ilmu baru</strong> — khususnya yang disajikan dengan pendekatan unik, bukan hafalan kaku.</p>
   </div>
-
   <div class="sec-label a6">— Organisasi (Kelas 10 SMK)</div>
   <div class="about-box a6">
     <div class="org-item"><span class="org-icon">🏐</span><div><div class="org-name">Voli</div><div class="org-desc">Tim voli sekolah — kerja sama &amp; koordinasi lapangan</div></div></div>
@@ -290,13 +373,12 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 </div>
 
-<!-- ══ SLIDE 2 : PENGALAMAN ══ -->
+<!-- SLIDE 2: PENGALAMAN -->
 <div class="slide" id="s2">
 <div class="slide-inner">
   <div class="section-tag a1">📌 Pengalaman</div>
   <h2 class="page-title a2">Perjalanan<br>Hidup</h2>
   <p class="page-subtitle a3">Tap tiap titik untuk cerita lengkapnya.</p>
-
   <div class="timeline a3">
     <div class="tl-item" onclick="toggleExpand('tl0')">
       <div class="tl-dot"></div>
@@ -305,7 +387,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
       <div class="tl-short">Pendidikan dasar di Madukara, Banjarnegara. Lulus dalam 7 tahun.</div>
       <div class="expand-panel" id="tl0">
         <div class="expand-body">
-          <p>Di sinilah semuanya bermula. SD bukan cuma tempat belajar baca-tulis — tapi tempat pertama kali aku ngerti artinya <strong>penasaran</strong>. Suka bongkar mainan, suka tanya "kenapa bisa gitu?", dan mulai kenal dunia lebih luas.</p>
+          <p>Di sinilah semuanya bermula. SD bukan cuma tempat belajar baca-tulis — tapi tempat pertama kali aku ngerti artinya <strong>penasaran</strong>.</p>
           <p>Aku lulus dalam 7 tahun — ada proses yang bikin perjalanan lebih panjang, tapi justru itu yang ngajarin aku bahwa <strong>waktu bukan penentu nilai seseorang</strong>.</p>
           <span class="src">Madukara, Banjarnegara · 2013–2020</span>
         </div>
@@ -318,8 +400,8 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
       <div class="tl-short">Mulai mengembangkan minat teknologi dan kegiatan sosial.</div>
       <div class="expand-panel" id="tl1">
         <div class="expand-body">
-          <p>Masa SMP adalah titik balik. Di sini aku mulai <strong>serius tertarik sama teknologi</strong> — komputer, elektronik, dan cara kerja perangkat di sekitarku. Bukan dari kelas, tapi dari rasa penasaran sendiri.</p>
-          <p>Kegiatan sosial juga mulai aku ikuti, dan itu ngasih pelajaran berharga tentang <strong>cara berinteraksi dan komunikasi yang efektif</strong> sama orang-orang dari berbagai latar belakang.</p>
+          <p>Masa SMP adalah titik balik. Di sini aku mulai <strong>serius tertarik sama teknologi</strong> — komputer, elektronik, dan cara kerja perangkat di sekitarku.</p>
+          <p>Kegiatan sosial juga mulai aku ikuti, dan itu ngasih pelajaran berharga tentang <strong>cara berinteraksi dan komunikasi yang efektif</strong>.</p>
           <span class="src">SMP Negeri 1 Madukara · 2020–2023</span>
         </div>
       </div>
@@ -328,11 +410,11 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
       <div class="tl-dot now"></div>
       <div class="tl-year">2023 – Sekarang</div>
       <div class="tl-title">SMKN 2 Bawang</div>
-      <div class="tl-short">Teknik Elektronika. Aktif organisasi, PKL, dan jadi Duta Genre.</div>
+      <div class="tl-short">Teknik Elektronika. Aktif organisasi, PKL 6 bulan, dan jadi Duta Genre.</div>
       <div class="expand-panel" id="tl2">
         <div class="expand-body">
           <p>SMKN 2 Bawang — tempat aku beneran tumbuh. Jurusan <strong>Teknik Elektronika</strong> ngasih fondasi teknis yang kuat: dari solder-desolder, baca skematik, sampai perbaikan hardware level komponen.</p>
-          <p>Kelas 10, aku aktif di <strong>4 organisasi sekaligus</strong>: Voli, PIK-R, Pramuka, dan Supporter — bukan karena disuruh, tapi karena mau ngerasain sebanyak mungkin pengalaman.</p>
+          <p>Kelas 10, aku aktif di <strong>4 organisasi sekaligus</strong>: Voli, PIK-R, Pramuka, dan Supporter.</p>
           <p>Puncaknya, aku terpilih sebagai <strong>Duta Genre (Generasi Berencana)</strong> Kecamatan Pagedongan — pengalaman yang ngubah cara aku melihat kepemimpinan dan tanggung jawab sosial.</p>
           <span class="src">SMKN 2 Bawang, Banjarnegara · 2023–sekarang</span>
         </div>
@@ -366,170 +448,134 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <div class="card-top">
       <span class="card-icon">🛠️</span>
       <div style="flex:1">
-        <h3>PKL — Hardware Engineer</h3>
-        <p class="card-short">3 bulan praktik kerja lapangan di bidang service &amp; hardware engineering.</p>
+        <h3>PKL — Hardware Engineer (6 Bulan Total)</h3>
+        <p class="card-short">POLYTRON 3 bulan + MEGATRON di sekolah 3 bulan = 6 bulan PKL total.</p>
       </div>
       <span class="card-chevron">›</span>
     </div>
-    <div class="card-meta"><span class="tag">Hardware</span><span class="tag green">Soldering</span><span class="tag">Teknisi</span></div>
+    <div class="card-meta"><span class="tag">Hardware</span><span class="tag green">POLYTRON</span><span class="tag yellow">MEGATRON</span><span class="tag">6 Bulan</span></div>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Tiga bulan PKL adalah tempat teori ketemu realita. Aku ngelakuin <strong>diagnosa kerusakan, solder SMD, ganti komponen,</strong> dan berhadapan sama pelanggan yang nggak selalu sabar.</p>
-        <p>Yang paling berkesan: ngebenerin perangkat yang sudah divonis mati. Ada kepuasan tersendiri waktu layar nyala lagi — seperti ngasih nyawa kedua ke sesuatu. Itu yang bikin aku makin yakin sama bidang ini.</p>
-        <span class="src">PKL · Bidang Service &amp; Hardware Engineering · 3 Bulan</span>
+        <p><strong>POLYTRON (3 Bulan)</strong> — Praktik langsung di industri service elektronik profesional. Diagnosa kerusakan, solder SMD, ganti komponen, dan berhadapan sama pelanggan nyata setiap hari.</p>
+        <p><strong>MEGATRON di Sekolah (3 Bulan)</strong> — Melanjutkan PKL di laboratorium sekolah dengan peralatan MEGATRON. Pendalaman teknis elektronika dengan pendekatan yang lebih terstruktur dan beragam jenis perangkat.</p>
+        <p>Total <strong>6 bulan PKL</strong> ngasih aku pengalaman yang jauh lebih luas dari rata-rata — dua lingkungan kerja yang berbeda, dua pendekatan yang saling melengkapi.</p>
+        <span class="src">PKL · POLYTRON 3 Bulan + MEGATRON (Sekolah) 3 Bulan · Total 6 Bulan</span>
       </div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- ══ SLIDE 3 : SKILLS ══ -->
+<!-- SLIDE 3: SKILLS -->
 <div class="slide" id="s3">
 <div class="slide-inner">
   <div class="section-tag a1">⚙️ Skills</div>
   <h2 class="page-title a2">Skill &amp;<br>Kemampuan</h2>
   <p class="page-subtitle a3">Tap item mana saja untuk cerita di baliknya.</p>
-
   <div class="sec-label a3">— HARD SKILL</div>
   <div id="hardSkills" class="a4"></div>
-
   <div class="sdiv"></div>
   <div class="sec-label">— SOFT SKILL</div>
   <div id="softSkills"></div>
-
   <div class="sdiv"></div>
   <div class="sec-label">— HOBI</div>
   <div id="hobiCards"></div>
 </div>
 </div>
 
-<!-- ══ SLIDE 4 : BLOG ══ -->
+<!-- SLIDE 4: BLOG -->
 <div class="slide" id="s4">
 <div class="slide-inner">
   <div class="section-tag a1">✍️ Blog</div>
   <h2 class="page-title a2">Blog<br>Pribadi</h2>
   <p class="page-subtitle a3">Tap kartu untuk baca isi lengkapnya.</p>
 
-  <div class="blog-card a3" onclick="toggleBlog(this)">
-    <div class="blog-img">🔧</div>
-    <div class="blog-body">
-      <div class="blog-date">14 Mei 2025</div>
-      <h3>Pengalaman PKL 3 Bulan: Belajar dari Dunia Nyata</h3>
-      <p class="blog-preview">Ternyata dunia kerja jauh beda dari teori di kelas. Ini yang aku pelajari...</p>
-      <div class="card-meta" style="margin-top:.5rem"><span class="tag">Pengalaman</span><span class="tag green">PKL</span></div>
-    </div>
-    <div class="blog-full">
-      <p>Hari pertama PKL, aku langsung dikasih motherboard rusak dan diminta diagnosa. Tanpa buku, tanpa guru di sebelah — cuma aku, multimeter, dan insting.</p>
-      <p>Ternyata dunia kerja nggak butuh kamu hafal semua teori. Yang dibutuhkan adalah <strong>kemampuan problem solving yang cepat</strong> dan keberanian buat nyoba walau takut salah.</p>
-      <p>3 bulan itu aku belajar lebih banyak dari 3 tahun teori di kelas. Bukan karena sekolah jelek — tapi karena <strong>pengalaman nyata punya tekstur yang berbeda</strong>. Ada beban tanggung jawab, ada ekspektasi klien, dan ada kepuasan yang tidak bisa didapat dari nilai ujian.</p>
-    </div>
+  <!-- Admin bar (hanya muncul saat login) -->
+  <div class="admin-bar a2" id="adminBar" style="display:none;">
+    <div class="admin-dot"></div>
+    <span>Mode Admin Aktif</span>
+    <button class="btn btn-primary btn-sm" onclick="openBlogModal()">+ Tulis Post</button>
+    <button class="btn btn-ghost btn-sm" onclick="doLogout()">Keluar</button>
   </div>
 
-  <div class="blog-card a4" onclick="toggleBlog(this)">
-    <div class="blog-img">🎯</div>
-    <div class="blog-body">
-      <div class="blog-date">2 April 2025</div>
-      <h3>Jadi Duta Genre: Antara Bangga dan Tanggung Jawab</h3>
-      <p class="blog-preview">Mewakili generasi muda kecamatan bukan hal mudah. Tapi ini salah satu momen terbaik...</p>
-      <div class="card-meta" style="margin-top:.5rem"><span class="tag">Kepemimpinan</span><span class="tag yellow">Sosial</span></div>
-    </div>
-    <div class="blog-full">
-      <p>Waktu pertama kali dengar nama aku disebut sebagai Duta Genre, yang aku rasain bukan bangga — tapi <strong>takut</strong>. Takut nggak bisa memenuhi ekspektasi.</p>
-      <p>Tapi justru dari situ aku belajar: <strong>kepemimpinan yang baik selalu dimulai dari rasa takut yang dikelola dengan benar</strong>. Bukan takut yang melumpuhkan, tapi takut yang bikin kamu lebih serius.</p>
-      <p>Aku belajar bicara di depan orang-orang yang usianya jauh di atasku, belajar dengerin sebelum ngomong, dan belajar bahwa <strong>dampak sosial yang nyata dimulai dari percakapan yang jujur</strong>.</p>
-    </div>
+  <!-- Firebase config notice (hanya muncul saat belum dikonfigurasi) -->
+  <div class="firebase-notice a3" id="firebaseNotice" style="display:none;">
+    <p>⚠️ <strong>Perlu setup Firebase:</strong> Paste config Firebase kamu di dalam file HTML ini. Cari bagian <code>FIREBASE_CONFIG_HERE</code> dan ganti dengan config dari Firebase Console.</p>
   </div>
 
-  <div class="blog-card a5" onclick="toggleBlog(this)">
-    <div class="blog-img">💡</div>
-    <div class="blog-body">
-      <div class="blog-date">10 Maret 2025</div>
-      <h3>Kenapa Aku Suka Bongkar Elektronik Sejak Kecil</h3>
-      <p class="blog-preview">Rasa penasaran yang bikin ortu was-was tapi ternyata jadi fondasi passion-ku...</p>
-      <div class="card-meta" style="margin-top:.5rem"><span class="tag">Hardware</span><span class="tag">Cerita</span></div>
-    </div>
-    <div class="blog-full">
-      <p>Waktu SD, aku pernah bongkar remote TV yang rusak — bukan buat diperbaiki, tapi cuma penasaran ada apa di dalamnya. Hasilnya? Remote makin rusak, dapat marah, tapi aku dapat sesuatu yang lebih berharga: <strong>rasa penasaran yang tidak bisa dihentikan</strong>.</p>
-      <p>Dari situ aku mulai ngerti bahwa <strong>belajar yang paling nempel adalah belajar yang lahir dari pertanyaan sendiri</strong>, bukan dari suruhan orang lain.</p>
-    </div>
-  </div>
+  <div id="blogList" class="a3"></div>
 
-  <div class="card a6" style="border-style:dashed;text-align:center;cursor:default;" >
+  <div class="card a6" id="addBlogHint" style="border-style:dashed;text-align:center;cursor:pointer;" onclick="checkAdminForNew()">
     <div style="font-size:1.4rem;margin-bottom:.4rem;">✏️</div>
-    <h3 style="margin-bottom:.2rem;">Lebih banyak cerita segera hadir</h3>
-    <p class="card-short">Fitur tulis blog sendiri sedang dalam pengembangan.</p>
+    <h3 style="margin-bottom:.2rem;" id="addBlogHintText">Punya cerita baru?</h3>
+    <p class="card-short" id="addBlogHintSub">Login sebagai admin untuk menulis post baru.</p>
   </div>
 </div>
 </div>
 
-<!-- ══ SLIDE 5 : ILMU BARU ══ -->
+<!-- SLIDE 5: ILMU BARU -->
 <div class="slide" id="s5">
 <div class="slide-inner">
   <div class="section-tag a1">🧠 Ilmu Baru</div>
   <h2 class="page-title a2">Info &amp;<br>Ilmu Baru</h2>
   <p class="page-subtitle a3">Fakta &amp; insight — tap untuk penjelasan lebih dalam.</p>
-
   <div class="ilmu-card a3" onclick="toggleIlmu(this)">
     <div class="ilmu-num">// 001</div>
     <h3>Kenapa Suhu 350°C Ideal untuk Soldering?</h3>
     <p class="ilmu-short">Sweet spot solder timah-timbal yang nggak merusak komponen.</p>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Solder alloy Sn63/Pb37 punya titik leleh di sekitar <strong>183°C</strong> — tapi kenapa iron disetel 350°C? Karena ada thermal transfer lag antara ujung iron dan pad PCB. Kalau terlalu rendah, solder tidak mengalir sempurna dan hasilnya <em>cold joint</em> yang rapuh.</p>
-        <p>Di atas 380°C, risiko delamination PCB dan kerusakan komponen SMD sensitif (seperti kapasitor MLCC dan IC fine-pitch) meningkat drastis. <strong>350°C adalah titik aman yang efisien</strong> — panas cukup, risiko minimal.</p>
+        <p>Solder alloy Sn63/Pb37 punya titik leleh di sekitar <strong>183°C</strong> — tapi kenapa iron disetel 350°C? Karena ada thermal transfer lag antara ujung iron dan pad PCB.</p>
+        <p>Di atas 380°C, risiko delamination PCB meningkat drastis. <strong>350°C adalah titik aman yang efisien</strong> — panas cukup, risiko minimal.</p>
         <span class="src">IPC J-STD-001 Standard — Soldering Quality Requirements</span>
       </div>
     </div>
   </div>
-
   <div class="ilmu-card a4" onclick="toggleIlmu(this)">
     <div class="ilmu-num">// 002</div>
     <h3>Hukum Moore: Setiap 2 Tahun, Chip Berlipat Ganda</h3>
     <p class="ilmu-short">Prediksi 1965 yang mendorong revolusi teknologi selama 5 dekade.</p>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Gordon Moore, co-founder Intel, mengobservasi pada 1965 bahwa jumlah transistor dalam IC berlipat ganda tiap ~2 tahun dengan biaya yang sama. Ini bukan hukum fisika — ini <strong>pengamatan empiris yang jadi self-fulfilling prophecy</strong> karena industri menjadikannya target.</p>
+        <p>Gordon Moore mengobservasi pada 1965 bahwa jumlah transistor dalam IC berlipat ganda tiap ~2 tahun. Ini <strong>pengamatan empiris yang jadi self-fulfilling prophecy</strong>.</p>
         <p>Hasilnya: prosesor yang hari ini ada di HP murah lebih powerful dari superkomputer 1990-an. Tapi sejak 2016, laju ini mulai melambat karena batas fisik atom semakin terasa.</p>
         <span class="src">Gordon Moore, "Cramming More Components onto Integrated Circuits" — Electronics Magazine, April 1965</span>
       </div>
     </div>
   </div>
-
   <div class="ilmu-card a5" onclick="toggleIlmu(this)">
     <div class="ilmu-num">// 003</div>
     <h3>Gen Z: Generasi Pertama yang Lahir di Era Internet</h3>
     <p class="ilmu-short">Bukan cuma "pakai internet" — tapi dunia mereka memang terbentuk di sana.</p>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Millennial tumbuh bersama internet — tapi punya memori dunia tanpa smartphone. Gen Z (1997–2012) <strong>tidak punya baseline itu</strong>. Otak mereka berkembang dengan koneksi konstan, notifikasi, dan validasi sosial digital sejak kecil.</p>
-        <p>Ini bukan hal sepele — pola pikir, cara belajar, cara membangun hubungan, sampai cara mengelola emosi Gen Z terbentuk di ekosistem yang sama sekali berbeda dari generasi sebelumnya.</p>
-        <span class="src">Pew Research Center, "Defining generations: Where Millennials end and Generation Z begins" — 2019</span>
+        <p>Millennial tumbuh bersama internet — tapi punya memori dunia tanpa smartphone. Gen Z (1997–2012) <strong>tidak punya baseline itu</strong>. Otak mereka berkembang dengan koneksi konstan sejak kecil.</p>
+        <p>Pola pikir, cara belajar, cara membangun hubungan Gen Z terbentuk di ekosistem yang sama sekali berbeda dari generasi sebelumnya.</p>
+        <span class="src">Pew Research Center, "Defining generations" — 2019</span>
       </div>
     </div>
   </div>
-
   <div class="ilmu-card a6" onclick="toggleIlmu(this)">
     <div class="ilmu-num">// 004</div>
     <h3>Efek Dunning-Kruger: Makin Tahu, Makin Merasa Bodoh</h3>
     <p class="ilmu-short">Paradoks kompetensi yang penting banget dipahami sebelum belajar apa pun.</p>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Orang yang baru belajar sesuatu cenderung overestimate kemampuan mereka — karena belum tahu apa yang belum mereka tahu. Ini yang disebut "<strong>peak of Mount Stupid</strong>" dalam kurva Dunning-Kruger.</p>
-        <p>Ironisnya, orang yang benar-benar ahli justru paling sering meragukan diri sendiri — karena mereka tahu betapa luas dan dalamnya bidang yang mereka tekuni. <strong>Rendah hati bukan kelemahan — itu tanda kamu sudah cukup dalam.</strong></p>
-        <span class="src">David Dunning &amp; Justin Kruger, "Unskilled and Unaware of It" — Journal of Personality and Social Psychology, 1999</span>
+        <p>Orang yang baru belajar sesuatu cenderung overestimate kemampuan mereka. Ini yang disebut "<strong>peak of Mount Stupid</strong>" dalam kurva Dunning-Kruger.</p>
+        <p>Ironisnya, orang yang benar-benar ahli justru paling sering meragukan diri sendiri. <strong>Rendah hati bukan kelemahan — itu tanda kamu sudah cukup dalam.</strong></p>
+        <span class="src">Dunning &amp; Kruger, "Unskilled and Unaware of It" — Journal of Personality and Social Psychology, 1999</span>
       </div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- ══ SLIDE 6 : JURNAL ══ -->
+<!-- SLIDE 6: JURNAL -->
 <div class="slide" id="s6">
 <div class="slide-inner">
   <div class="section-tag a1">🧩 Jurnal</div>
   <h2 class="page-title a2">Jurnal<br>Psikologi</h2>
-  <p class="page-subtitle a3">Insight psikologi yang relate buat Gen Z — tap untuk baca lebih dalam.</p>
-
+  <p class="page-subtitle a3">Insight psikologi yang relate buat Gen Z.</p>
   <div class="jurnal-card a3" onclick="toggleJurnal(this)">
     <div class="jurnal-label">🧠 Kesehatan Mental</div>
     <h3>Doom Scrolling &amp; Kecemasan: Kenapa Kita Tidak Bisa Berhenti?</h3>
@@ -537,14 +583,12 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <div class="jurnal-footer"><span class="tag">Dopamin</span><span class="tag yellow">Algoritma</span><span class="tag">Kecemasan</span></div>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Otak manusia punya <strong>negativity bias</strong> — secara evolusi, kita lebih waspada terhadap ancaman daripada hal positif. Platform sosmed mengeksploitasi ini: konten yang memancing rasa takut, marah, atau penasaran dapat lebih banyak engagement.</p>
-        <p>Hasilnya: kita scroll terus, makin cemas, tapi tidak bisa berhenti karena setiap scroll berpotensi kasih reward baru (info menarik, like, notifikasi). Ini adalah <strong>variable reward schedule</strong> — mekanisme yang sama dengan mesin slot kasino.</p>
-        <p>Solusi bukan berarti hapus semua sosmed. Tapi mulai dengan <strong>intentional browsing</strong>: buka dengan tujuan, bukan karena bosan. Bedanya besar.</p>
+        <p>Otak manusia punya <strong>negativity bias</strong> — secara evolusi, kita lebih waspada terhadap ancaman. Platform sosmed mengeksploitasi ini: konten yang memancing rasa takut dapat lebih banyak engagement.</p>
+        <p>Hasilnya: kita scroll terus karena setiap scroll berpotensi kasih reward baru. Ini adalah <strong>variable reward schedule</strong> — mekanisme yang sama dengan mesin slot kasino.</p>
         <span class="src">Tristan Harris, "The Social Dilemma" — Center for Humane Technology, 2020</span>
       </div>
     </div>
   </div>
-
   <div class="jurnal-card a4" onclick="toggleJurnal(this)">
     <div class="jurnal-label">💭 Self-Awareness</div>
     <h3>Quarter-Life Crisis: Normal Banget di Usia 17–25</h3>
@@ -552,14 +596,12 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <div class="jurnal-footer"><span class="tag green">Normal</span><span class="tag">Identitas</span><span class="tag yellow">Gen Z</span></div>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Quarter-life crisis adalah periode kebingungan identitas dan arah yang umumnya terjadi di usia 20-an awal. Tapi untuk Gen Z, ini sering dimulai lebih awal — sekitar 17–19 tahun — karena <strong>tekanan sosial dan perbandingan di sosmed jauh lebih intens</strong>.</p>
-        <p>"Teman-teman udah tahu mau kemana, aku belum." Pikiran itu berbahaya karena basisnya adalah <strong>highlight reel</strong> orang lain, bukan realita mereka. Hampir semua orang di usia ini sama-sama bingung — hanya yang kelihatan di feed saja yang berbeda.</p>
-        <p>Kunci: bedakan antara <strong>perbandingan yang menggerakkan</strong> (inspirasi) vs <strong>perbandingan yang melumpuhkan</strong> (iri). Yang pertama sehat, yang kedua perlu diwaspadai.</p>
-        <span class="src">Robbins &amp; Wilner, "Quarterlife Crisis: The Unique Challenges of Life in Your Twenties" — Tarcher/Putnam, 2001</span>
+        <p>Quarter-life crisis adalah periode kebingungan identitas dan arah. Untuk Gen Z, ini sering dimulai lebih awal — sekitar 17–19 tahun — karena <strong>tekanan sosial dan perbandingan di sosmed jauh lebih intens</strong>.</p>
+        <p>Kunci: bedakan antara <strong>perbandingan yang menggerakkan</strong> (inspirasi) vs <strong>perbandingan yang melumpuhkan</strong> (iri).</p>
+        <span class="src">Robbins &amp; Wilner, "Quarterlife Crisis" — Tarcher/Putnam, 2001</span>
       </div>
     </div>
   </div>
-
   <div class="jurnal-card a5" onclick="toggleJurnal(this)">
     <div class="jurnal-label">⚡ Produktivitas</div>
     <h3>Kenapa Fokus Makin Susah di Era Digital?</h3>
@@ -567,24 +609,21 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <div class="jurnal-footer"><span class="tag">Fokus</span><span class="tag yellow">Pomodoro</span><span class="tag">Digital Detox</span></div>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Notifikasi, short-video, dan multi-tab melatih otak kita untuk mengharapkan <strong>reward instan</strong>. Setiap kali kita cek HP saat bosan, kita memperkuat sirkuit yang bilang "saat tidak nyaman, cari stimulasi baru."</p>
-        <p>Ini bukan ADHD klinis — itu <strong>kondisi yang kita bangun sendiri melalui kebiasaan</strong>. Kabar baiknya: karena dilatih, bisa dilatih ulang. Mulai dengan 25 menit focus block tanpa gangguan (teknik Pomodoro), konsisten 2 minggu, dan lihat perbedaannya.</p>
-        <p>Kunci lain: <strong>boring time is training time</strong>. Saat antri atau menunggu, tahan diri dari buka HP. Itu adalah latihan untuk otak agar nyaman dengan keheningan — kondisi di mana kreativitas dan fokus tumbuh.</p>
-        <span class="src">Cal Newport, "Deep Work: Rules for Focused Success in a Distracted World" — Grand Central Publishing, 2016</span>
+        <p>Notifikasi dan short-video melatih otak kita untuk mengharapkan <strong>reward instan</strong>. Ini bukan ADHD klinis — itu <strong>kondisi yang kita bangun sendiri melalui kebiasaan</strong>.</p>
+        <p>Mulai dengan 25 menit focus block tanpa gangguan (teknik Pomodoro). Dan ingat: <strong>boring time is training time</strong>.</p>
+        <span class="src">Cal Newport, "Deep Work" — Grand Central Publishing, 2016</span>
       </div>
     </div>
   </div>
-
   <div class="jurnal-card a6" onclick="toggleJurnal(this)">
     <div class="jurnal-label">🤝 Hubungan Sosial</div>
     <h3>Parasocial Relationship: Kenapa Kita Merasa "Kenal" Konten Kreator?</h3>
-    <p class="jurnal-short">Otak tidak bisa bedakan hubungan satu arah dan dua arah. Ini bukan buruk — asal sadar.</p>
+    <p class="jurnal-short">Otak tidak bisa bedakan hubungan satu arah dan dua arah.</p>
     <div class="jurnal-footer"><span class="tag">Sosial</span><span class="tag">Konten</span><span class="tag green">Self-Aware</span></div>
     <div class="expand-panel">
       <div class="expand-body">
-        <p>Parasocial relationship adalah hubungan emosional satu arah — kamu merasa kenal seseorang (youtuber, idol, streamer), padahal mereka tidak tahu kamu ada. Otak tidak punya mekanisme untuk membedakan ini dari hubungan nyata.</p>
-        <p>Ini bukan sesuatu yang perlu dipermalukan. Secara evolusi, <strong>otak manusia memproses wajah dan suara yang sering muncul sebagai "kenalan"</strong> — karena di era pra-media, kalau kamu sering lihat wajah seseorang, berarti kamu memang kenal mereka.</p>
-        <p>Tidak berbahaya selama kamu <strong>sadar batasnya</strong>: kamu tahu tentang mereka, tapi tidak kenal mereka. Bedanya satu kata, dampaknya besar untuk ekspektasi dan kesehatan mental kamu.</p>
+        <p>Parasocial relationship adalah hubungan emosional satu arah. Otak tidak punya mekanisme untuk membedakan ini dari hubungan nyata.</p>
+        <p>Tidak berbahaya selama kamu <strong>sadar batasnya</strong>: kamu tahu tentang mereka, tapi tidak kenal mereka.</p>
         <span class="src">Horton &amp; Wohl, "Mass Communication and Para-Social Interaction" — Psychiatry Journal, 1956</span>
       </div>
     </div>
@@ -592,52 +631,46 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 </div>
 
-<!-- ══ SLIDE 7 : QUOTES ══ -->
+<!-- SLIDE 7: QUOTES -->
 <div class="slide" id="s7">
 <div class="slide-inner">
   <div class="section-tag a1">💬 Quotes</div>
   <h2 class="page-title a2">Kata-kata<br>Orang Hebat</h2>
-  <p class="page-subtitle a3">Kutipan asli, sumber terverifikasi. Tap untuk konteks &amp; cerita di baliknya.</p>
-
+  <p class="page-subtitle a3">Kutipan asli, sumber terverifikasi. Tap untuk konteks.</p>
   <div class="quote-card a3" onclick="toggleQuote(this)">
     <div class="quote-text">"The people who are crazy enough to think they can change the world are the ones who do."</div>
     <div class="quote-author"><div class="quote-av">🍎</div><div><div class="quote-name">Steve Jobs</div><div class="quote-src"><em>Think Different Ad Campaign, Apple — 1997</em></div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Kalimat ini muncul di iklan ikonik Apple "Think Different" (1997), saat Jobs baru kembali ke Apple yang hampir bangkrut. <strong>Ini bukan sekadar slogan</strong> — ini adalah deklarasi filosofi yang mengubah arah perusahaan dan industri teknologi. Kata-kata ini juga refleksi pribadi Jobs: dia percaya irasionalitas tertentu adalah prerequisite untuk inovasi sejati.</div></div>
+    <div class="quote-context"><div class="quote-ctx-body">Kalimat ini muncul di iklan ikonik Apple "Think Different" (1997), saat Jobs baru kembali ke Apple yang hampir bangkrut. <strong>Ini bukan sekadar slogan</strong> — ini adalah deklarasi filosofi yang mengubah arah perusahaan dan industri teknologi.</div></div>
   </div>
-
   <div class="quote-card a4" onclick="toggleQuote(this)">
     <div class="quote-text">"It does not matter how slowly you go as long as you do not stop."</div>
     <div class="quote-author"><div class="quote-av">☯️</div><div><div class="quote-name">Konfusius</div><div class="quote-src"><em>The Analects — ~500 SM, Tiongkok</em></div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Konfusius mengajarkan bahwa <strong>kesabaran dan konsistensi melampaui kecepatan</strong>. Di era di mana semua serba instan — viral dalam satu malam, sukses dalam satu postingan — kutipan ini terasa makin relevan. Proses yang lambat tapi tidak berhenti akan selalu mengalahkan sprint yang kelelahan di tengah jalan.</div></div>
+    <div class="quote-context"><div class="quote-ctx-body">Konfusius mengajarkan bahwa <strong>kesabaran dan konsistensi melampaui kecepatan</strong>. Di era di mana semua serba instan, kutipan ini terasa makin relevan.</div></div>
   </div>
-
   <div class="quote-card a5" onclick="toggleQuote(this)">
     <div class="quote-text">"Education is the most powerful weapon which you can use to change the world."</div>
     <div class="quote-author"><div class="quote-av">✊</div><div><div class="quote-name">Nelson Mandela</div><div class="quote-src"><em>Pidato di Madison Park High School, Boston — 23 Juni 1990</em></div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Mandela bicara ini setelah 27 tahun dipenjara. <strong>Orang yang tahu betapa mahalnya harga kebebasan</strong> — dan ia memilih untuk bicara soal pendidikan, bukan senjata. Karena ia tahu, sistem apartheid tidak bisa dikalahkan hanya dengan pemberontakan fisik, tapi dengan generasi yang cukup terdidik untuk menolak ketidakadilan.</div></div>
+    <div class="quote-context"><div class="quote-ctx-body">Mandela bicara ini setelah 27 tahun dipenjara. <strong>Orang yang tahu betapa mahalnya harga kebebasan</strong> — dan ia memilih untuk bicara soal pendidikan.</div></div>
   </div>
-
   <div class="quote-card a6" onclick="toggleQuote(this)">
     <div class="quote-text">"I have not failed. I've just found 10,000 ways that won't work."</div>
     <div class="quote-author"><div class="quote-av">💡</div><div><div class="quote-name">Thomas Edison</div><div class="quote-src"><em>Dikutip oleh Harper's Monthly Magazine — 1890</em></div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Edison tidak menemukan bohlam di percobaan pertama — atau kedua, atau keseribu. Yang membedakannya bukan bakat, tapi <strong>cara mendefinisikan ulang kegagalan</strong>. Setiap percobaan yang tidak berhasil adalah data, bukan kekalahan. Mindset ini bukan positivity palsu — ini sistem iterasi yang nyata.</div></div>
+    <div class="quote-context"><div class="quote-ctx-body">Edison tidak menemukan bohlam di percobaan pertama. Yang membedakannya bukan bakat, tapi <strong>cara mendefinisikan ulang kegagalan</strong> sebagai data, bukan kekalahan.</div></div>
   </div>
-
   <div class="quote-card" onclick="toggleQuote(this)">
     <div class="quote-text">"Wherever you are, be all there."</div>
     <div class="quote-author"><div class="quote-av">🌿</div><div><div class="quote-name">Jim Elliot</div><div class="quote-src"><em>Jurnal Pribadi Jim Elliot — 1948</em></div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Di era multitasking dan notifikasi tanpa henti, kalimat ini adalah antidot. <strong>Hadir sepenuhnya</strong> — bukan secara fisik, tapi secara mental dan emosional — adalah skill yang makin langka dan makin berharga. Saat makan bersama keluarga, hadirlah. Saat belajar, hadirlah. Saat istirahat, hadirlah juga.</div></div>
+    <div class="quote-context"><div class="quote-ctx-body">Di era multitasking dan notifikasi tanpa henti, kalimat ini adalah antidot. <strong>Hadir sepenuhnya</strong> — bukan secara fisik, tapi secara mental dan emosional.</div></div>
   </div>
 </div>
 </div>
 
-<!-- ══ SLIDE 8 : KONTAK ══ -->
+<!-- SLIDE 8: KONTAK -->
 <div class="slide" id="s8">
 <div class="slide-inner">
   <div class="section-tag a1">📬 Kontak</div>
   <h2 class="page-title a2">Mari<br>Ngobrol 👋</h2>
   <p class="page-subtitle a3">Punya project, kolaborasi, atau cuma mau kenalan? Aku selalu terbuka.</p>
-
   <a class="contact-item a3" href="mailto:fastendmuhammad@gmail.com">
     <div class="contact-icon">✉️</div>
     <div><div class="contact-label">Email</div><div class="contact-sub">fastendmuhammad@gmail.com</div></div>
@@ -663,7 +696,6 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <div><div class="contact-label">Spotify</div><div class="contact-sub">Fastend Muchammad</div></div>
     <span class="contact-arr">›</span>
   </a>
-
   <div class="sdiv a6"></div>
   <div style="text-align:center;color:var(--text3);font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:1px;" class="a6">
     © 2025 Fastend Muchammad
@@ -674,55 +706,356 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div><!-- end carousel -->
 <div class="swipe-hint" id="swipeHint">‹ swipe horizontal › untuk navigasi</div>
 
+<!-- Firebase SDK -->
+<script type="module">
+// ══════════════════════════════════════════════════════
+// FIREBASE CONFIG — GANTI BAGIAN INI DENGAN CONFIG KAMU
+// Ambil dari: Firebase Console → Project Settings → Your Apps → SDK setup
+// ══════════════════════════════════════════════════════
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyALvLFu8niulNVrnNp8q5vCSwWO4T9ZFDE",
+  authDomain: "stendomain-1753f.firebaseapp.com",
+  projectId: "stendomain-1753f",
+  storageBucket: "stendomain-1753f.firebasestorage.app",
+  messagingSenderId: "424739432348",
+  appId: "1:424739432348:web:5051e99d8fbccfc0400a59",
+  measurementId: "G-W5W7W89BDD"
+};
+// ══════════════════════════════════════════════════════
+// PASSWORD ADMIN — GANTI SESUAI KEINGINAN
+// ══════════════════════════════════════════════════════
+const _ap = atob("RmFzdGVuZEFkbWluMjAyNQ=="); // default: FastendAdmin2025
+// ══════════════════════════════════════════════════════
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+let db = null;
+let firebaseOk = false;
+let isAdmin = false;
+let editingId = null;
+let blogPosts = [];
+
+// Static blog posts (selalu tampil, tidak bisa dihapus admin)
+const staticPosts = [
+  {
+    id: 'static-1',
+    emoji: '🔧',
+    title: 'Pengalaman PKL 6 Bulan: Belajar dari Dua Dunia',
+    date: '14 Mei 2025',
+    preview: 'POLYTRON dan MEGATRON — dua tempat PKL yang ngajarin hal berbeda tapi saling melengkapi...',
+    tags: ['Pengalaman','PKL'],
+    tagColors: ['','green'],
+    content: [
+      'Hari pertama di POLYTRON, aku langsung dikasih motherboard rusak dan diminta diagnosa. Tanpa buku, tanpa guru di sebelah — cuma aku, multimeter, dan insting.',
+      'Tiga bulan di sana ngajarin aku cara kerja dunia servis elektronik yang sesungguhnya: kecepatan, akurasi, dan komunikasi sama pelanggan yang tidak selalu sabar.',
+      'Tiga bulan berikutnya di MEGATRON (laboratorium sekolah) terasa berbeda — lebih terstruktur, lebih beragam jenis perangkat, dan lebih dalam secara teknis. Kalau POLYTRON ngajarin kecepatan, MEGATRON ngajarin ketelitian.',
+      'Total 6 bulan PKL adalah pengalaman terbaik yang aku dapat selama di SMK. Dua lingkungan, dua pendekatan, satu kesimpulan: <strong>pengalaman nyata punya tekstur yang tidak bisa didapat dari nilai ujian</strong>.'
+    ],
+    isStatic: true
+  },
+  {
+    id: 'static-2',
+    emoji: '🎯',
+    title: 'Jadi Duta Genre: Antara Bangga dan Tanggung Jawab',
+    date: '2 April 2025',
+    preview: 'Mewakili generasi muda kecamatan bukan hal mudah. Tapi ini salah satu momen terbaik...',
+    tags: ['Kepemimpinan','Sosial'],
+    tagColors: ['','yellow'],
+    content: [
+      'Waktu pertama kali dengar nama aku disebut sebagai Duta Genre, yang aku rasain bukan bangga — tapi <strong>takut</strong>. Takut nggak bisa memenuhi ekspektasi.',
+      'Tapi justru dari situ aku belajar: <strong>kepemimpinan yang baik selalu dimulai dari rasa takut yang dikelola dengan benar</strong>.',
+      'Aku belajar bicara di depan orang-orang yang usianya jauh di atasku, belajar dengerin sebelum ngomong, dan belajar bahwa <strong>dampak sosial yang nyata dimulai dari percakapan yang jujur</strong>.'
+    ],
+    isStatic: true
+  },
+  {
+    id: 'static-3',
+    emoji: '💡',
+    title: 'Kenapa Aku Suka Bongkar Elektronik Sejak Kecil',
+    date: '10 Maret 2025',
+    preview: 'Rasa penasaran yang bikin ortu was-was tapi ternyata jadi fondasi passion-ku...',
+    tags: ['Hardware','Cerita'],
+    tagColors: ['',''],
+    content: [
+      'Waktu SD, aku pernah bongkar remote TV yang rusak — bukan buat diperbaiki, tapi cuma penasaran ada apa di dalamnya. Hasilnya? Remote makin rusak, dapat marah, tapi aku dapat sesuatu yang lebih berharga: <strong>rasa penasaran yang tidak bisa dihentikan</strong>.',
+      'Dari situ aku mulai ngerti bahwa <strong>belajar yang paling nempel adalah belajar yang lahir dari pertanyaan sendiri</strong>, bukan dari suruhan orang lain.'
+    ],
+    isStatic: true
+  }
+];
+
+// Init Firebase
+try {
+  const isConfigured = FIREBASE_CONFIG.apiKey !== "GANTI_DENGAN_API_KEY_KAMU";
+  if (isConfigured) {
+    const app = initializeApp(FIREBASE_CONFIG);
+    db = getFirestore(app);
+    firebaseOk = true;
+  } else {
+    document.getElementById('firebaseNotice').style.display = 'block';
+  }
+} catch(e) {
+  console.warn('Firebase init error:', e);
+  document.getElementById('firebaseNotice').style.display = 'block';
+}
+
+// Expose globals
+window._ap = _ap;
+window.firebaseOk = firebaseOk;
+window.isAdmin = false;
+window.editingId = null;
+window.blogPosts = [];
+
+// ── Load blog posts ──
+async function loadBlogPosts() {
+  let dynamicPosts = [];
+  if (firebaseOk && db) {
+    try {
+      const q = query(collection(db, "blogPosts"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      dynamicPosts = snapshot.docs.map(d => ({id: d.id, ...d.data(), isStatic: false}));
+    } catch(e) {
+      console.warn('Firestore read error:', e);
+    }
+  }
+  window.blogPosts = [...dynamicPosts, ...staticPosts];
+  renderBlogPosts();
+}
+
+function renderBlogPosts() {
+  const list = document.getElementById('blogList');
+  const posts = window.blogPosts;
+  list.innerHTML = posts.map((post, i) => {
+    const dateStr = post.date || formatDate(post.createdAt);
+    const contentHTML = Array.isArray(post.content)
+      ? post.content.map(p => `<p>${p}</p>`).join('')
+      : `<p>${post.content || ''}</p>`;
+    const adminBtns = (window.isAdmin && !post.isStatic) ? `
+      <div class="blog-admin-btns" onclick="event.stopPropagation()">
+        <button class="btn btn-ghost btn-sm" onclick="openEditBlog('${post.id}')">✏️ Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="confirmDelete('${post.id}')">🗑️ Hapus</button>
+      </div>` : '';
+    const tag1 = post.tags?.[0] || '';
+    const tag2 = post.tags?.[1] || '';
+    const col1 = post.tagColors?.[0] || '';
+    const col2 = post.tagColors?.[1] || '';
+    return `
+      <div class="blog-card" onclick="toggleBlog(this)" style="animation-delay:${i*.07}s">
+        <div class="blog-img">${post.emoji || '📝'}</div>
+        <div class="blog-body">
+          <div class="blog-date">${dateStr}</div>
+          <h3>${post.title}</h3>
+          <p class="blog-preview">${post.preview}</p>
+          <div class="card-meta" style="margin-top:.5rem">
+            ${tag1 ? `<span class="tag ${col1}">${tag1}</span>` : ''}
+            ${tag2 ? `<span class="tag ${col2}">${tag2}</span>` : ''}
+          </div>
+        </div>
+        <div class="blog-full">
+          ${contentHTML}
+        </div>
+        ${adminBtns}
+      </div>`;
+  }).join('');
+
+  // Update hint
+  if (window.isAdmin) {
+    document.getElementById('addBlogHintText').textContent = '+ Tulis Post Baru';
+    document.getElementById('addBlogHintSub').textContent = 'Klik untuk menulis cerita baru.';
+  }
+}
+
+function formatDate(ts) {
+  if (!ts) return '';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+}
+
+// ── Admin Auth ──
+window.doLogin = function() {
+  const pw = document.getElementById('loginPassword').value;
+  const err = document.getElementById('loginError');
+  if (pw === window._ap) {
+    window.isAdmin = true;
+    err.style.display = 'none';
+    document.getElementById('loginPassword').value = '';
+    closeModal('loginModal');
+    document.getElementById('adminBar').style.display = 'flex';
+    showToast('✅ Mode admin aktif', 'success');
+    renderBlogPosts();
+  } else {
+    err.style.display = 'block';
+    document.getElementById('loginPassword').value = '';
+  }
+};
+
+window.doLogout = function() {
+  window.isAdmin = false;
+  document.getElementById('adminBar').style.display = 'none';
+  document.getElementById('addBlogHintText').textContent = 'Punya cerita baru?';
+  document.getElementById('addBlogHintSub').textContent = 'Login sebagai admin untuk menulis post baru.';
+  showToast('👋 Keluar dari mode admin', 'success');
+  renderBlogPosts();
+};
+
+window.checkAdminForNew = function() {
+  if (window.isAdmin) {
+    openBlogModal();
+  } else {
+    openModal('loginModal');
+    setTimeout(() => document.getElementById('loginPassword').focus(), 350);
+  }
+};
+
+// ── Blog Modal ──
+window.openBlogModal = function() {
+  window.editingId = null;
+  document.getElementById('blogModalTitle').textContent = '✍️ Tulis Blog Baru';
+  document.getElementById('blogEmoji').value = '';
+  document.getElementById('blogTitle').value = '';
+  document.getElementById('blogDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('blogTag1').value = '';
+  document.getElementById('blogTag2').value = '';
+  document.getElementById('blogPreview').value = '';
+  document.getElementById('blogContent').value = '';
+  document.getElementById('saveBlogLabel').textContent = 'Simpan';
+  openModal('blogModal');
+};
+
+window.openEditBlog = function(id) {
+  const post = window.blogPosts.find(p => p.id === id);
+  if (!post) return;
+  window.editingId = id;
+  document.getElementById('blogModalTitle').textContent = '✏️ Edit Blog';
+  document.getElementById('blogEmoji').value = post.emoji || '';
+  document.getElementById('blogTitle').value = post.title || '';
+  document.getElementById('blogDate').value = post.date || '';
+  document.getElementById('blogTag1').value = post.tags?.[0] || '';
+  document.getElementById('blogTag2').value = post.tags?.[1] || '';
+  document.getElementById('blogPreview').value = post.preview || '';
+  document.getElementById('blogContent').value = Array.isArray(post.content) ? post.content.join('\n\n') : (post.content || '');
+  document.getElementById('saveBlogLabel').textContent = 'Simpan Perubahan';
+  openModal('blogModal');
+};
+
+window.saveBlog = async function() {
+  if (!window.isAdmin) return;
+  const title = document.getElementById('blogTitle').value.trim();
+  const content = document.getElementById('blogContent').value.trim();
+  if (!title || !content) { showToast('❌ Judul dan isi wajib diisi', 'error'); return; }
+
+  const label = document.getElementById('saveBlogLabel');
+  label.innerHTML = '<span class="loading-spinner"></span>';
+
+  const tag1 = document.getElementById('blogTag1').value.trim();
+  const tag2 = document.getElementById('blogTag2').value.trim();
+  const data = {
+    emoji: document.getElementById('blogEmoji').value.trim() || '📝',
+    title,
+    date: document.getElementById('blogDate').value || new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}),
+    tags: [tag1, tag2].filter(Boolean),
+    tagColors: ['', tag2 ? 'green' : ''].slice(0, [tag1,tag2].filter(Boolean).length),
+    preview: document.getElementById('blogPreview').value.trim() || content.substring(0,80)+'...',
+    content: content.split(/\n\n+/).filter(p => p.trim()),
+    updatedAt: new Date().toISOString()
+  };
+
+  try {
+    if (firebaseOk && db) {
+      if (window.editingId) {
+        await updateDoc(doc(db, "blogPosts", window.editingId), data);
+      } else {
+        data.createdAt = new Date();
+        await addDoc(collection(db, "blogPosts"), data);
+      }
+      await loadBlogPosts();
+      showToast('✅ Blog berhasil disimpan!', 'success');
+    } else {
+      // Fallback tanpa Firebase: simpan sementara di memory
+      if (window.editingId) {
+        const idx = window.blogPosts.findIndex(p => p.id === window.editingId);
+        if (idx !== -1) window.blogPosts[idx] = {...window.blogPosts[idx], ...data};
+      } else {
+        window.blogPosts.unshift({id: 'local-'+Date.now(), ...data, isStatic: false});
+      }
+      renderBlogPosts();
+      showToast('✅ Tersimpan (sementara — setup Firebase untuk permanen)', 'success');
+    }
+    closeModal('blogModal');
+  } catch(e) {
+    showToast('❌ Gagal menyimpan: '+e.message, 'error');
+  }
+  label.textContent = window.editingId ? 'Simpan Perubahan' : 'Simpan';
+};
+
+window.confirmDelete = function(id) {
+  if (!confirm('Hapus post ini? Tindakan tidak bisa dibatalkan.')) return;
+  deleteBlog(id);
+};
+
+async function deleteBlog(id) {
+  try {
+    if (firebaseOk && db) {
+      await deleteDoc(doc(db, "blogPosts", id));
+      await loadBlogPosts();
+    } else {
+      window.blogPosts = window.blogPosts.filter(p => p.id !== id);
+      renderBlogPosts();
+    }
+    showToast('🗑️ Post dihapus', 'success');
+  } catch(e) {
+    showToast('❌ Gagal menghapus', 'error');
+  }
+}
+
+// ── Modal helpers ──
+window.openModal = function(id) { document.getElementById(id).classList.add('open'); };
+window.closeModal = function(id) { document.getElementById(id).classList.remove('open'); };
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+});
+
+// Init
+loadBlogPosts();
+
+</script>
+
 <script>
 // ══ DATA ══
 const hardSkills = [
-  {icon:'🔧',name:'Teknisi Service',pct:85,
-    detail:'Dari diagnosa awal sampai keputusan komponen mana yang harus diganti — ini adalah inti dari apa yang aku pelajari selama PKL. Kemampuan ini bukan cuma soal tangan yang terampil, tapi soal <strong>membaca situasi dengan tenang</strong> saat perangkat yang kamu pegang adalah satu-satunya HP milik seseorang.'},
-  {icon:'🪛',name:'Solder / Desolder',pct:80,
-    detail:'SMD dan through-hole — dua dunia yang berbeda. Komponen SMD sekecil 0402 butuh presisi tingkat milimeter; satu getaran yang salah bisa merusak pad PCB selamanya. Aku latih ini sampai tangan bisa diam walau napas cepat.'},
-  {icon:'💻',name:'Hardware Engineering',pct:78,
-    detail:'Bongkar-pasang bukan vandalisme — itu adalah cara paling jujur untuk memahami sebuah sistem. Aku sudah bongkar laptop, HP, motherboard, dan berbagai periferal. Setiap sekrup yang dibuka adalah pertanyaan, setiap komponen yang kelihatan adalah jawaban.'},
-  {icon:'⚡',name:'Software Engineering',pct:40,
-    detail:'Masih dalam tahap eksplorasi — dan aku suka jujur soal ini. Aku paham logika dasar pemrograman, sudah coba beberapa project kecil, dan terus belajar. Level 40% bukan berarti lemah; itu berarti masih ada 60% petualangan yang menunggu.'},
+  {icon:'🔧',name:'Teknisi Service',pct:85,detail:'Dari diagnosa awal sampai keputusan komponen mana yang harus diganti — ini adalah inti dari apa yang aku pelajari selama PKL. Kemampuan ini bukan cuma soal tangan yang terampil, tapi soal <strong>membaca situasi dengan tenang</strong>.'},
+  {icon:'🪛',name:'Solder / Desolder',pct:80,detail:'SMD dan through-hole — dua dunia yang berbeda. Komponen SMD sekecil 0402 butuh presisi tingkat milimeter; satu getaran yang salah bisa merusak pad PCB selamanya.'},
+  {icon:'💻',name:'Hardware Engineering',pct:78,detail:'Bongkar-pasang bukan vandalisme — itu adalah cara paling jujur untuk memahami sebuah sistem. Aku sudah bongkar laptop, HP, motherboard, dan berbagai periferal.'},
+  {icon:'⚡',name:'Software Engineering',pct:40,detail:'Masih dalam tahap eksplorasi — dan aku suka jujur soal ini. Level 40% bukan berarti lemah; itu berarti masih ada 60% petualangan yang menunggu.'},
 ];
 const softSkills = [
-  {icon:'🗣️',name:'Komunikasi',pct:88,
-    detail:'Dilatih langsung di lapangan: ngomong sama remaja sebaya, sama orang tua, sama perangkat kecamatan — dalam satu hari yang sama sebagai Duta Genre. Belajar bahwa pesan yang sama perlu dikemas berbeda untuk audiens yang berbeda.'},
-  {icon:'👑',name:'Leadership',pct:82,
-    detail:'Leadership yang aku percaya bukan soal paling keras suaranya. Tapi soal siapa yang paling konsisten, paling siap, dan paling bisa dipercaya saat situasi tidak pasti. Itu yang aku coba bangun.'},
-  {icon:'🎯',name:'Problem Solving',pct:80,
-    detail:'Kebiasaan bongkar elektronik ngajarin aku satu hal: masalah selalu punya penyebab yang logis. Panik itu manusiawi, tapi diagnosis sistematis jauh lebih berguna. Aku aplikasikan pola pikir yang sama ke hampir semua masalah.'},
-  {icon:'📚',name:'Fast Learner',pct:92,
-    detail:'Ini bukan klaim kosong — ini pola yang aku observe sendiri. Aku bisa nyerap materi teknis baru lebih cepat kalau cara penyampaiannya unik dan ada konteks real-world-nya. Kuncinya: rasa penasaran yang tidak pernah aku padamkan.'},
+  {icon:'🗣️',name:'Komunikasi',pct:88,detail:'Dilatih langsung di lapangan: ngomong sama remaja sebaya, sama orang tua, sama perangkat kecamatan — dalam satu hari yang sama sebagai Duta Genre.'},
+  {icon:'👑',name:'Leadership',pct:82,detail:'Leadership yang aku percaya bukan soal paling keras suaranya. Tapi soal siapa yang paling konsisten, paling siap, dan paling bisa dipercaya saat situasi tidak pasti.'},
+  {icon:'🎯',name:'Problem Solving',pct:80,detail:'Kebiasaan bongkar elektronik ngajarin aku satu hal: masalah selalu punya penyebab yang logis. Panik itu manusiawi, tapi diagnosis sistematis jauh lebih berguna.'},
+  {icon:'📚',name:'Fast Learner',pct:92,detail:'Aku bisa nyerap materi teknis baru lebih cepat kalau cara penyampaiannya unik dan ada konteks real-world-nya. Kuncinya: rasa penasaran yang tidak pernah aku padamkan.'},
 ];
 const hobi = [
-  {icon:'♟️',name:'Catur',elo:'±1500',
-    detail:'Elo ±1500 berarti aku sudah melewati fase "asal main" dan masuk ke level di mana setiap langkah punya konsekuensi yang harus diperhitungkan. Catur mengajariku bahwa <strong>keputusan terbaik sering terlihat kontra-intuitif</strong> — dan itu berlaku jauh di luar papan.'},
-  {icon:'🏐',name:'Voli',
-    detail:'Olahraga tim yang ngajarin hal paling sederhana tapi paling susah: percaya sama orang lain. Di voli, kamu tidak bisa kontrol semua bola — kamu harus yakin timmu akan cover posisinya. Itu latihan kepercayaan yang paling konkret.'},
-  {icon:'🎵',name:'Bernyanyi',
-    detail:'Bukan soal suara bagus atau jelek — tapi soal ekspresi yang tidak bisa dilakukan dengan kata-kata. Ada hal-hal yang lebih mudah dikeluarkan lewat nada daripada kalimat. Bernyanyi adalah salah satu cara aku tetap waras.'},
-  {icon:'🎮',name:'Gaming',
-    detail:'Gaming bukan pelarian — itu laboratorium. Di sana aku belajar strategi, adaptasi cepat, manajemen sumber daya, dan komunikasi tim dalam tekanan. Semua skill yang ternyata sangat transferable ke dunia nyata.'},
-  {icon:'🎱',name:'Billiard',
-    detail:'Billiard adalah olahraga yang paling "diam" tapi paling intens secara mental. Setiap tembakan adalah kalkulasi: sudut, kekuatan, spin, posisi bola berikutnya. Aku suka bahwa di sini, <strong>tenang adalah senjata utama</strong>.'},
+  {icon:'♟️',name:'Catur',elo:'±1500',detail:'Elo ±1500 berarti aku sudah melewati fase "asal main" dan masuk ke level di mana setiap langkah punya konsekuensi. Catur mengajariku bahwa <strong>keputusan terbaik sering terlihat kontra-intuitif</strong>.'},
+  {icon:'🏐',name:'Voli',detail:'Olahraga tim yang ngajarin hal paling sederhana tapi paling susah: percaya sama orang lain.'},
+  {icon:'🎵',name:'Bernyanyi',detail:'Bukan soal suara bagus atau jelek — tapi soal ekspresi yang tidak bisa dilakukan dengan kata-kata.'},
+  {icon:'🎮',name:'Gaming',detail:'Gaming bukan pelarian — itu laboratorium. Di sana aku belajar strategi, adaptasi cepat, manajemen sumber daya, dan komunikasi tim dalam tekanan.'},
+  {icon:'🎱',name:'Billiard',detail:'Billiard adalah olahraga yang paling "diam" tapi paling intens secara mental. Aku suka bahwa di sini, <strong>tenang adalah senjata utama</strong>.'},
 ];
 
-// Render skills
 function renderSkillCards(arr, id) {
   document.getElementById(id).innerHTML = arr.map((s,i) => `
     <div class="card" onclick="toggleCard(this)" style="animation-delay:${.35+i*.08}s">
       <div class="card-top">
         <span class="card-icon">${s.icon}</span>
         <div style="flex:1">
-          <h3>${s.name}${s.elo ? ` <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);font-weight:400;">ELO ${s.elo}</span>` : ''}</h3>
+          <h3>${s.name}${s.elo?` <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);font-weight:400;">ELO ${s.elo}</span>`:''}</h3>
           <div class="skill-wrap" style="margin-top:.5rem;margin-bottom:0">
             <div class="skill-label-row">
               <span class="skill-name" style="font-size:.75rem;color:var(--text3);">Penguasaan</span>
-              <span class="skill-pct">${s.pct || '—'}${s.pct?'%':''}</span>
+              <span class="skill-pct">${s.pct||'—'}${s.pct?'%':''}</span>
             </div>
-            ${s.pct ? `<div class="skill-track"><div class="skill-fill" data-pct="${s.pct}"></div></div>` : ''}
+            ${s.pct?`<div class="skill-track"><div class="skill-fill" data-pct="${s.pct}"></div></div>`:''}
           </div>
         </div>
         <span class="card-chevron">›</span>
@@ -730,8 +1063,7 @@ function renderSkillCards(arr, id) {
       <div class="expand-panel">
         <div class="expand-body"><p>${s.detail}</p></div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 function renderHobi(arr, id) {
   document.getElementById(id).innerHTML = arr.map((h,i) => `
@@ -739,16 +1071,15 @@ function renderHobi(arr, id) {
       <div class="card-top">
         <span class="card-icon">${h.icon}</span>
         <div style="flex:1">
-          <h3>${h.name}${h.elo ? ` <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);font-weight:400;">ELO ${h.elo}</span>` : ''}</h3>
-          <p class="card-short">${h.detail.replace(/<[^>]+>/g,'').substring(0,60)}…</p>
+          <h3>${h.name}${h.elo?` <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);font-weight:400;">ELO ${h.elo}</span>`:''}</h3>
+          <p class="card-short">${h.detail.replace(/<[^>]+>/g,'').substring(0,65)}…</p>
         </div>
         <span class="card-chevron">›</span>
       </div>
       <div class="expand-panel">
         <div class="expand-body"><p>${h.detail}</p></div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 renderSkillCards(hardSkills,'hardSkills');
 renderSkillCards(softSkills,'softSkills');
@@ -758,7 +1089,6 @@ renderHobi(hobi,'hobiCards');
 function toggleCard(el) {
   const panel = el.querySelector('.expand-panel');
   const wasOpen = el.classList.contains('expanded');
-  // close siblings
   el.parentElement.querySelectorAll('.card.expanded').forEach(c => {
     c.classList.remove('expanded');
     c.querySelector('.expand-panel').classList.remove('open');
@@ -772,7 +1102,6 @@ function toggleCard(el) {
 function toggleExpand(id) {
   const panel = document.getElementById(id);
   const isOpen = panel.classList.contains('open');
-  // close all tl panels
   document.querySelectorAll('.tl-item .expand-panel').forEach(p => p.classList.remove('open'));
   if (!isOpen) {
     panel.classList.add('open');
@@ -781,6 +1110,7 @@ function toggleExpand(id) {
 }
 function toggleBlog(el) {
   const full = el.querySelector('.blog-full');
+  if (!full) return;
   const isOpen = full.classList.contains('open');
   document.querySelectorAll('.blog-full.open').forEach(f => f.classList.remove('open'));
   document.querySelectorAll('.blog-card.expanded').forEach(c => c.classList.remove('expanded'));
@@ -828,6 +1158,30 @@ function toggleIlmu(el) {
   }
 }
 
+// ══ TOAST ══
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+window.showToast = showToast;
+
+// ══ SECRET ADMIN — klik logo 5x ══
+let logoClicks = 0, logoTimer;
+document.getElementById('navLogo').addEventListener('click', () => {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => logoClicks = 0, 2000);
+  if (logoClicks >= 5) {
+    logoClicks = 0;
+    if (!window.isAdmin) {
+      openModal('loginModal');
+      setTimeout(() => document.getElementById('loginPassword').focus(), 350);
+    }
+  }
+});
+
 // ══ CAROUSEL ══
 const LABELS = ['Home','Tentang','Pengalaman','Skills','Blog','Ilmu Baru','Jurnal','Quotes','Kontak'];
 const totalSlides = LABELS.length;
@@ -849,10 +1203,10 @@ function goTo(idx) {
   document.querySelectorAll('.dot-nav-item').forEach((d,i) => d.classList.toggle('active',i===current));
   if (current === 3) setTimeout(animateBars, 250);
 }
-
 function animateBars() {
   document.querySelectorAll('.skill-fill').forEach(el => { el.style.width = el.dataset.pct+'%'; });
 }
+window.goTo = goTo;
 
 // ══ SWIPE ══
 let sx=0,sy=0,dragging=false,isH=null;
