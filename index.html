@@ -570,7 +570,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 </div>
 
-<!-- SLIDE 6: JURNAL -->
+
 <div class="slide" id="s6">
 <div class="slide-inner">
   <div class="section-tag a1">🧩 Jurnal</div>
@@ -631,7 +631,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 </div>
 
-<!-- SLIDE 7: QUOTES -->
+
 <div class="slide" id="s7">
 <div class="slide-inner">
   <div class="section-tag a1">💬 Quotes</div>
@@ -665,7 +665,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 </div>
 
-<!-- SLIDE 8: KONTAK -->
+
 <div class="slide" id="s8">
 <div class="slide-inner">
   <div class="section-tag a1">📬 Kontak</div>
@@ -703,15 +703,15 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 </div>
 
-</div><!-- end carousel -->
+</div>
 <div class="swipe-hint" id="swipeHint">‹ swipe horizontal › untuk navigasi</div>
 
-<!-- Firebase SDK -->
+
 <script type="module">
-// ══════════════════════════════════════════════════════
-// FIREBASE CONFIG — GANTI BAGIAN INI DENGAN CONFIG KAMU
-// Ambil dari: Firebase Console → Project Settings → Your Apps → SDK setup
-// ══════════════════════════════════════════════════════
+
+
+
+
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyALvLFu8niulNVrnNp8q5vCSwWO4T9ZFDE",
   authDomain: "stendomain-1753f.firebaseapp.com",
@@ -721,11 +721,11 @@ const FIREBASE_CONFIG = {
   appId: "1:424739432348:web:5051e99d8fbccfc0400a59",
   measurementId: "G-W5W7W89BDD"
 };
-// ══════════════════════════════════════════════════════
-// PASSWORD ADMIN — GANTI SESUAI KEINGINAN
-// ══════════════════════════════════════════════════════
-const _ap = atob("RmFzdGVuZEFkbWluMjAyNQ=="); // default: FastendAdmin2025
-// ══════════════════════════════════════════════════════
+
+
+
+const _ap = atob("U1NTdGVuNEFkbTE0MDM="); 
+
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -736,7 +736,7 @@ let isAdmin = false;
 let editingId = null;
 let blogPosts = [];
 
-// Static blog posts (selalu tampil, tidak bisa dihapus admin)
+// 
 const staticPosts = [
   {
     id: 'static-1',
