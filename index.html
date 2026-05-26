@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-<title>stendomain.blogspot</title>
+<title>Fastend Muchammad</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -257,11 +257,15 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
     <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
     <h2>Admin Login</h2>
     <div class="form-group">
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" id="loginEmail" placeholder="fastendmuhammad@gmail.com" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <div class="form-group">
       <label class="form-label">Password</label>
       <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
     </div>
-    <div id="loginError" style="color:var(--red);font-size:.75rem;margin-bottom:.75rem;display:none;">Password salah.</div>
-    <button class="btn btn-primary" style="width:100%;" onclick="doLogin()">Masuk</button>
+    <div id="loginError" style="color:var(--red);font-size:.75rem;margin-bottom:.75rem;display:none;"></div>
+    <button class="btn btn-primary" style="width:100%;" id="loginBtn" onclick="doLogin()">Masuk</button>
   </div>
 </div>
 
@@ -661,11 +665,16 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "424739432348",
   appId: "1:424739432348:web:5051e99d8fbccfc0400a59"
 };
-const _ap = atob("U1NTdGVuNEFkbTE0MDM=");
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-let db = null, firebaseOk = false, currentImageBase64 = null;
+const app = initializeApp(FIREBASE_CONFIG);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentImageBase64 = null;
 window.isAdmin = false;
 window.editingId = null;
 window.blogPosts = [];
@@ -676,22 +685,23 @@ const staticPosts = [
   {id:'s3',emoji:'💡',sourceLabel:'Masa Kecil',title:'Kenapa Aku Suka Bongkar Elektronik Sejak Kecil',date:'10 Maret 2025',preview:'Rasa penasaran yang bikin ortu was-was tapi ternyata jadi fondasi passion-ku...',tags:['Hardware','Cerita'],tagColors:['',''],content:['Waktu SD, aku pernah bongkar remote TV yang rusak — bukan buat diperbaiki, tapi cuma penasaran ada apa di dalamnya. Hasilnya? Remote makin rusak, dapat marah, tapi aku dapat sesuatu yang lebih berharga: <strong>rasa penasaran yang tidak bisa dihentikan</strong>.','Dari situ aku mulai ngerti bahwa <strong>belajar yang paling nempel adalah belajar yang lahir dari pertanyaan sendiri</strong>, bukan dari suruhan orang lain.'],isStatic:true}
 ];
 
-try {
-  const app = initializeApp(FIREBASE_CONFIG);
-  db = getFirestore(app);
-  firebaseOk = true;
-} catch(e) { console.warn('Firebase:', e); }
-
-window._ap = _ap;
+onAuthStateChanged(auth, (user) => {
+  if (user && user.email === 'fastendmuhammad@gmail.com') {
+    window.isAdmin = true;
+    document.getElementById('adminBar').style.display = 'flex';
+  } else {
+    window.isAdmin = false;
+    document.getElementById('adminBar').style.display = 'none';
+  }
+  loadBlogPosts();
+});
 
 async function loadBlogPosts() {
   let dyn = [];
-  if (firebaseOk && db) {
-    try {
-      const snap = await getDocs(query(collection(db,"blogPosts"), orderBy("createdAt","desc")));
-      dyn = snap.docs.map(d => ({id:d.id,...d.data(),isStatic:false}));
-    } catch(e) {}
-  }
+  try {
+    const snap = await getDocs(query(collection(db,"blogPosts"), orderBy("createdAt","desc")));
+    dyn = snap.docs.map(d => ({id:d.id,...d.data(),isStatic:false}));
+  } catch(e) { console.warn('Load blogs:', e); }
   window.blogPosts = [...dyn, ...staticPosts];
   renderBlogPosts();
 }
@@ -700,33 +710,39 @@ function renderBlogPosts() {
   const list = document.getElementById('blogList');
   list.innerHTML = window.blogPosts.map((post, i) => {
     const dateStr = post.date || (post.createdAt ? (post.createdAt.toDate ? post.createdAt.toDate() : new Date(post.createdAt)).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}) : '');
-    const contentHTML = (Array.isArray(post.content) ? post.content : [post.content||'']).map(p=>`<p>${p}</p>`).join('');
+    const contentHTML = (Array.isArray(post.content) ? post.content : [post.content||'']).map(p=>`<p>${sanitizeHTML(p)}</p>`).join('');
     const t1=post.tags?.[0]||'', t2=post.tags?.[1]||'', c1=post.tagColors?.[0]||'', c2=post.tagColors?.[1]||'';
     const imgEl = post.imageBase64 ? `<img class="cover-img" src="${post.imageBase64}" alt=""/><span class="emoji-layer">${post.emoji||'📝'}</span>` : `<span class="emoji-layer">${post.emoji||'📝'}</span>`;
-    const sbEl = post.sourceBy?.title ? `<div class="blog-sourceby"><span class="blog-sourceby-icon">📖</span><div><div class="blog-sourceby-lbl">Source By</div><div class="blog-sourceby-title">${post.sourceBy.title}</div>${post.sourceBy.author?`<div class="blog-sourceby-author">${post.sourceBy.author}</div>`:''}</div></div>` : '';
+    const sbEl = post.sourceBy?.title ? `<div class="blog-sourceby"><span class="blog-sourceby-icon">📖</span><div><div class="blog-sourceby-lbl">Source By</div><div class="blog-sourceby-title">${sanitizeHTML(post.sourceBy.title)}</div>${post.sourceBy.author?`<div class="blog-sourceby-author">${sanitizeHTML(post.sourceBy.author)}</div>`:''}</div></div>` : '';
     const adminBtns = (window.isAdmin && !post.isStatic) ? `<div class="blog-admin-btns" onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="openEditBlog('${post.id}')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="confirmDelete('${post.id}')">🗑️ Hapus</button></div>` : '';
     return `<div class="blog-card" onclick="toggleBlog(this)">
       <div class="blog-img">${imgEl}</div>
       <div class="blog-body">
         <div class="blog-date">${dateStr}</div>
-        ${post.sourceLabel?`<div class="blog-source-label">${post.sourceLabel}</div>`:''}
-        <h3>${post.title}</h3>
-        <p class="blog-preview">${post.preview}</p>
-        <div class="card-meta blog-tags" style="margin-top:.55rem">${t1?`<span class="tag ${c1}">${t1}</span>`:''}${t2?`<span class="tag ${c2}">${t2}</span>`:''}</div>
+        ${post.sourceLabel?`<div class="blog-source-label">${sanitizeHTML(post.sourceLabel)}</div>`:''}
+        <h3>${sanitizeHTML(post.title)}</h3>
+        <p class="blog-preview">${sanitizeHTML(post.preview)}</p>
+        <div class="card-meta blog-tags" style="margin-top:.55rem">${t1?`<span class="tag ${c1}">${sanitizeHTML(t1)}</span>`:''}${t2?`<span class="tag ${c2}">${sanitizeHTML(t2)}</span>`:''}</div>
       </div>
       <div class="blog-full">${contentHTML}${sbEl}</div>
       ${adminBtns}
     </div>`;
   }).join('');
-  if (window.isAdmin) {
-    document.getElementById('addBlogHintText').textContent = '+ Tulis Post Baru';
-    document.getElementById('addBlogHintSub').textContent = 'Klik untuk menulis cerita baru.';
-  }
+}
+
+function sanitizeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML.replace(/\n/g, '<br>');
 }
 
 window.handleImageUpload = function(e) {
   const file = e.target.files[0];
   if (!file) return;
+  if (file.size > 5*1024*1024) {
+    showToast('❌ Gambar terlalu besar (max 5MB)','error');
+    return;
+  }
   const r = new FileReader();
   r.onload = (ev) => {
     currentImageBase64 = ev.target.result;
@@ -736,34 +752,39 @@ window.handleImageUpload = function(e) {
   r.readAsDataURL(file);
 };
 
-window.doLogin = function() {
+window.doLogin = async function() {
+  const email = document.getElementById('loginEmail').value.trim();
   const pw = document.getElementById('loginPassword').value;
-  if (pw === window._ap) {
-    window.isAdmin = true;
-    document.getElementById('loginError').style.display = 'none';
+  if (!email || !pw) {
+    showToast('❌ Email dan password harus diisi','error');
+    return;
+  }
+  const btn = document.getElementById('loginBtn');
+  btn.innerHTML = '<span class="loading-spinner"></span>';
+  try {
+    await signInWithEmailAndPassword(auth, email, pw);
     document.getElementById('loginPassword').value = '';
     closeModal('loginModal');
-    document.getElementById('adminBar').style.display = 'flex';
-    showToast('✅ Mode admin aktif','success');
-    renderBlogPosts();
-  } else {
+    showToast('✅ Login berhasil','success');
+  } catch(e) {
+    document.getElementById('loginError').textContent = e.code === 'auth/invalid-credential' ? 'Email atau password salah.' : 'Error: ' + e.message;
     document.getElementById('loginError').style.display = 'block';
-    document.getElementById('loginPassword').value = '';
   }
+  btn.innerHTML = 'Masuk';
 };
 
-window.doLogout = function() {
-  window.isAdmin = false;
-  document.getElementById('adminBar').style.display = 'none';
-  document.getElementById('addBlogHintText').textContent = 'Punya cerita baru?';
-  document.getElementById('addBlogHintSub').textContent = 'Login sebagai admin untuk menulis post baru.';
-  showToast('👋 Keluar dari mode admin','success');
-  renderBlogPosts();
+window.doLogout = async function() {
+  try {
+    await signOut(auth);
+    showToast('👋 Keluar dari mode admin','success');
+  } catch(e) {
+    showToast('❌ Gagal logout','error');
+  }
 };
 
 window.checkAdminForNew = function() {
   if (window.isAdmin) openBlogModal();
-  else { openModal('loginModal'); setTimeout(()=>document.getElementById('loginPassword').focus(),350); }
+  else { openModal('loginModal'); setTimeout(()=>document.getElementById('loginEmail').focus(),350); }
 };
 
 window.openBlogModal = function() {
@@ -814,18 +835,12 @@ window.saveBlog = async function() {
     content:content.split(/\n\n+/).filter(p=>p.trim()),
     sourceBy:sbt?{title:sbt,author:sba}:null,
     imageBase64:currentImageBase64||null,
-    updatedAt:new Date().toISOString()
+    updatedAt:new Date()
   };
   try {
-    if (firebaseOk&&db) {
-      if (window.editingId) await updateDoc(doc(db,"blogPosts",window.editingId),data);
-      else { data.createdAt=new Date(); await addDoc(collection(db,"blogPosts"),data); }
-      await loadBlogPosts();
-    } else {
-      if (window.editingId) { const idx=window.blogPosts.findIndex(p=>p.id===window.editingId); if(idx!==-1) window.blogPosts[idx]={...window.blogPosts[idx],...data}; }
-      else window.blogPosts.unshift({id:'local-'+Date.now(),...data,isStatic:false});
-      renderBlogPosts();
-    }
+    if (window.editingId) await updateDoc(doc(db,"blogPosts",window.editingId),data);
+    else { data.createdAt=new Date(); await addDoc(collection(db,"blogPosts"),data); }
+    await loadBlogPosts();
     showToast('✅ Blog berhasil disimpan!','success');
     closeModal('blogModal');
   } catch(e) { showToast('❌ Gagal menyimpan: '+e.message,'error'); }
@@ -835,8 +850,8 @@ window.saveBlog = async function() {
 window.confirmDelete = function(id) { if (!confirm('Hapus post ini?')) return; deleteBlog(id); };
 async function deleteBlog(id) {
   try {
-    if (firebaseOk&&db) { await deleteDoc(doc(db,"blogPosts",id)); await loadBlogPosts(); }
-    else { window.blogPosts=window.blogPosts.filter(p=>p.id!==id); renderBlogPosts(); }
+    await deleteDoc(doc(db,"blogPosts",id));
+    await loadBlogPosts();
     showToast('🗑️ Post dihapus','success');
   } catch(e) { showToast('❌ Gagal menghapus','error'); }
 }
@@ -885,7 +900,7 @@ function showToast(msg,type='success'){const t=document.getElementById('toast');
 window.showToast=showToast;
 
 let lc=0,lt;
-document.getElementById('navLogo').addEventListener('click',()=>{lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,2000);if(lc>=5){lc=0;if(!window.isAdmin){openModal('loginModal');setTimeout(()=>document.getElementById('loginPassword').focus(),350);}}});
+document.getElementById('navLogo').addEventListener('click',()=>{lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,2000);if(lc>=5){lc=0;if(!window.isAdmin){openModal('loginModal');setTimeout(()=>document.getElementById('loginEmail').focus(),350);}}});
 
 const LABELS=['Home','Tentang','Pengalaman','Skills','Blog','Ilmu Baru','Jurnal','Quotes','Kontak'];
 const total=LABELS.length;
