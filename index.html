@@ -56,8 +56,6 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;}
-
-/* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:50px;padding:0 1.1rem;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);border-bottom:1px solid var(--sep);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background .35s,border-color .35s;}
 .nav-logo{font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);letter-spacing:.5px;cursor:pointer;user-select:none;text-transform:uppercase;}
 .nav-logo span{color:var(--accent);}
@@ -67,15 +65,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:50px;padding:0 1.1rem
 .dot-nav-item.active{background:var(--accent);width:18px;border-radius:3px;}
 .theme-btn{width:32px;height:32px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;transition:all .2s;}
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
-
-/* ── CAROUSEL ── */
 #carousel{position:fixed;top:50px;left:0;right:0;bottom:0;display:flex;transition:transform .48s cubic-bezier(.4,0,.2,1);will-change:transform;}
 .slide{min-width:100vw;height:100%;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
 .slide::-webkit-scrollbar{display:none;}
 .slide{-ms-overflow-style:none;scrollbar-width:none;}
 .slide-inner{min-height:100%;padding:1.75rem 1.15rem 6rem;max-width:680px;margin:0 auto;position:relative;z-index:1;}
-
-/* ── TYPOGRAPHY ── */
 .section-tag{display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:1.2rem;}
 .section-tag::before{content:'';display:inline-block;width:18px;height:1px;background:var(--accent);}
 h1.hero-name{font-family:'Libre Baskerville',serif;font-weight:700;font-size:clamp(2.4rem,8.5vw,3.8rem);line-height:1.05;letter-spacing:-1.5px;margin-bottom:1rem;}
@@ -87,8 +81,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;flex-shrink:0;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 .nickname-badge{display:inline-flex;align-items:center;gap:.3rem;background:transparent;border:1px solid var(--border2);border-radius:3px;padding:.2rem .55rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text2);margin-right:.3rem;margin-bottom:.3rem;}
-
-/* ── BUTTONS ── */
 .btn-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
 .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:3px;font-size:.8rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .18s;font-family:'DM Sans',sans-serif;letter-spacing:.3px;}
 .btn-primary{background:var(--accent);color:#fff;}
@@ -98,8 +90,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .btn-danger{background:transparent;color:var(--red);border:1px solid rgba(224,82,82,.3);}
 .btn-danger:hover{background:rgba(224,82,82,.08);}
 .btn-sm{padding:.3rem .7rem;font-size:.72rem;}
-
-/* ── CARDS (general) ── */
 .card{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.15rem 1.25rem;margin-bottom:.55rem;transition:border-color .2s,box-shadow .2s;cursor:pointer;position:relative;overflow:hidden;}
 .card:hover{border-color:var(--border2);box-shadow:0 3px 16px var(--shadow);}
 .card.expanded{border-color:rgba(26,115,232,.22);}
@@ -121,16 +111,12 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .expand-body p+p{margin-top:.55rem;}
 .expand-body strong{color:var(--text);font-weight:600;}
 .expand-body .src{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.72rem;color:var(--text3);margin-top:.65rem;display:block;}
-
-/* ── SKILL BARS ── */
 .skill-wrap{margin-bottom:.9rem;}
 .skill-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
 .skill-name{font-size:.8rem;font-weight:500;color:var(--text);}
 .skill-pct{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent);}
 .skill-track{height:3px;background:var(--bg3);border-radius:999px;overflow:hidden;}
 .skill-fill{height:100%;border-radius:999px;background:var(--accent);width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1);}
-
-/* ── TIMELINE ── */
 .timeline{position:relative;padding-left:1.6rem;}
 .timeline::before{content:'';position:absolute;left:.3rem;top:.5rem;bottom:.5rem;width:1px;background:linear-gradient(to bottom,var(--accent),transparent);}
 .tl-item{position:relative;margin-bottom:1.8rem;cursor:pointer;}
@@ -140,29 +126,21 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .tl-year{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);margin-bottom:.22rem;letter-spacing:.8px;}
 .tl-title{font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.2rem;}
 .tl-short{color:var(--text2);font-size:.78rem;line-height:1.6;font-weight:300;}
-
-/* ── BLOG — Bloomberg style ── */
 .blog-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;overflow:hidden;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);}
 .blog-card:first-child{border-top:1px solid var(--sep);}
 .blog-card:hover{background:var(--card-hover);}
 .blog-card.expanded{background:var(--bg2);}
 .blog-card:active{opacity:.9;}
-
-/* Image strip — full width, no border-radius */
 .blog-img{height:var(--blog-img-h);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden;flex-shrink:0;}
 .blog-img img.cover-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
 .blog-img .emoji-layer{position:relative;z-index:1;opacity:.45;}
 .blog-img::after{content:'';position:absolute;inset:0;background:var(--img-overlay);pointer-events:none;}
-
-/* Card body — Bloomberg editorial layout */
 .blog-body{padding:.85rem 1rem 1rem;}
 .blog-date{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);margin-bottom:.18rem;letter-spacing:.8px;text-transform:uppercase;}
 .blog-source-label{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:.35rem;font-weight:500;}
 .blog-card h3{font-family:'Libre Baskerville',serif;font-size:.97rem;font-weight:700;letter-spacing:-.3px;line-height:1.4;margin-bottom:.4rem;color:var(--text);}
 .blog-card .blog-preview{color:var(--text2);font-size:.79rem;line-height:1.65;font-style:italic;font-family:'Libre Baskerville',serif;font-weight:400;}
 .card-meta.blog-tags{margin-top:.6rem;}
-
-/* Full content */
 .blog-full{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);padding:0;}
 .blog-full.open{max-height:2000px;padding:0 1rem .9rem;}
 .blog-full p{color:var(--text2);font-size:.82rem;line-height:1.85;margin-top:.7rem;font-weight:300;}
@@ -173,13 +151,9 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .blog-sourceby-title{font-size:.78rem;font-weight:600;color:var(--text);font-family:'Libre Baskerville',serif;}
 .blog-sourceby-author{font-size:.71rem;color:var(--text2);font-style:italic;}
 .blog-admin-btns{display:flex;gap:.4rem;padding:.55rem 1rem .75rem;border-top:1px solid var(--sep);}
-
-/* Blog list wrapper — thin top rule like Bloomberg section */
 .blog-section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem;}
 .blog-section-header::after{content:'';flex:1;height:1px;background:var(--sep);}
 .blog-section-title{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;white-space:nowrap;}
-
-/* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .3s;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:4px;padding:1.6rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;transform:translateY(16px);transition:transform .3s;}
@@ -206,8 +180,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast.success{border-color:var(--green);color:var(--green);}
 .toast.error{border-color:var(--red);color:var(--red);}
-
-/* ── QUOTE ── */
 .quote-card{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.4rem;margin-bottom:.55rem;position:relative;overflow:hidden;transition:all .2s;cursor:pointer;}
 .quote-card::before{content:'\201C';position:absolute;top:-1.2rem;left:.6rem;font-family:'Libre Baskerville',serif;font-size:7rem;font-weight:700;color:var(--accent);opacity:.05;line-height:1;pointer-events:none;}
 .quote-card:hover{border-color:var(--border2);}
@@ -220,8 +192,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .quote-context{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
 .quote-context.open{max-height:300px;}
 .quote-ctx-body{border-top:1px solid var(--sep);margin-top:.85rem;padding-top:.75rem;color:var(--text2);font-size:.78rem;line-height:1.8;font-weight:300;}
-
-/* ── JURNAL ── */
 .jurnal-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;padding:1.2rem;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);border-left:2px solid var(--accent);}
 .jurnal-card:first-child{border-top:1px solid var(--sep);}
 .jurnal-card:hover{background:var(--card-hover);}
@@ -235,8 +205,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .book-ref-lbl{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;}
 .book-ref-title{font-family:'Libre Baskerville',serif;font-size:.77rem;font-weight:700;color:var(--text);}
 .book-ref-author{font-size:.7rem;color:var(--text2);font-style:italic;}
-
-/* ── ILMU ── */
 .ilmu-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;padding:1.2rem;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);}
 .ilmu-card:first-child{border-top:1px solid var(--sep);}
 .ilmu-card:hover{background:var(--card-hover);}
@@ -244,8 +212,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .ilmu-num{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);margin-bottom:.3rem;letter-spacing:1px;}
 .ilmu-card h3{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.38rem;line-height:1.4;}
 .ilmu-short{color:var(--text2);font-size:.79rem;line-height:1.6;font-style:italic;}
-
-/* ── CONTACT ── */
 .contact-item{display:flex;align-items:center;gap:.85rem;background:var(--surface);border:1px solid var(--card-border);border-radius:3px;padding:.88rem 1.1rem;text-decoration:none;color:var(--text);transition:all .2s;margin-bottom:.45rem;}
 .contact-item:hover{border-color:var(--border2);transform:translateX(3px);}
 .contact-icon{width:34px;height:34px;border-radius:3px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
@@ -253,8 +219,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .contact-sub{font-size:.71rem;color:var(--text3);font-family:'DM Mono',monospace;}
 .contact-arr{margin-left:auto;color:var(--text3);transition:transform .2s;font-size:.8rem;}
 .contact-item:hover .contact-arr{transform:translateX(3px);color:var(--accent);}
-
-/* ── ABOUT BOX ── */
 .about-box{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.2rem;margin-bottom:.75rem;}
 .about-box p{color:var(--text2);font-size:.84rem;line-height:1.8;font-weight:300;}
 .about-box p+p{margin-top:.55rem;}
@@ -270,17 +234,12 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .org-desc{font-size:.73rem;color:var(--text3);}
 .sdiv{height:1px;background:var(--sep);margin:1.3rem 0;}
 .sec-label{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem;}
-
-/* ── ADD BLOG HINT ── */
 .add-hint{border:1px dashed var(--border2);border-radius:3px;padding:1.2rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-top:.9rem;}
 .add-hint:hover{border-color:var(--accent);}
 .add-hint h3{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;margin-bottom:.2rem;}
 .add-hint p{font-size:.76rem;color:var(--text3);}
-
-/* ── SWIPE HINT ── */
 .swipe-hint{position:fixed;bottom:.8rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.5rem;background:rgba(10,10,11,.92);border:1px solid var(--border2);border-radius:2px;padding:.3rem .9rem;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);backdrop-filter:blur(12px);z-index:50;transition:opacity .4s;pointer-events:none;letter-spacing:.8px;}
 .swipe-hint.gone{opacity:0;}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 .a1{animation:fadeUp .5s .05s ease both;}
 .a2{animation:fadeUp .5s .13s ease both;}
@@ -293,7 +252,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 <body>
 <div class="toast" id="toast"></div>
 
-<!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
@@ -306,7 +264,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
     <button class="btn btn-primary" style="width:100%;" onclick="doLogin()">Masuk</button>
   </div>
 </div>
-
 
 <div class="modal-overlay" id="blogModal">
   <div class="modal" style="position:relative;">
@@ -379,7 +336,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 
 <div id="carousel">
 
-
 <div class="slide" id="s0"><div class="slide-inner">
   <div class="status-badge a1"><div class="status-dot"></div>Open to Collaborate</div>
   <h1 class="hero-name a2">Halo,<br><span class="dim">saya </span>Fastend<br><span class="dim">Muchammad</span></h1>
@@ -396,7 +352,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
-<!-- SLIDE 1: TENTANG -->
 <div class="slide" id="s1"><div class="slide-inner">
   <div class="section-tag a1">Tentang Saya</div>
   <h2 class="page-title a2">Siapa itu<br>Fastend?</h2>
@@ -437,7 +392,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
-<!-- SLIDE 2: PENGALAMAN -->
 <div class="slide" id="s2"><div class="slide-inner">
   <div class="section-tag a1">Pengalaman</div>
   <h2 class="page-title a2">Perjalanan<br>Hidup</h2>
@@ -500,7 +454,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
-<!-- SLIDE 3: SKILLS -->
 <div class="slide" id="s3"><div class="slide-inner">
   <div class="section-tag a1">Skills</div>
   <h2 class="page-title a2">Skill &amp;<br>Kemampuan</h2>
@@ -515,7 +468,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div id="hobiCards"></div>
 </div></div>
 
-<!-- SLIDE 4: BLOG -->
 <div class="slide" id="s4"><div class="slide-inner">
   <div class="section-tag a1">Blog</div>
   <h2 class="page-title a2">Blog<br>Pribadi</h2>
@@ -537,7 +489,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
-<!-- SLIDE 5: ILMU BARU -->
 <div class="slide" id="s5"><div class="slide-inner">
   <div class="section-tag a1">Ilmu Baru</div>
   <h2 class="page-title a2">Info &amp;<br>Ilmu Baru</h2>
@@ -584,7 +535,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
-<!-- SLIDE 6: JURNAL -->
 <div class="slide" id="s6"><div class="slide-inner">
   <div class="section-tag a1">Jurnal</div>
   <h2 class="page-title a2">Jurnal<br>Psikologi</h2>
@@ -635,7 +585,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
-<!-- SLIDE 7: QUOTES -->
 <div class="slide" id="s7"><div class="slide-inner">
   <div class="section-tag a1">Quotes</div>
   <h2 class="page-title a2">Kata-kata<br>Orang Hebat</h2>
@@ -667,7 +616,6 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
-<!-- SLIDE 8: KONTAK -->
 <div class="slide" id="s8"><div class="slide-inner">
   <div class="section-tag a1">Kontak</div>
   <h2 class="page-title a2">Mari<br>Ngobrol 👋</h2>
@@ -918,7 +866,7 @@ function renderSkillCards(arr,id){
 function renderHobi(arr,id){
   document.getElementById(id).innerHTML=arr.map((h,i)=>`
     <div class="card" onclick="toggleCard(this)" style="animation-delay:${.35+i*.08}s">
-      <div class="card-top"><span class="card-icon">${h.icon}</span><div style="flex:1"><h3>${h.name}${h.elo?` <span style="font-family:'DM Mono',monospace;font-size:.67rem;color:var(--accent);font-weight:400"> ELO ${h.elo}</span>`:''}</h3><p class="card-short">${h.detail.replace(/<[^>]+>/g,'').substring(0,65)}…</p></div><span class="card-chevron">›</span></div>
+      <div class="card-top"><span class="card-icon">${h.icon}</span><div style="flex:1"><h3>${h.name}${h.elo?` <span style="font-family:'DM Mono',monospace;font-size:.67rem;color:var(--accent);font-weight:400"> ELO ${h.elo}</span>`:''}</h3><p class="card-short">${h.detail.replace(/<[^>]+>/g,'').substring(0,65)}\u2026</p></div><span class="card-chevron">›</span></div>
       <div class="expand-panel"><div class="expand-body"><p>${h.detail}</p></div></div>
     </div>`).join('');
 }
