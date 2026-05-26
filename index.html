@@ -5,261 +5,313 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <title>Fastend Muchammad</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Lora:ital@0;1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root[data-theme="dark"]{
-  --bg:#141618;
-  --bg2:#1a1d20;
-  --bg3:#20242a;
-  --surface:#1e2228;
-  --border:#2c3038;
-  --border2:#363c46;
-  --text:#e8eaed;
-  --text2:#9ba3af;
-  --text3:#525a66;
-  --accent:#5b9bd5;
-  --accent2:#7db8e8;
-  --green:#34c974;
-  --yellow:#f0b429;
-  --red:#f26b6b;
-  --shadow:rgba(0,0,0,.45);
-  --nav-bg:rgba(20,22,24,.92);
-  --card-border:rgba(255,255,255,.06);
-  --card-hover:rgba(255,255,255,.03);
+  --bg:#0a0a0b;
+  --bg2:#111214;
+  --bg3:#18191d;
+  --surface:#111214;
+  --border:#1e2026;
+  --border2:#2a2d35;
+  --text:#ececec;
+  --text2:#888b94;
+  --text3:#3e4148;
+  --accent:#1a73e8;
+  --accent2:#4d9fff;
+  --green:#2db870;
+  --yellow:#e8a020;
+  --red:#e05252;
+  --shadow:rgba(0,0,0,.6);
+  --nav-bg:rgba(10,10,11,.96);
+  --card-border:rgba(255,255,255,.055);
+  --card-hover:rgba(255,255,255,.025);
+  --img-overlay:linear-gradient(to bottom, transparent 40%, rgba(10,10,11,.7) 100%);
+  --blog-img-h:110px;
+  --sep:#1e2026;
 }
 :root[data-theme="light"]{
-  --bg:#f4f6f9;
-  --bg2:#eef1f6;
-  --bg3:#e5e9f0;
+  --bg:#f2f2ed;
+  --bg2:#e8e8e3;
+  --bg3:#ddddd8;
   --surface:#ffffff;
-  --border:#dde3ec;
-  --border2:#c8d1de;
-  --text:#1a2030;
-  --text2:#4a5568;
-  --text3:#8a97a8;
-  --accent:#2d7cc0;
-  --accent2:#4a95d8;
-  --green:#1a9e5a;
-  --yellow:#c98a00;
-  --red:#d94040;
-  --shadow:rgba(45,90,140,.1);
-  --nav-bg:rgba(244,246,249,.94);
-  --card-border:rgba(0,0,0,.06);
+  --border:#e0dfd8;
+  --border2:#c8c7c0;
+  --text:#0a0a0b;
+  --text2:#555860;
+  --text3:#aaaaaa;
+  --accent:#0063be;
+  --accent2:#1a73e8;
+  --green:#0f8c4a;
+  --yellow:#a86800;
+  --red:#c03030;
+  --shadow:rgba(0,0,0,.08);
+  --nav-bg:rgba(242,242,237,.97);
+  --card-border:rgba(0,0,0,.07);
   --card-hover:rgba(0,0,0,.02);
+  --img-overlay:linear-gradient(to bottom, transparent 40%, rgba(242,242,237,.55) 100%);
+  --blog-img-h:110px;
+  --sep:#e0dfd8;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;}
-.glow-orb{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(110px);}
-.glow-orb.a{width:600px;height:600px;top:-200px;left:-150px;background:radial-gradient(circle,rgba(60,100,160,.32) 0%,transparent 70%);}
-.glow-orb.b{width:500px;height:500px;bottom:-150px;right:-150px;background:radial-gradient(circle,rgba(70,120,180,.18) 0%,transparent 70%);}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:54px;padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background .4s,border-color .4s;}
-.nav-logo{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.3px;cursor:pointer;user-select:none;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:50px;padding:0 1.1rem;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);border-bottom:1px solid var(--sep);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background .35s,border-color .35s;}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);letter-spacing:.5px;cursor:pointer;user-select:none;text-transform:uppercase;}
 .nav-logo span{color:var(--accent);}
-.nav-right{display:flex;align-items:center;gap:.6rem;}
-.dot-nav{display:flex;gap:5px;align-items:center;}
-.dot-nav-item{width:7px;height:7px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .3s;}
-.dot-nav-item.active{background:var(--accent);width:22px;border-radius:4px;}
-.theme-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .2s;}
-.theme-btn:hover{background:var(--bg3);}
-#carousel{position:fixed;top:54px;left:0;right:0;bottom:0;display:flex;transition:transform .52s cubic-bezier(.4,0,.2,1);will-change:transform;}
+.nav-right{display:flex;align-items:center;gap:.5rem;}
+.dot-nav{display:flex;gap:4px;align-items:center;}
+.dot-nav-item{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .3s;}
+.dot-nav-item.active{background:var(--accent);width:18px;border-radius:3px;}
+.theme-btn{width:32px;height:32px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;transition:all .2s;}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── CAROUSEL ── */
+#carousel{position:fixed;top:50px;left:0;right:0;bottom:0;display:flex;transition:transform .48s cubic-bezier(.4,0,.2,1);will-change:transform;}
 .slide{min-width:100vw;height:100%;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
 .slide::-webkit-scrollbar{display:none;}
 .slide{-ms-overflow-style:none;scrollbar-width:none;}
-.slide-inner{min-height:100%;padding:2rem 1.25rem 6rem;max-width:680px;margin:0 auto;position:relative;z-index:1;}
-.section-tag{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;background:rgba(91,155,213,.08);border:1px solid rgba(91,155,213,.16);border-radius:6px;padding:.28rem .7rem;margin-bottom:1.4rem;}
-h1.hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.6rem,9vw,4.2rem);line-height:1.0;letter-spacing:-3px;margin-bottom:1rem;}
-h1.hero-name .dim{color:var(--text3);font-weight:400;}
-.page-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.7rem,5.5vw,2.6rem);letter-spacing:-1.5px;line-height:1.1;margin-bottom:.45rem;}
-.page-subtitle{color:var(--text2);font-size:.88rem;margin-bottom:1.8rem;max-width:440px;line-height:1.7;}
-.hero-bio{color:var(--text2);font-size:.93rem;line-height:1.78;max-width:440px;margin-bottom:1.8rem;}
-.status-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border2);border-radius:999px;padding:.32rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2);margin-bottom:1.8rem;}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
-.nickname-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(91,155,213,.08);border:1px solid rgba(91,155,213,.18);border-radius:8px;padding:.25rem .65rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent2);margin-right:.35rem;margin-bottom:.35rem;}
-.btn-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem;}
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.58rem 1.15rem;border-radius:10px;font-size:.82rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .2s;font-family:'Inter',sans-serif;}
+.slide-inner{min-height:100%;padding:1.75rem 1.15rem 6rem;max-width:680px;margin:0 auto;position:relative;z-index:1;}
+
+/* ── TYPOGRAPHY ── */
+.section-tag{display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:1.2rem;}
+.section-tag::before{content:'';display:inline-block;width:18px;height:1px;background:var(--accent);}
+h1.hero-name{font-family:'Libre Baskerville',serif;font-weight:700;font-size:clamp(2.4rem,8.5vw,3.8rem);line-height:1.05;letter-spacing:-1.5px;margin-bottom:1rem;}
+h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
+.page-title{font-family:'Libre Baskerville',serif;font-weight:700;font-size:clamp(1.6rem,5vw,2.4rem);letter-spacing:-1px;line-height:1.1;margin-bottom:.4rem;}
+.page-subtitle{color:var(--text2);font-size:.85rem;margin-bottom:1.6rem;max-width:440px;line-height:1.75;font-weight:300;}
+.hero-bio{color:var(--text2);font-size:.9rem;line-height:1.8;max-width:440px;margin-bottom:1.6rem;font-weight:300;}
+.status-badge{display:inline-flex;align-items:center;gap:.45rem;background:transparent;border:1px solid var(--border2);border-radius:3px;padding:.28rem .9rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text2);margin-bottom:1.6rem;letter-spacing:.5px;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.nickname-badge{display:inline-flex;align-items:center;gap:.3rem;background:transparent;border:1px solid var(--border2);border-radius:3px;padding:.2rem .55rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text2);margin-right:.3rem;margin-bottom:.3rem;}
+
+/* ── BUTTONS ── */
+.btn-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:3px;font-size:.8rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .18s;font-family:'DM Sans',sans-serif;letter-spacing:.3px;}
 .btn-primary{background:var(--accent);color:#fff;}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);}
-.btn-ghost{background:var(--surface);color:var(--text2);border:1px solid var(--border2);}
-.btn-ghost:hover{border-color:var(--accent);color:var(--text);transform:translateY(-1px);}
-.btn-danger{background:rgba(242,107,107,.1);color:var(--red);border:1px solid rgba(242,107,107,.22);}
-.btn-danger:hover{background:rgba(242,107,107,.18);}
-.btn-sm{padding:.35rem .75rem;font-size:.75rem;border-radius:8px;}
-.card{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:1.3rem 1.4rem;margin-bottom:.7rem;transition:border-color .25s,transform .2s,box-shadow .25s;cursor:pointer;position:relative;overflow:hidden;}
-.card:hover{border-color:var(--border2);box-shadow:0 4px 20px var(--shadow);}
-.card.expanded{border-color:rgba(91,155,213,.28);}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);}
+.btn-ghost:hover{border-color:var(--text2);color:var(--text);}
+.btn-danger{background:transparent;color:var(--red);border:1px solid rgba(224,82,82,.3);}
+.btn-danger:hover{background:rgba(224,82,82,.08);}
+.btn-sm{padding:.3rem .7rem;font-size:.72rem;}
+
+/* ── CARDS (general) ── */
+.card{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.15rem 1.25rem;margin-bottom:.55rem;transition:border-color .2s,box-shadow .2s;cursor:pointer;position:relative;overflow:hidden;}
+.card:hover{border-color:var(--border2);box-shadow:0 3px 16px var(--shadow);}
+.card.expanded{border-color:rgba(26,115,232,.22);}
 .card:active{transform:scale(.985);}
-.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;}
-.card-icon{font-size:1.4rem;flex-shrink:0;margin-top:.05rem;}
-.card-chevron{color:var(--text3);font-size:.9rem;margin-top:.1rem;transition:transform .3s;flex-shrink:0;}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.7rem;}
+.card-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem;}
+.card-chevron{color:var(--text3);font-size:.85rem;margin-top:.1rem;transition:transform .3s;flex-shrink:0;}
 .card.expanded .card-chevron{transform:rotate(90deg);color:var(--accent);}
-.card h3{font-family:'Syne',sans-serif;font-size:.93rem;font-weight:700;margin-bottom:.2rem;letter-spacing:-.3px;}
-.card .card-short{color:var(--text2);font-size:.8rem;line-height:1.6;}
-.card-meta{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.7rem;}
-.tag{background:rgba(91,155,213,.07);border:1px solid rgba(91,155,213,.14);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.18rem .52rem;border-radius:5px;}
-.tag.green{background:rgba(52,201,116,.07);border-color:rgba(52,201,116,.16);color:var(--green);}
-.tag.yellow{background:rgba(240,180,41,.07);border-color:rgba(240,180,41,.16);color:var(--yellow);}
-.expand-panel{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
+.card h3{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.18rem;letter-spacing:-.2px;}
+.card .card-short{color:var(--text2);font-size:.78rem;line-height:1.6;}
+.card-meta{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.65rem;}
+.tag{background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:'DM Mono',monospace;font-size:.58rem;padding:.15rem .48rem;border-radius:2px;letter-spacing:.5px;text-transform:uppercase;}
+.tag.green{border-color:rgba(45,184,112,.3);color:var(--green);}
+.tag.yellow{border-color:rgba(232,160,32,.3);color:var(--yellow);}
+.expand-panel{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
 .expand-panel.open{max-height:700px;}
-.expand-body{padding-top:.9rem;border-top:1px solid var(--border);margin-top:.9rem;}
-.expand-body p{color:var(--text2);font-size:.82rem;line-height:1.75;}
-.expand-body p+p{margin-top:.6rem;}
+.expand-body{padding-top:.85rem;border-top:1px solid var(--sep);margin-top:.85rem;}
+.expand-body p{color:var(--text2);font-size:.81rem;line-height:1.8;font-weight:300;}
+.expand-body p+p{margin-top:.55rem;}
 .expand-body strong{color:var(--text);font-weight:600;}
-.expand-body .src{font-family:'Lora',serif;font-style:italic;font-size:.75rem;color:var(--text3);margin-top:.7rem;display:block;}
-.skill-wrap{margin-bottom:1rem;}
-.skill-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem;}
-.skill-name{font-size:.82rem;font-weight:500;color:var(--text);}
-.skill-pct{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);}
-.skill-track{height:5px;background:var(--bg3);border-radius:999px;overflow:hidden;}
-.skill-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1);}
-.timeline{position:relative;padding-left:1.75rem;}
-.timeline::before{content:'';position:absolute;left:.35rem;top:.5rem;bottom:.5rem;width:2px;background:linear-gradient(to bottom,var(--accent),transparent);border-radius:2px;}
-.tl-item{position:relative;margin-bottom:2rem;cursor:pointer;}
-.tl-dot{position:absolute;left:-1.55rem;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 10px var(--accent);}
-.tl-dot.now{animation:gdot 2s infinite;}
-@keyframes gdot{0%,100%{box-shadow:0 0 8px var(--accent);}50%{box-shadow:0 0 20px var(--accent),0 0 32px rgba(91,155,213,.35);}}
-.tl-year{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--accent);margin-bottom:.28rem;letter-spacing:.8px;}
-.tl-title{font-family:'Syne',sans-serif;font-size:.97rem;font-weight:700;letter-spacing:-.3px;margin-bottom:.25rem;}
-.tl-short{color:var(--text2);font-size:.8rem;line-height:1.6;}
-/* ── BLOG ── */
-.blog-card{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;margin-bottom:.7rem;transition:all .25s;cursor:pointer;}
-.blog-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 6px 24px var(--shadow);}
-.blog-card.expanded{border-color:rgba(91,155,213,.22);}
-.blog-img{height:90px;background:linear-gradient(135deg,var(--bg3),var(--bg2));display:flex;align-items:center;justify-content:center;font-size:2.8rem;position:relative;overflow:hidden;}
+.expand-body .src{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.72rem;color:var(--text3);margin-top:.65rem;display:block;}
+
+/* ── SKILL BARS ── */
+.skill-wrap{margin-bottom:.9rem;}
+.skill-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
+.skill-name{font-size:.8rem;font-weight:500;color:var(--text);}
+.skill-pct{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent);}
+.skill-track{height:3px;background:var(--bg3);border-radius:999px;overflow:hidden;}
+.skill-fill{height:100%;border-radius:999px;background:var(--accent);width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1);}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:1.6rem;}
+.timeline::before{content:'';position:absolute;left:.3rem;top:.5rem;bottom:.5rem;width:1px;background:linear-gradient(to bottom,var(--accent),transparent);}
+.tl-item{position:relative;margin-bottom:1.8rem;cursor:pointer;}
+.tl-dot{position:absolute;left:-1.4rem;top:.3rem;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);}
+.tl-dot.now{box-shadow:0 0 8px var(--accent);animation:gdot 2s infinite;}
+@keyframes gdot{0%,100%{box-shadow:0 0 6px var(--accent);}50%{box-shadow:0 0 16px var(--accent);}}
+.tl-year{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);margin-bottom:.22rem;letter-spacing:.8px;}
+.tl-title{font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.2rem;}
+.tl-short{color:var(--text2);font-size:.78rem;line-height:1.6;font-weight:300;}
+
+/* ── BLOG — Bloomberg style ── */
+.blog-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;overflow:hidden;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);}
+.blog-card:first-child{border-top:1px solid var(--sep);}
+.blog-card:hover{background:var(--card-hover);}
+.blog-card.expanded{background:var(--bg2);}
+.blog-card:active{opacity:.9;}
+
+/* Image strip — full width, no border-radius */
+.blog-img{height:var(--blog-img-h);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden;flex-shrink:0;}
 .blog-img img.cover-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
-.blog-img .emoji-layer{position:relative;z-index:1;}
-.blog-body{padding:.9rem 1.15rem 1.1rem;}
-.blog-date{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--text3);margin-bottom:.2rem;}
-.blog-source-label{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
-.blog-card h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:-.3px;margin-bottom:.35rem;}
-.blog-card .blog-preview{color:var(--text2);font-size:.79rem;line-height:1.6;}
-.blog-full{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);padding:0 1.15rem;}
-.blog-full.open{max-height:1400px;padding:0 1.15rem .9rem;}
-.blog-full p{color:var(--text2);font-size:.81rem;line-height:1.8;margin-top:.6rem;}
+.blog-img .emoji-layer{position:relative;z-index:1;opacity:.45;}
+.blog-img::after{content:'';position:absolute;inset:0;background:var(--img-overlay);pointer-events:none;}
+
+/* Card body — Bloomberg editorial layout */
+.blog-body{padding:.85rem 1rem 1rem;}
+.blog-date{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);margin-bottom:.18rem;letter-spacing:.8px;text-transform:uppercase;}
+.blog-source-label{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:.35rem;font-weight:500;}
+.blog-card h3{font-family:'Libre Baskerville',serif;font-size:.97rem;font-weight:700;letter-spacing:-.3px;line-height:1.4;margin-bottom:.4rem;color:var(--text);}
+.blog-card .blog-preview{color:var(--text2);font-size:.79rem;line-height:1.65;font-style:italic;font-family:'Libre Baskerville',serif;font-weight:400;}
+.card-meta.blog-tags{margin-top:.6rem;}
+
+/* Full content */
+.blog-full{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);padding:0;}
+.blog-full.open{max-height:2000px;padding:0 1rem .9rem;}
+.blog-full p{color:var(--text2);font-size:.82rem;line-height:1.85;margin-top:.7rem;font-weight:300;}
 .blog-full p+p{margin-top:.5rem;}
-.blog-sourceby{display:flex;align-items:center;gap:.55rem;margin-top:1rem;padding:.65rem .9rem;background:var(--bg3);border-radius:10px;border:1px solid var(--border);}
-.blog-sourceby-icon{font-size:1.1rem;flex-shrink:0;}
-.blog-sourceby-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:.1rem;}
-.blog-sourceby-title{font-size:.78rem;font-weight:600;color:var(--text);}
-.blog-sourceby-author{font-size:.72rem;color:var(--text2);}
-.blog-admin-btns{display:flex;gap:.4rem;padding:.6rem 1.15rem .9rem;border-top:1px solid var(--border);}
+.blog-sourceby{display:flex;align-items:center;gap:.55rem;margin-top:1rem;padding:.65rem .85rem;background:var(--bg3);border-left:2px solid var(--accent);border-radius:0;}
+.blog-sourceby-icon{font-size:1rem;flex-shrink:0;opacity:.6;}
+.blog-sourceby-lbl{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.1rem;}
+.blog-sourceby-title{font-size:.78rem;font-weight:600;color:var(--text);font-family:'Libre Baskerville',serif;}
+.blog-sourceby-author{font-size:.71rem;color:var(--text2);font-style:italic;}
+.blog-admin-btns{display:flex;gap:.4rem;padding:.55rem 1rem .75rem;border-top:1px solid var(--sep);}
+
+/* Blog list wrapper — thin top rule like Bloomberg section */
+.blog-section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem;}
+.blog-section-header::after{content:'';flex:1;height:1px;background:var(--sep);}
+.blog-section-title{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;white-space:nowrap;}
+
 /* ── MODAL ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .3s;}
 .modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:1.75rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;transform:translateY(20px);transition:transform .3s;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:4px;padding:1.6rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;transform:translateY(16px);transition:transform .3s;}
 .modal-overlay.open .modal{transform:translateY(0);}
-.modal h2{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.25rem;letter-spacing:-.5px;}
-.modal-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:8px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;}
-.form-group{margin-bottom:1rem;}
-.form-label{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem;display:block;}
-.form-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:.65rem .85rem;color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.modal h2{font-family:'Libre Baskerville',serif;font-size:1.15rem;font-weight:700;margin-bottom:1.2rem;letter-spacing:-.3px;}
+.modal-close{position:absolute;top:1rem;right:1rem;width:30px;height:30px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+.form-group{margin-bottom:.9rem;}
+.form-label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.38rem;display:block;}
+.form-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;padding:.6rem .8rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.83rem;outline:none;transition:border-color .2s;-webkit-appearance:none;}
 .form-input:focus{border-color:var(--accent);}
-.form-textarea{min-height:120px;resize:vertical;line-height:1.6;}
-.form-row{display:flex;gap:.6rem;}
+.form-textarea{min-height:115px;resize:vertical;line-height:1.6;}
+.form-row{display:flex;gap:.55rem;}
 .form-row .form-group{flex:1;}
-.img-upload-area{border:2px dashed var(--border2);border-radius:12px;padding:1.1rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
-.img-upload-area:hover{border-color:var(--accent);background:rgba(91,155,213,.04);}
-.img-upload-area p{font-size:.75rem;color:var(--text3);margin-top:.25rem;}
-.img-preview{width:100%;height:75px;object-fit:cover;border-radius:8px;margin-top:.5rem;display:none;}
-.admin-bar{display:flex;align-items:center;gap:.5rem;background:rgba(91,155,213,.06);border:1px solid rgba(91,155,213,.14);border-radius:12px;padding:.6rem 1rem;margin-bottom:1rem;}
-.admin-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);flex-shrink:0;}
-.admin-bar span{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--accent);flex:1;}
-.loading-spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;}
+.img-upload-area{border:1px dashed var(--border2);border-radius:3px;padding:1rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
+.img-upload-area:hover{border-color:var(--accent);background:rgba(26,115,232,.04);}
+.img-upload-area p{font-size:.72rem;color:var(--text3);margin-top:.2rem;}
+.img-preview{width:100%;height:70px;object-fit:cover;border-radius:2px;margin-top:.5rem;display:none;}
+.admin-bar{display:flex;align-items:center;gap:.5rem;background:transparent;border:1px solid rgba(26,115,232,.2);border-radius:3px;padding:.55rem .9rem;margin-bottom:.9rem;}
+.admin-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);flex-shrink:0;}
+.admin-bar span{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--accent);flex:1;}
+.loading-spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:.6rem 1.2rem;font-size:.8rem;font-weight:500;z-index:2000;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+.toast{position:fixed;bottom:4.5rem;left:50%;transform:translateX(-50%) translateY(16px);background:var(--surface);border:1px solid var(--border2);border-radius:3px;padding:.55rem 1.15rem;font-size:.78rem;font-weight:500;z-index:2000;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast.success{border-color:var(--green);color:var(--green);}
 .toast.error{border-color:var(--red);color:var(--red);}
-.quote-card{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:1.5rem;margin-bottom:.7rem;position:relative;overflow:hidden;transition:all .25s;cursor:pointer;}
-.quote-card::before{content:'\201C';position:absolute;top:-.6rem;left:.75rem;font-family:'Syne',sans-serif;font-size:8rem;font-weight:800;color:var(--accent);opacity:.05;line-height:1;pointer-events:none;}
-.quote-card:hover{border-color:var(--border2);transform:translateY(-2px);}
-.quote-card.expanded{border-color:rgba(91,155,213,.22);}
-.quote-text{font-family:'Syne',sans-serif;font-size:.93rem;font-weight:600;line-height:1.55;margin-bottom:.9rem;letter-spacing:-.2px;position:relative;z-index:1;}
-.quote-author{display:flex;align-items:center;gap:.55rem;}
-.quote-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
-.quote-name{font-size:.77rem;font-weight:600;color:var(--text);}
-.quote-src{font-family:'Lora',serif;font-style:italic;font-size:.7rem;color:var(--text3);}
-.quote-context{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
+
+/* ── QUOTE ── */
+.quote-card{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.4rem;margin-bottom:.55rem;position:relative;overflow:hidden;transition:all .2s;cursor:pointer;}
+.quote-card::before{content:'\201C';position:absolute;top:-1.2rem;left:.6rem;font-family:'Libre Baskerville',serif;font-size:7rem;font-weight:700;color:var(--accent);opacity:.05;line-height:1;pointer-events:none;}
+.quote-card:hover{border-color:var(--border2);}
+.quote-card.expanded{border-color:rgba(26,115,232,.22);}
+.quote-text{font-family:'Libre Baskerville',serif;font-size:.92rem;font-style:italic;font-weight:400;line-height:1.6;margin-bottom:.85rem;letter-spacing:-.1px;position:relative;z-index:1;}
+.quote-author{display:flex;align-items:center;gap:.5rem;}
+.quote-av{width:28px;height:28px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;border:1px solid var(--border2);}
+.quote-name{font-size:.78rem;font-weight:700;color:var(--text);}
+.quote-src{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.67rem;color:var(--text3);}
+.quote-context{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
 .quote-context.open{max-height:300px;}
-.quote-ctx-body{border-top:1px solid var(--border);margin-top:.9rem;padding-top:.8rem;color:var(--text2);font-size:.79rem;line-height:1.75;}
+.quote-ctx-body{border-top:1px solid var(--sep);margin-top:.85rem;padding-top:.75rem;color:var(--text2);font-size:.78rem;line-height:1.8;font-weight:300;}
+
 /* ── JURNAL ── */
-.jurnal-card{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:1.3rem;margin-bottom:.7rem;transition:all .25s;cursor:pointer;border-left:3px solid rgba(91,155,213,.4);}
-.jurnal-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px var(--shadow);}
-.jurnal-card.expanded{box-shadow:0 6px 22px var(--shadow);}
-.jurnal-label{display:inline-flex;align-items:center;gap:.3rem;font-family:'JetBrains Mono',monospace;font-size:.61rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.55rem;}
-.jurnal-card h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.4rem;}
-.jurnal-card .jurnal-short{color:var(--text2);font-size:.8rem;line-height:1.6;}
-.jurnal-footer{margin-top:.75rem;display:flex;gap:.35rem;flex-wrap:wrap;}
-.book-ref{display:flex;align-items:center;gap:.55rem;margin-top:.9rem;padding:.6rem .85rem;background:var(--bg3);border-radius:10px;border:1px solid var(--border);}
-.book-ref-icon{font-size:1.2rem;flex-shrink:0;}
-.book-ref-lbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
-.book-ref-title{font-size:.78rem;font-weight:600;color:var(--text);}
-.book-ref-author{font-size:.71rem;color:var(--text2);}
+.jurnal-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;padding:1.2rem;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);border-left:2px solid var(--accent);}
+.jurnal-card:first-child{border-top:1px solid var(--sep);}
+.jurnal-card:hover{background:var(--card-hover);}
+.jurnal-card.expanded{background:var(--bg2);}
+.jurnal-label{display:inline-flex;align-items:center;gap:.3rem;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:.5rem;}
+.jurnal-card h3{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.38rem;line-height:1.4;}
+.jurnal-card .jurnal-short{color:var(--text2);font-size:.79rem;line-height:1.6;font-style:italic;font-family:'Libre Baskerville',serif;}
+.jurnal-footer{margin-top:.7rem;display:flex;gap:.3rem;flex-wrap:wrap;}
+.book-ref{display:flex;align-items:center;gap:.5rem;margin-top:.85rem;padding:.55rem .8rem;background:var(--bg3);border-left:2px solid var(--accent);border-radius:0;}
+.book-ref-icon{font-size:1rem;flex-shrink:0;opacity:.6;}
+.book-ref-lbl{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;}
+.book-ref-title{font-family:'Libre Baskerville',serif;font-size:.77rem;font-weight:700;color:var(--text);}
+.book-ref-author{font-size:.7rem;color:var(--text2);font-style:italic;}
+
 /* ── ILMU ── */
-.ilmu-card{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:1.3rem;margin-bottom:.7rem;transition:all .25s;cursor:pointer;}
-.ilmu-card:hover{border-color:rgba(240,180,41,.28);transform:translateY(-2px);}
-.ilmu-card.expanded{border-color:rgba(240,180,41,.32);}
-.ilmu-num{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--text3);margin-bottom:.35rem;}
-.ilmu-card h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.4rem;}
-.ilmu-short{color:var(--text2);font-size:.8rem;line-height:1.6;}
-.contact-item{display:flex;align-items:center;gap:.9rem;background:var(--surface);border:1px solid var(--card-border);border-radius:14px;padding:.95rem 1.15rem;text-decoration:none;color:var(--text);transition:all .22s;margin-bottom:.5rem;}
-.contact-item:hover{border-color:rgba(91,155,213,.28);transform:translateX(4px);}
-.contact-icon{width:36px;height:36px;border-radius:10px;background:rgba(91,155,213,.08);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;}
-.contact-label{font-weight:600;font-size:.86rem;}
-.contact-sub{font-size:.73rem;color:var(--text3);}
-.contact-arr{margin-left:auto;color:var(--text3);transition:transform .2s;}
+.ilmu-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;padding:1.2rem;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);}
+.ilmu-card:first-child{border-top:1px solid var(--sep);}
+.ilmu-card:hover{background:var(--card-hover);}
+.ilmu-card.expanded{background:var(--bg2);}
+.ilmu-num{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);margin-bottom:.3rem;letter-spacing:1px;}
+.ilmu-card h3{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.38rem;line-height:1.4;}
+.ilmu-short{color:var(--text2);font-size:.79rem;line-height:1.6;font-style:italic;}
+
+/* ── CONTACT ── */
+.contact-item{display:flex;align-items:center;gap:.85rem;background:var(--surface);border:1px solid var(--card-border);border-radius:3px;padding:.88rem 1.1rem;text-decoration:none;color:var(--text);transition:all .2s;margin-bottom:.45rem;}
+.contact-item:hover{border-color:var(--border2);transform:translateX(3px);}
+.contact-icon{width:34px;height:34px;border-radius:3px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
+.contact-label{font-weight:700;font-size:.84rem;}
+.contact-sub{font-size:.71rem;color:var(--text3);font-family:'DM Mono',monospace;}
+.contact-arr{margin-left:auto;color:var(--text3);transition:transform .2s;font-size:.8rem;}
 .contact-item:hover .contact-arr{transform:translateX(3px);color:var(--accent);}
-.about-box{background:var(--surface);border:1px solid var(--card-border);border-radius:16px;padding:1.3rem;margin-bottom:.8rem;}
-.about-box p{color:var(--text2);font-size:.86rem;line-height:1.8;}
-.about-box p+p{margin-top:.6rem;}
+
+/* ── ABOUT BOX ── */
+.about-box{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.2rem;margin-bottom:.75rem;}
+.about-box p{color:var(--text2);font-size:.84rem;line-height:1.8;font-weight:300;}
+.about-box p+p{margin-top:.55rem;}
 .about-box strong{color:var(--text);font-weight:600;}
-.birth-tag{display:inline-flex;align-items:center;gap:.35rem;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:.28rem .75rem;margin-top:.85rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2);}
+.birth-tag{display:inline-flex;align-items:center;gap:.32rem;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;padding:.24rem .7rem;margin-top:.8rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text2);}
 .birth-tag span{color:var(--accent);}
-.animal-grid{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem;}
-.animal-tag{background:rgba(52,201,116,.07);border:1px solid rgba(52,201,116,.16);color:var(--green);font-size:.75rem;padding:.22rem .6rem;border-radius:8px;display:flex;align-items:center;gap:.3rem;}
-.org-item{display:flex;align-items:center;gap:.8rem;padding:.65rem 0;border-bottom:1px solid var(--border);}
+.animal-grid{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem;}
+.animal-tag{background:transparent;border:1px solid rgba(45,184,112,.25);color:var(--green);font-size:.72rem;padding:.18rem .55rem;border-radius:2px;display:flex;align-items:center;gap:.28rem;}
+.org-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--sep);}
 .org-item:last-child{border-bottom:none;}
-.org-icon{font-size:1.3rem;flex-shrink:0;}
-.org-name{font-weight:600;font-size:.85rem;}
-.org-desc{font-size:.76rem;color:var(--text3);}
-.sdiv{height:1px;background:var(--border);margin:1.4rem 0;}
-.sec-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.8rem;}
-.swipe-hint{position:fixed;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.5rem;background:rgba(20,22,24,.9);border:1px solid var(--border2);border-radius:999px;padding:.35rem .95rem;font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--text3);backdrop-filter:blur(12px);z-index:50;transition:opacity .4s;pointer-events:none;}
+.org-icon{font-size:1.2rem;flex-shrink:0;}
+.org-name{font-weight:700;font-size:.83rem;}
+.org-desc{font-size:.73rem;color:var(--text3);}
+.sdiv{height:1px;background:var(--sep);margin:1.3rem 0;}
+.sec-label{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem;}
+
+/* ── ADD BLOG HINT ── */
+.add-hint{border:1px dashed var(--border2);border-radius:3px;padding:1.2rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-top:.9rem;}
+.add-hint:hover{border-color:var(--accent);}
+.add-hint h3{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;margin-bottom:.2rem;}
+.add-hint p{font-size:.76rem;color:var(--text3);}
+
+/* ── SWIPE HINT ── */
+.swipe-hint{position:fixed;bottom:.8rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.5rem;background:rgba(10,10,11,.92);border:1px solid var(--border2);border-radius:2px;padding:.3rem .9rem;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);backdrop-filter:blur(12px);z-index:50;transition:opacity .4s;pointer-events:none;letter-spacing:.8px;}
 .swipe-hint.gone{opacity:0;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-.a1{animation:fadeUp .55s .05s ease both;}
-.a2{animation:fadeUp .55s .15s ease both;}
-.a3{animation:fadeUp .55s .25s ease both;}
-.a4{animation:fadeUp .55s .35s ease both;}
-.a5{animation:fadeUp .55s .45s ease both;}
-.a6{animation:fadeUp .55s .55s ease both;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.a1{animation:fadeUp .5s .05s ease both;}
+.a2{animation:fadeUp .5s .13s ease both;}
+.a3{animation:fadeUp .5s .22s ease both;}
+.a4{animation:fadeUp .5s .3s ease both;}
+.a5{animation:fadeUp .5s .38s ease both;}
+.a6{animation:fadeUp .5s .46s ease both;}
 </style>
 </head>
 <body>
-<div class="glow-orb a"></div>
-<div class="glow-orb b"></div>
 <div class="toast" id="toast"></div>
 
 <!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
-    <h2>🔐 Admin Login</h2>
+    <h2>Admin Login</h2>
     <div class="form-group">
       <label class="form-label">Password</label>
       <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
     </div>
-    <div id="loginError" style="color:var(--red);font-size:.78rem;margin-bottom:.8rem;display:none;">Password salah. Coba lagi.</div>
+    <div id="loginError" style="color:var(--red);font-size:.75rem;margin-bottom:.75rem;display:none;">Password salah.</div>
     <button class="btn btn-primary" style="width:100%;" onclick="doLogin()">Masuk</button>
   </div>
 </div>
 
-<!-- BLOG MODAL -->
+
 <div class="modal-overlay" id="blogModal">
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('blogModal')">✕</button>
-    <h2 id="blogModalTitle">✍️ Tulis Blog Baru</h2>
+    <h2 id="blogModalTitle">Tulis Blog Baru</h2>
     <div class="form-group">
       <label class="form-label">Emoji / Ikon</label>
       <input class="form-input" id="blogEmoji" placeholder="🔧" maxlength="4"/>
@@ -268,7 +320,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
       <label class="form-label">Gambar Cover (opsional)</label>
       <div class="img-upload-area" onclick="document.getElementById('blogImageInput').click()">
         <input type="file" id="blogImageInput" accept="image/*" style="display:none" onchange="handleImageUpload(event)"/>
-        <div style="font-size:1.5rem">🖼️</div>
+        <div style="font-size:1.4rem">🖼️</div>
         <p>Tap untuk upload gambar cover</p>
         <img id="imgPreview" class="img-preview" src="" alt="preview"/>
       </div>
@@ -300,17 +352,17 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
       <input class="form-input" id="blogPreview" placeholder="Ringkasan singkat..."/>
     </div>
     <div class="form-group">
-      <label class="form-label">Isi Blog (paragraf, pisahkan baris kosong)</label>
+      <label class="form-label">Isi Blog</label>
       <textarea class="form-input form-textarea" id="blogContent" placeholder="Tulis isi blog...&#10;&#10;Paragraf baru."></textarea>
     </div>
     <div class="form-group">
-      <label class="form-label">Source By (buku / artikel referensi)</label>
+      <label class="form-label">Source By</label>
       <div class="form-row">
         <div class="form-group"><input class="form-input" id="sourceByTitle" placeholder="Judul buku/artikel"/></div>
         <div class="form-group"><input class="form-input" id="sourceByAuthor" placeholder="Nama penulis"/></div>
       </div>
     </div>
-    <div style="display:flex;gap:.6rem;">
+    <div style="display:flex;gap:.55rem;">
       <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('blogModal')">Batal</button>
       <button class="btn btn-primary" style="flex:1;" onclick="saveBlog()"><span id="saveBlogLabel">Simpan</span></button>
     </div>
@@ -318,7 +370,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 </div>
 
 <nav>
-  <div class="nav-logo" id="navLogo">~/<span>Fastend</span></div>
+  <div class="nav-logo" id="navLogo">./~<span>Fastend</span></div>
   <div class="nav-right">
     <div class="dot-nav" id="dotNav"></div>
     <button class="theme-btn" id="themeBtn">🌙</button>
@@ -327,7 +379,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 
 <div id="carousel">
 
-<!-- SLIDE 0: HOME -->
+
 <div class="slide" id="s0"><div class="slide-inner">
   <div class="status-badge a1"><div class="status-dot"></div>Open to Collaborate</div>
   <h1 class="hero-name a2">Halo,<br><span class="dim">saya </span>Fastend<br><span class="dim">Muchammad</span></h1>
@@ -340,39 +392,39 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
   <div class="about-box a5">
     <p>Namaku <strong>Fastend Muchammad</strong> — sering dipanggil <strong>Sten</strong> atau <strong>Ten</strong> saja. Lahir di <strong>Banjarnegara, Jawa Tengah</strong>, 14 Maret 2007.</p>
     <p>Suka banget sama hewan — reptil, burung, kucing, ikan, hampir semua kecuali serangga kecil. Hobi utama: <strong>game, teknologi,</strong> dan nyerap ilmu baru dengan cara yang unik biar nyantol.</p>
-    <div class="birth-tag">🎂 <span>14 Maret 2007</span> · Banjarnegara</div>
+    <div class="birth-tag"> <span>14 Maret 2007</span> · Banjarnegara</div>
   </div>
 </div></div>
 
 <!-- SLIDE 1: TENTANG -->
 <div class="slide" id="s1"><div class="slide-inner">
-  <div class="section-tag a1">👤 Tentang Saya</div>
+  <div class="section-tag a1">Tentang Saya</div>
   <h2 class="page-title a2">Siapa itu<br>Fastend?</h2>
   <p class="page-subtitle a3">Lebih dari sekadar nama — ini orangnya.</p>
   <div class="about-box a3">
     <p>Nama lengkapku <strong>Fastend Muchammad</strong>, tapi orang-orang biasa manggil aku <strong>Sten</strong> atau cukup <strong>Ten</strong>.</p>
     <p>Aku lahir dan besar di <strong>Banjarnegara, Jawa Tengah</strong> — kota kecil yang justru bikin aku belajar banyak tentang kreativitas dan keterbatasan yang jadi kekuatan.</p>
-    <div class="birth-tag">🎂 <span>14 Maret 2007</span> · Banjarnegara, Jawa Tengah</div>
+    <div class="birth-tag"> <span>14 Maret 2007</span> · Banjarnegara, Jawa Tengah</div>
   </div>
   <div class="sec-label a4">— Nickname</div>
-  <div class="a4" style="margin-bottom:1.2rem;">
-    <span class="nickname-badge">⚡ Fastend</span>
-    <span class="nickname-badge">🔹 Sten</span>
-    <span class="nickname-badge">✦ Ten</span>
+  <div class="a4" style="margin-bottom:1.1rem;">
+    <span class="nickname-badge">Fastend</span>
+    <span class="nickname-badge">Sten</span>
+    <span class="nickname-badge">Ten</span>
   </div>
   <div class="sec-label a4">— Hewan Favorit</div>
-  <div class="about-box a4" style="margin-bottom:1.2rem;">
+  <div class="about-box a4" style="margin-bottom:1.1rem;">
     <p>Aku suka hampir semua hewan. Yang paling aku suka:</p>
     <div class="animal-grid">
-      <span class="animal-tag">🦎 Reptil</span>
-      <span class="animal-tag">🐦 Burung &amp; Unggas</span>
-      <span class="animal-tag">🐱 Kucing &amp; Berbulu</span>
-      <span class="animal-tag">🐟 Ikan</span>
+      <span class="animal-tag"> Reptil</span>
+      <span class="animal-tag"> Burung &amp; Unggas</span>
+      <span class="animal-tag"> Kucing &amp; Berbulu</span>
+      <span class="animal-tag"> Ikan</span>
     </div>
-    <p style="margin-top:.7rem;font-size:.78rem;color:var(--text3);">Satu-satunya yang kurang: serangga kecil. Bukan fobia, cuma kurang nyaman aja.</p>
+    <p style="margin-top:.65rem;font-size:.76rem;color:var(--text3);">Satu-satunya yang kurang: serangga kecil. Bukan fobia, cuma kurang nyaman aja.</p>
   </div>
   <div class="sec-label a5">— Minat Utama</div>
-  <div class="about-box a5" style="margin-bottom:1.2rem;">
+  <div class="about-box a5" style="margin-bottom:1.1rem;">
     <p>Dua hal yang selalu bikin aku excited: <strong>Game</strong> dan <strong>Teknologi</strong>. Tapi bukan cuma main atau pakai — aku suka ngerti cara kerjanya, bongkar-pasang, dan eksplorasi lebih dalam.</p>
     <p>Selain itu, aku juga doyan banget nyerap <strong>ilmu baru</strong> — khususnya yang disajikan dengan pendekatan unik, bukan hafalan kaku.</p>
   </div>
@@ -387,7 +439,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 
 <!-- SLIDE 2: PENGALAMAN -->
 <div class="slide" id="s2"><div class="slide-inner">
-  <div class="section-tag a1">📌 Pengalaman</div>
+  <div class="section-tag a1">Pengalaman</div>
   <h2 class="page-title a2">Perjalanan<br>Hidup</h2>
   <p class="page-subtitle a3">Tap tiap titik untuk cerita lengkapnya.</p>
   <div class="timeline a3">
@@ -432,7 +484,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <div class="card-top"><span class="card-icon">👑</span><div style="flex:1"><h3>Duta Genre Kec. Pagedongan</h3><p class="card-short">Generasi Berencana, Banjarnegara. Komunikasi &amp; kepemimpinan tingkat kecamatan.</p></div><span class="card-chevron">›</span></div>
     <div class="card-meta"><span class="tag">Leadership</span><span class="tag">Komunikasi</span><span class="tag green">Sosial</span></div>
     <div class="expand-panel"><div class="expand-body">
-      <p>Jadi Duta Genre bukan cuma gelar — ada tanggung jawab nyata di baliknya. Aku harus <strong>berkomunikasi sama banyak kalangan</strong>: remaja, orang tua, sampai perangkat desa, dengan pesan yang sama tapi cara yang berbeda.</p>
+      <p>Jadi Duta Genre bukan cuma gelar — ada tanggung jawab nyata di baliknya. Aku harus <strong>berkomunikasi sama banyak kalangan</strong>.</p>
       <p>Pengalaman ini ngajarin aku bahwa <strong>leadership yang baik bukan soal tampil di depan</strong>, tapi soal konsistensi, empati, dan kemampuan ngajak orang percaya pada tujuan yang lebih besar.</p>
       <span class="src">Kecamatan Pagedongan, Banjarnegara · Aktif saat kelas 10</span>
     </div></div>
@@ -442,8 +494,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <div class="card-meta"><span class="tag">Hardware</span><span class="tag green">POLYTRON</span><span class="tag yellow">MEGATRON</span><span class="tag">6 Bulan</span></div>
     <div class="expand-panel"><div class="expand-body">
       <p><strong>POLYTRON (3 Bulan)</strong> — Praktik langsung di industri service elektronik profesional. Diagnosa kerusakan, solder SMD, ganti komponen, dan berhadapan sama pelanggan nyata setiap hari.</p>
-      <p><strong>MEGATRON di Sekolah (3 Bulan)</strong> — Melanjutkan PKL di laboratorium sekolah. Pendalaman teknis elektronika dengan pendekatan yang lebih terstruktur dan beragam jenis perangkat.</p>
-      <p>Total <strong>6 bulan PKL</strong> ngasih aku pengalaman yang jauh lebih luas dari rata-rata — dua lingkungan kerja yang berbeda, dua pendekatan yang saling melengkapi.</p>
+      <p><strong>MEGATRON di Sekolah (3 Bulan)</strong> — Melanjutkan PKL di laboratorium sekolah. Pendalaman teknis elektronika dengan pendekatan yang lebih terstruktur.</p>
       <span class="src">PKL · POLYTRON 3 Bulan + MEGATRON (Sekolah) 3 Bulan · Total 6 Bulan</span>
     </div></div>
   </div>
@@ -451,7 +502,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 
 <!-- SLIDE 3: SKILLS -->
 <div class="slide" id="s3"><div class="slide-inner">
-  <div class="section-tag a1">⚙️ Skills</div>
+  <div class="section-tag a1">Skills</div>
   <h2 class="page-title a2">Skill &amp;<br>Kemampuan</h2>
   <p class="page-subtitle a3">Tap item mana saja untuk cerita di baliknya.</p>
   <div class="sec-label a3">— HARD SKILL</div>
@@ -466,7 +517,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 
 <!-- SLIDE 4: BLOG -->
 <div class="slide" id="s4"><div class="slide-inner">
-  <div class="section-tag a1">✍️ Blog</div>
+  <div class="section-tag a1">Blog</div>
   <h2 class="page-title a2">Blog<br>Pribadi</h2>
   <p class="page-subtitle a3">Tap kartu untuk baca isi lengkapnya.</p>
   <div class="admin-bar a2" id="adminBar" style="display:none;">
@@ -475,17 +526,20 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <button class="btn btn-primary btn-sm" onclick="openBlogModal()">+ Tulis Post</button>
     <button class="btn btn-ghost btn-sm" onclick="doLogout()">Keluar</button>
   </div>
+  <div class="blog-section-header a3">
+    <span class="blog-section-title">Artikel Terbaru</span>
+  </div>
   <div id="blogList" class="a3"></div>
-  <div class="card a6" id="addBlogHint" style="border-style:dashed;text-align:center;" onclick="checkAdminForNew()">
-    <div style="font-size:1.4rem;margin-bottom:.4rem;">✏️</div>
-    <h3 style="margin-bottom:.2rem;" id="addBlogHintText">Punya cerita baru?</h3>
-    <p class="card-short" id="addBlogHintSub">Login sebagai admin untuk menulis post baru.</p>
+  <div class="add-hint a6" id="addBlogHint" onclick="checkAdminForNew()">
+    <div style="font-size:1.3rem;margin-bottom:.35rem;">✏️</div>
+    <h3 id="addBlogHintText">Punya cerita baru?</h3>
+    <p id="addBlogHintSub">Login sebagai admin untuk menulis post baru.</p>
   </div>
 </div></div>
 
 <!-- SLIDE 5: ILMU BARU -->
 <div class="slide" id="s5"><div class="slide-inner">
-  <div class="section-tag a1">🧠 Ilmu Baru</div>
+  <div class="section-tag a1">Ilmu Baru</div>
   <h2 class="page-title a2">Info &amp;<br>Ilmu Baru</h2>
   <p class="page-subtitle a3">Fakta &amp; insight — tap untuk penjelasan lebih dalam.</p>
   <div class="ilmu-card a3" onclick="toggleIlmu(this)">
@@ -532,11 +586,11 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 
 <!-- SLIDE 6: JURNAL -->
 <div class="slide" id="s6"><div class="slide-inner">
-  <div class="section-tag a1">🧩 Jurnal</div>
+  <div class="section-tag a1">Jurnal</div>
   <h2 class="page-title a2">Jurnal<br>Psikologi</h2>
   <p class="page-subtitle a3">Insight psikologi yang relate buat Gen Z.</p>
   <div class="jurnal-card a3" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">🧠 Kesehatan Mental</div>
+    <div class="jurnal-label">Kesehatan Mental</div>
     <h3>Doom Scrolling &amp; Kecemasan: Kenapa Kita Tidak Bisa Berhenti?</h3>
     <p class="jurnal-short">Algoritma dirancang untuk mengeksploitasi negativity bias otak kita.</p>
     <div class="jurnal-footer"><span class="tag">Dopamin</span><span class="tag yellow">Algoritma</span><span class="tag">Kecemasan</span></div>
@@ -547,7 +601,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     </div></div>
   </div>
   <div class="jurnal-card a4" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">💭 Self-Awareness</div>
+    <div class="jurnal-label">Self-Awareness</div>
     <h3>Quarter-Life Crisis: Normal Banget di Usia 17–25</h3>
     <p class="jurnal-short">"Aku mau jadi apa?" bukan tanda gagal — itu tanda kamu lagi tumbuh.</p>
     <div class="jurnal-footer"><span class="tag green">Normal</span><span class="tag">Identitas</span><span class="tag yellow">Gen Z</span></div>
@@ -558,7 +612,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     </div></div>
   </div>
   <div class="jurnal-card a5" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">⚡ Produktivitas</div>
+    <div class="jurnal-label">Produktivitas</div>
     <h3>Kenapa Fokus Makin Susah di Era Digital?</h3>
     <p class="jurnal-short">Bukan ADHD — tapi "acquired attention deficit" yang kita latih sendiri.</p>
     <div class="jurnal-footer"><span class="tag">Fokus</span><span class="tag yellow">Pomodoro</span><span class="tag">Digital Detox</span></div>
@@ -569,7 +623,7 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     </div></div>
   </div>
   <div class="jurnal-card a6" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">🤝 Hubungan Sosial</div>
+    <div class="jurnal-label">Hubungan Sosial</div>
     <h3>Parasocial Relationship: Kenapa Kita Merasa "Kenal" Konten Kreator?</h3>
     <p class="jurnal-short">Otak tidak bisa bedakan hubungan satu arah dan dua arah.</p>
     <div class="jurnal-footer"><span class="tag">Sosial</span><span class="tag">Konten</span><span class="tag green">Self-Aware</span></div>
@@ -583,39 +637,39 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
 
 <!-- SLIDE 7: QUOTES -->
 <div class="slide" id="s7"><div class="slide-inner">
-  <div class="section-tag a1">💬 Quotes</div>
+  <div class="section-tag a1">Quotes</div>
   <h2 class="page-title a2">Kata-kata<br>Orang Hebat</h2>
   <p class="page-subtitle a3">Kutipan asli, sumber terverifikasi. Tap untuk konteks.</p>
   <div class="quote-card a3" onclick="toggleQuote(this)">
     <div class="quote-text">"The people who are crazy enough to think they can change the world are the ones who do."</div>
-    <div class="quote-author"><div class="quote-av">🍎</div><div><div class="quote-name">Steve Jobs</div><div class="quote-src"><em>Think Different Ad Campaign, Apple — 1997</em></div></div></div>
+    <div class="quote-author"><div class="quote-av">🍎</div><div><div class="quote-name">Steve Jobs</div><div class="quote-src">Think Different Ad Campaign, Apple — 1997</div></div></div>
     <div class="quote-context"><div class="quote-ctx-body">Kalimat ini muncul di iklan ikonik Apple "Think Different" (1997), saat Jobs baru kembali ke Apple yang hampir bangkrut. <strong>Ini bukan sekadar slogan</strong> — ini adalah deklarasi filosofi yang mengubah arah perusahaan dan industri teknologi.</div></div>
   </div>
   <div class="quote-card a4" onclick="toggleQuote(this)">
     <div class="quote-text">"It does not matter how slowly you go as long as you do not stop."</div>
-    <div class="quote-author"><div class="quote-av">☯️</div><div><div class="quote-name">Konfusius</div><div class="quote-src"><em>The Analects — ~500 SM, Tiongkok</em></div></div></div>
+    <div class="quote-author"><div class="quote-av">☯️</div><div><div class="quote-name">Konfusius</div><div class="quote-src">The Analects — ~500 SM, Tiongkok</div></div></div>
     <div class="quote-context"><div class="quote-ctx-body">Konfusius mengajarkan bahwa <strong>kesabaran dan konsistensi melampaui kecepatan</strong>. Di era di mana semua serba instan, kutipan ini terasa makin relevan.</div></div>
   </div>
   <div class="quote-card a5" onclick="toggleQuote(this)">
     <div class="quote-text">"Education is the most powerful weapon which you can use to change the world."</div>
-    <div class="quote-author"><div class="quote-av">✊</div><div><div class="quote-name">Nelson Mandela</div><div class="quote-src"><em>Pidato di Madison Park High School, Boston — 23 Juni 1990</em></div></div></div>
+    <div class="quote-author"><div class="quote-av">✊</div><div><div class="quote-name">Nelson Mandela</div><div class="quote-src">Pidato di Madison Park High School, Boston — 23 Juni 1990</div></div></div>
     <div class="quote-context"><div class="quote-ctx-body">Mandela bicara ini setelah 27 tahun dipenjara. <strong>Orang yang tahu betapa mahalnya harga kebebasan</strong> — dan ia memilih untuk bicara soal pendidikan.</div></div>
   </div>
   <div class="quote-card a6" onclick="toggleQuote(this)">
     <div class="quote-text">"I have not failed. I've just found 10,000 ways that won't work."</div>
-    <div class="quote-author"><div class="quote-av">💡</div><div><div class="quote-name">Thomas Edison</div><div class="quote-src"><em>Dikutip oleh Harper's Monthly Magazine — 1890</em></div></div></div>
+    <div class="quote-author"><div class="quote-av">💡</div><div><div class="quote-name">Thomas Edison</div><div class="quote-src">Dikutip oleh Harper's Monthly Magazine — 1890</div></div></div>
     <div class="quote-context"><div class="quote-ctx-body">Edison tidak menemukan bohlam di percobaan pertama. Yang membedakannya bukan bakat, tapi <strong>cara mendefinisikan ulang kegagalan</strong> sebagai data, bukan kekalahan.</div></div>
   </div>
   <div class="quote-card" onclick="toggleQuote(this)">
     <div class="quote-text">"Wherever you are, be all there."</div>
-    <div class="quote-author"><div class="quote-av">🌿</div><div><div class="quote-name">Jim Elliot</div><div class="quote-src"><em>Jurnal Pribadi Jim Elliot — 1948</em></div></div></div>
+    <div class="quote-author"><div class="quote-av">🌿</div><div><div class="quote-name">Jim Elliot</div><div class="quote-src">Jurnal Pribadi Jim Elliot — 1948</div></div></div>
     <div class="quote-context"><div class="quote-ctx-body">Di era multitasking dan notifikasi tanpa henti, kalimat ini adalah antidot. <strong>Hadir sepenuhnya</strong> — bukan secara fisik, tapi secara mental dan emosional.</div></div>
   </div>
 </div></div>
 
 <!-- SLIDE 8: KONTAK -->
 <div class="slide" id="s8"><div class="slide-inner">
-  <div class="section-tag a1">📬 Kontak</div>
+  <div class="section-tag a1">Kontak</div>
   <h2 class="page-title a2">Mari<br>Ngobrol 👋</h2>
   <p class="page-subtitle a3">Punya project, kolaborasi, atau cuma mau kenalan? Aku selalu terbuka.</p>
   <a class="contact-item a3" href="mailto:fastendmuhammad@gmail.com">
@@ -644,11 +698,11 @@ h1.hero-name .dim{color:var(--text3);font-weight:400;}
     <span class="contact-arr">›</span>
   </a>
   <div class="sdiv a6"></div>
-  <div style="text-align:center;color:var(--text3);font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:1px;" class="a6">© 2025 Fastend Muchammad</div>
+  <div style="text-align:center;color:var(--text3);font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:1.5px;" class="a6">© 2025 FASTEND MUCHAMMAD</div>
 </div></div>
 
 </div>
-<div class="swipe-hint" id="swipeHint">‹ swipe horizontal › untuk navigasi</div>
+<div class="swipe-hint" id="swipeHint">‹ swipe › navigate</div>
 
 <script type="module">
 const FIREBASE_CONFIG = {
@@ -700,7 +754,7 @@ function renderBlogPosts() {
     const dateStr = post.date || (post.createdAt ? (post.createdAt.toDate ? post.createdAt.toDate() : new Date(post.createdAt)).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}) : '');
     const contentHTML = (Array.isArray(post.content) ? post.content : [post.content||'']).map(p=>`<p>${p}</p>`).join('');
     const t1=post.tags?.[0]||'', t2=post.tags?.[1]||'', c1=post.tagColors?.[0]||'', c2=post.tagColors?.[1]||'';
-    const imgEl = post.imageBase64 ? `<img class="cover-img" src="${post.imageBase64}" alt=""/><span class="emoji-layer">${post.emoji||'📝'}</span>` : (post.emoji||'📝');
+    const imgEl = post.imageBase64 ? `<img class="cover-img" src="${post.imageBase64}" alt=""/><span class="emoji-layer">${post.emoji||'📝'}</span>` : `<span class="emoji-layer">${post.emoji||'📝'}</span>`;
     const sbEl = post.sourceBy?.title ? `<div class="blog-sourceby"><span class="blog-sourceby-icon">📖</span><div><div class="blog-sourceby-lbl">Source By</div><div class="blog-sourceby-title">${post.sourceBy.title}</div>${post.sourceBy.author?`<div class="blog-sourceby-author">${post.sourceBy.author}</div>`:''}</div></div>` : '';
     const adminBtns = (window.isAdmin && !post.isStatic) ? `<div class="blog-admin-btns" onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="openEditBlog('${post.id}')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="confirmDelete('${post.id}')">🗑️ Hapus</button></div>` : '';
     return `<div class="blog-card" onclick="toggleBlog(this)">
@@ -710,7 +764,7 @@ function renderBlogPosts() {
         ${post.sourceLabel?`<div class="blog-source-label">${post.sourceLabel}</div>`:''}
         <h3>${post.title}</h3>
         <p class="blog-preview">${post.preview}</p>
-        <div class="card-meta" style="margin-top:.5rem">${t1?`<span class="tag ${c1}">${t1}</span>`:''}${t2?`<span class="tag ${c2}">${t2}</span>`:''}</div>
+        <div class="card-meta blog-tags" style="margin-top:.55rem">${t1?`<span class="tag ${c1}">${t1}</span>`:''}${t2?`<span class="tag ${c2}">${t2}</span>`:''}</div>
       </div>
       <div class="blog-full">${contentHTML}${sbEl}</div>
       ${adminBtns}
@@ -766,7 +820,7 @@ window.checkAdminForNew = function() {
 
 window.openBlogModal = function() {
   window.editingId = null; currentImageBase64 = null;
-  document.getElementById('blogModalTitle').textContent = '✍️ Tulis Blog Baru';
+  document.getElementById('blogModalTitle').textContent = 'Tulis Blog Baru';
   ['blogEmoji','blogSourceLabel','blogTitle','blogTag1','blogTag2','blogPreview','blogContent','sourceByTitle','sourceByAuthor'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('blogDate').value = new Date().toISOString().split('T')[0];
   document.getElementById('imgPreview').style.display = 'none';
@@ -778,7 +832,7 @@ window.openEditBlog = function(id) {
   const post = window.blogPosts.find(p=>p.id===id);
   if (!post) return;
   window.editingId = id; currentImageBase64 = post.imageBase64||null;
-  document.getElementById('blogModalTitle').textContent = '✏️ Edit Blog';
+  document.getElementById('blogModalTitle').textContent = 'Edit Blog';
   document.getElementById('blogEmoji').value = post.emoji||'';
   document.getElementById('blogSourceLabel').value = post.sourceLabel||'';
   document.getElementById('blogTitle').value = post.title||'';
@@ -855,8 +909,8 @@ function renderSkillCards(arr,id){
   document.getElementById(id).innerHTML=arr.map((s,i)=>`
     <div class="card" onclick="toggleCard(this)" style="animation-delay:${.35+i*.08}s">
       <div class="card-top"><span class="card-icon">${s.icon}</span><div style="flex:1">
-        <h3>${s.name}${s.elo?` <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);font-weight:400">ELO ${s.elo}</span>`:''}</h3>
-        <div class="skill-wrap" style="margin-top:.5rem;margin-bottom:0"><div class="skill-label-row"><span class="skill-name" style="font-size:.75rem;color:var(--text3)">Penguasaan</span><span class="skill-pct">${s.pct||'—'}${s.pct?'%':''}</span></div>${s.pct?`<div class="skill-track"><div class="skill-fill" data-pct="${s.pct}"></div></div>`:''}</div>
+        <h3>${s.name}${s.elo?` <span style="font-family:'DM Mono',monospace;font-size:.67rem;color:var(--accent);font-weight:400"> ELO ${s.elo}</span>`:''}</h3>
+        <div class="skill-wrap" style="margin-top:.45rem;margin-bottom:0"><div class="skill-label-row"><span class="skill-name" style="font-size:.72rem;color:var(--text3)">Penguasaan</span><span class="skill-pct">${s.pct||'—'}${s.pct?'%':''}</span></div>${s.pct?`<div class="skill-track"><div class="skill-fill" data-pct="${s.pct}"></div></div>`:''}</div>
       </div><span class="card-chevron">›</span></div>
       <div class="expand-panel"><div class="expand-body"><p>${s.detail}</p></div></div>
     </div>`).join('');
@@ -864,7 +918,7 @@ function renderSkillCards(arr,id){
 function renderHobi(arr,id){
   document.getElementById(id).innerHTML=arr.map((h,i)=>`
     <div class="card" onclick="toggleCard(this)" style="animation-delay:${.35+i*.08}s">
-      <div class="card-top"><span class="card-icon">${h.icon}</span><div style="flex:1"><h3>${h.name}${h.elo?` <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);font-weight:400">ELO ${h.elo}</span>`:''}</h3><p class="card-short">${h.detail.replace(/<[^>]+>/g,'').substring(0,65)}…</p></div><span class="card-chevron">›</span></div>
+      <div class="card-top"><span class="card-icon">${h.icon}</span><div style="flex:1"><h3>${h.name}${h.elo?` <span style="font-family:'DM Mono',monospace;font-size:.67rem;color:var(--accent);font-weight:400"> ELO ${h.elo}</span>`:''}</h3><p class="card-short">${h.detail.replace(/<[^>]+>/g,'').substring(0,65)}…</p></div><span class="card-chevron">›</span></div>
       <div class="expand-panel"><div class="expand-body"><p>${h.detail}</p></div></div>
     </div>`).join('');
 }
@@ -898,12 +952,12 @@ window.goTo=goTo;
 let sx=0,sy=0,dr=false,iH=null;
 carousel.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;dr=true;iH=null;},{passive:true});
 carousel.addEventListener('touchmove',e=>{if(!dr)return;const dx=e.touches[0].clientX-sx,dy=e.touches[0].clientY-sy;if(iH===null)iH=Math.abs(dx)>Math.abs(dy);if(iH){e.preventDefault();carousel.style.transition='none';carousel.style.transform=`translateX(${-(cur*100)+(dx/window.innerWidth*100)}vw)`;}},{passive:false});
-carousel.addEventListener('touchend',e=>{if(!dr)return;dr=false;carousel.style.transition='transform .52s cubic-bezier(.4,0,.2,1)';const dx=e.changedTouches[0].clientX-sx;if(iH){if(dx<-window.innerWidth*.18&&cur<total-1)goTo(cur+1);else if(dx>window.innerWidth*.18&&cur>0)goTo(cur-1);else goTo(cur);}},{passive:true});
+carousel.addEventListener('touchend',e=>{if(!dr)return;dr=false;carousel.style.transition='transform .48s cubic-bezier(.4,0,.2,1)';const dx=e.changedTouches[0].clientX-sx;if(iH){if(dx<-window.innerWidth*.18&&cur<total-1)goTo(cur+1);else if(dx>window.innerWidth*.18&&cur>0)goTo(cur-1);else goTo(cur);}},{passive:true});
 
 let mx=0,md=false;
 carousel.addEventListener('mousedown',e=>{mx=e.clientX;md=true;});
 carousel.addEventListener('mousemove',e=>{if(!md)return;carousel.style.transition='none';carousel.style.transform=`translateX(${-(cur*100)+(e.clientX-mx)/window.innerWidth*100}vw)`;});
-carousel.addEventListener('mouseup',e=>{if(!md)return;md=false;carousel.style.transition='transform .52s cubic-bezier(.4,0,.2,1)';const dx=e.clientX-mx;if(dx<-window.innerWidth*.15&&cur<total-1)goTo(cur+1);else if(dx>window.innerWidth*.15&&cur>0)goTo(cur-1);else goTo(cur);});
+carousel.addEventListener('mouseup',e=>{if(!md)return;md=false;carousel.style.transition='transform .48s cubic-bezier(.4,0,.2,1)';const dx=e.clientX-mx;if(dx<-window.innerWidth*.15&&cur<total-1)goTo(cur+1);else if(dx>window.innerWidth*.15&&cur>0)goTo(cur-1);else goTo(cur);});
 carousel.addEventListener('mouseleave',()=>{if(md){md=false;goTo(cur);}});
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
 
