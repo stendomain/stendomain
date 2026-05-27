@@ -269,6 +269,115 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div>
 
+<div class="modal-overlay" id="ilmuModal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModal('ilmuModal')">✕</button>
+    <h2 id="ilmuModalTitle">Ilmu Baru</h2>
+    <div class="form-group">
+      <label class="form-label">Nomor (001, 002, dst)</label>
+      <input class="form-input" id="ilmuNum" placeholder="001"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Judul</label>
+      <input class="form-input" id="ilmuTitle" placeholder="Judul ilmu baru..."/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Ringkas (1 kalimat)</label>
+      <input class="form-input" id="ilmuShort" placeholder="Ringkasan singkat..."/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Penjelasan Lengkap</label>
+      <textarea class="form-input form-textarea" id="ilmuBody" placeholder="Tulis penjelasan...&#10;&#10;Paragraf baru."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Sumber</label>
+      <input class="form-input" id="ilmuSource" placeholder="Nama buku/jurnal, tahun"/>
+    </div>
+    <div style="display:flex;gap:.55rem;">
+      <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('ilmuModal')">Batal</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="saveIlmu()"><span id="saveIlmuLabel">Simpan</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="jurnalModal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModal('jurnalModal')">✕</button>
+    <h2 id="jurnalModalTitle">Jurnal Baru</h2>
+    <div class="form-group">
+      <label class="form-label">Kategori</label>
+      <input class="form-input" id="jurnalLabel" placeholder="Kesehatan Mental"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Judul</label>
+      <input class="form-input" id="jurnalTitle" placeholder="Judul jurnal..."/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Ringkas (1 kalimat)</label>
+      <input class="form-input" id="jurnalShort" placeholder="Ringkasan singkat..."/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tag 1</label>
+      <input class="form-input" id="jurnalTag1" placeholder="Dopamin"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tag 2 (opsional)</label>
+      <input class="form-input" id="jurnalTag2" placeholder="Algoritma"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tag 3 (opsional)</label>
+      <input class="form-input" id="jurnalTag3" placeholder="Kecemasan"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Isi Jurnal</label>
+      <textarea class="form-input form-textarea" id="jurnalBody" placeholder="Tulis isi jurnal...&#10;&#10;Paragraf baru."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Source By (Judul Buku/Artikel)</label>
+      <input class="form-input" id="jurnalSourceTitle" placeholder="The Social Dilemma"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Penulis</label>
+      <input class="form-input" id="jurnalSourceAuthor" placeholder="Nama Penulis — Tahun"/>
+    </div>
+    <div style="display:flex;gap:.55rem;">
+      <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('jurnalModal')">Batal</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="saveJurnal()"><span id="saveJurnalLabel">Simpan</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="quoteModal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModal('quoteModal')">✕</button>
+    <h2 id="quoteModalTitle">Quote Baru</h2>
+    <div class="form-group">
+      <label class="form-label">Kutipan</label>
+      <textarea class="form-input form-textarea" id="quoteText" placeholder="&quot;Tulis kutipan di sini...&quot;"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nama Pembicara</label>
+      <input class="form-input" id="quoteName" placeholder="Steve Jobs"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Avatar/Emoji</label>
+      <input class="form-input" id="quoteAvatar" placeholder="🍎" maxlength="4"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Sumber</label>
+      <input class="form-input" id="quoteSource" placeholder="Think Different Ad Campaign, Apple — 1997"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Konteks/Penjelasan</label>
+      <textarea class="form-input form-textarea" id="quoteContext" placeholder="Tulis konteks di balik quote ini..."></textarea>
+    </div>
+    <div style="display:flex;gap:.55rem;">
+      <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('quoteModal')">Batal</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="saveQuote()"><span id="saveQuoteLabel">Simpan</span></button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="blogModal">
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('blogModal')">✕</button>
@@ -497,127 +606,36 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div class="section-tag a1">Ilmu Baru</div>
   <h2 class="page-title a2">Info &amp;<br>Ilmu Baru</h2>
   <p class="page-subtitle a3">Fakta &amp; insight — tap untuk penjelasan lebih dalam.</p>
-  <div class="ilmu-card a3" onclick="toggleIlmu(this)">
-    <div class="ilmu-num">// 001</div>
-    <h3>Kenapa Suhu 350°C Ideal untuk Soldering?</h3>
-    <p class="ilmu-short">Sweet spot solder timah-timbal yang nggak merusak komponen.</p>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Solder alloy Sn63/Pb37 punya titik leleh di sekitar <strong>183°C</strong> — tapi kenapa iron disetel 350°C? Karena ada thermal transfer lag antara ujung iron dan pad PCB.</p>
-      <p>Di atas 380°C, risiko delamination PCB meningkat drastis. <strong>350°C adalah titik aman yang efisien</strong> — panas cukup, risiko minimal.</p>
-      <span class="src">IPC J-STD-001 Standard — Soldering Quality Requirements</span>
-    </div></div>
+  <div class="admin-bar a2" id="ilmuAdminBar" style="display:none;">
+    <div class="admin-dot"></div>
+    <span>Mode Admin Aktif</span>
+    <button class="btn btn-primary btn-sm" onclick="openIlmuModal()">+ Ilmu Baru</button>
   </div>
-  <div class="ilmu-card a4" onclick="toggleIlmu(this)">
-    <div class="ilmu-num">// 002</div>
-    <h3>Hukum Moore: Setiap 2 Tahun, Chip Berlipat Ganda</h3>
-    <p class="ilmu-short">Prediksi 1965 yang mendorong revolusi teknologi selama 5 dekade.</p>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Gordon Moore mengobservasi pada 1965 bahwa jumlah transistor dalam IC berlipat ganda tiap ~2 tahun. Ini <strong>pengamatan empiris yang jadi self-fulfilling prophecy</strong>.</p>
-      <p>Hasilnya: prosesor yang hari ini ada di HP murah lebih powerful dari superkomputer 1990-an. Tapi sejak 2016, laju ini mulai melambat karena batas fisik atom semakin terasa.</p>
-      <span class="src">Gordon Moore, Electronics Magazine — April 1965</span>
-    </div></div>
-  </div>
-  <div class="ilmu-card a5" onclick="toggleIlmu(this)">
-    <div class="ilmu-num">// 003</div>
-    <h3>Gen Z: Generasi Pertama yang Lahir di Era Internet</h3>
-    <p class="ilmu-short">Bukan cuma "pakai internet" — tapi dunia mereka memang terbentuk di sana.</p>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Millennial tumbuh bersama internet — tapi punya memori dunia tanpa smartphone. Gen Z (1997–2012) <strong>tidak punya baseline itu</strong>. Otak mereka berkembang dengan koneksi konstan sejak kecil.</p>
-      <p>Pola pikir, cara belajar, cara membangun hubungan Gen Z terbentuk di ekosistem yang sama sekali berbeda dari generasi sebelumnya.</p>
-      <span class="src">Pew Research Center, "Defining generations" — 2019</span>
-    </div></div>
-  </div>
-  <div class="ilmu-card a6" onclick="toggleIlmu(this)">
-    <div class="ilmu-num">// 004</div>
-    <h3>Efek Dunning-Kruger: Makin Tahu, Makin Merasa Bodoh</h3>
-    <p class="ilmu-short">Paradoks kompetensi yang penting banget dipahami sebelum belajar apa pun.</p>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Orang yang baru belajar sesuatu cenderung overestimate kemampuan mereka. Ini yang disebut "<strong>peak of Mount Stupid</strong>" dalam kurva Dunning-Kruger.</p>
-      <p>Ironisnya, orang yang benar-benar ahli justru paling sering meragukan diri sendiri. <strong>Rendah hati bukan kelemahan — itu tanda kamu sudah cukup dalam.</strong></p>
-      <span class="src">Dunning &amp; Kruger, Journal of Personality and Social Psychology — 1999</span>
-    </div></div>
-  </div>
+  <div id="ilmuList" class="a3"></div>
 </div></div>
 
 <div class="slide" id="s6"><div class="slide-inner">
   <div class="section-tag a1">Jurnal</div>
   <h2 class="page-title a2">Jurnal<br>Psikologi</h2>
   <p class="page-subtitle a3">Insight psikologi yang relate buat Gen Z.</p>
-  <div class="jurnal-card a3" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">Kesehatan Mental</div>
-    <h3>Doom Scrolling &amp; Kecemasan: Kenapa Kita Tidak Bisa Berhenti?</h3>
-    <p class="jurnal-short">Algoritma dirancang untuk mengeksploitasi negativity bias otak kita.</p>
-    <div class="jurnal-footer"><span class="tag">Dopamin</span><span class="tag yellow">Algoritma</span><span class="tag">Kecemasan</span></div>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Otak manusia punya <strong>negativity bias</strong> — secara evolusi, kita lebih waspada terhadap ancaman. Platform sosmed mengeksploitasi ini: konten yang memancing rasa takut dapat lebih banyak engagement.</p>
-      <p>Hasilnya: kita scroll terus karena setiap scroll berpotensi kasih reward baru. Ini adalah <strong>variable reward schedule</strong> — mekanisme yang sama dengan mesin slot kasino.</p>
-      <div class="book-ref"><span class="book-ref-icon">📚</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">The Social Dilemma</div><div class="book-ref-author">Tristan Harris — Center for Humane Technology, 2020</div></div></div>
-    </div></div>
+  <div class="admin-bar a2" id="jurnalAdminBar" style="display:none;">
+    <div class="admin-dot"></div>
+    <span>Mode Admin Aktif</span>
+    <button class="btn btn-primary btn-sm" onclick="openJurnalModal()">+ Jurnal Baru</button>
   </div>
-  <div class="jurnal-card a4" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">Self-Awareness</div>
-    <h3>Quarter-Life Crisis: Normal Banget di Usia 17–25</h3>
-    <p class="jurnal-short">"Aku mau jadi apa?" bukan tanda gagal — itu tanda kamu lagi tumbuh.</p>
-    <div class="jurnal-footer"><span class="tag green">Normal</span><span class="tag">Identitas</span><span class="tag yellow">Gen Z</span></div>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Quarter-life crisis adalah periode kebingungan identitas dan arah. Untuk Gen Z, ini sering dimulai lebih awal — sekitar 17–19 tahun — karena <strong>tekanan sosial dan perbandingan di sosmed jauh lebih intens</strong>.</p>
-      <p>Kunci: bedakan antara <strong>perbandingan yang menggerakkan</strong> (inspirasi) vs <strong>perbandingan yang melumpuhkan</strong> (iri).</p>
-      <div class="book-ref"><span class="book-ref-icon">📖</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">Quarterlife Crisis</div><div class="book-ref-author">Robbins &amp; Wilner — Tarcher/Putnam, 2001</div></div></div>
-    </div></div>
-  </div>
-  <div class="jurnal-card a5" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">Produktivitas</div>
-    <h3>Kenapa Fokus Makin Susah di Era Digital?</h3>
-    <p class="jurnal-short">Bukan ADHD — tapi "acquired attention deficit" yang kita latih sendiri.</p>
-    <div class="jurnal-footer"><span class="tag">Fokus</span><span class="tag yellow">Pomodoro</span><span class="tag">Digital Detox</span></div>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Notifikasi dan short-video melatih otak kita untuk mengharapkan <strong>reward instan</strong>. Ini bukan ADHD klinis — itu <strong>kondisi yang kita bangun sendiri melalui kebiasaan</strong>.</p>
-      <p>Mulai dengan 25 menit focus block tanpa gangguan (teknik Pomodoro). Dan ingat: <strong>boring time is training time</strong>.</p>
-      <div class="book-ref"><span class="book-ref-icon">📖</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">Deep Work</div><div class="book-ref-author">Cal Newport — Grand Central Publishing, 2016</div></div></div>
-    </div></div>
-  </div>
-  <div class="jurnal-card a6" onclick="toggleJurnal(this)">
-    <div class="jurnal-label">Hubungan Sosial</div>
-    <h3>Parasocial Relationship: Kenapa Kita Merasa "Kenal" Konten Kreator?</h3>
-    <p class="jurnal-short">Otak tidak bisa bedakan hubungan satu arah dan dua arah.</p>
-    <div class="jurnal-footer"><span class="tag">Sosial</span><span class="tag">Konten</span><span class="tag green">Self-Aware</span></div>
-    <div class="expand-panel"><div class="expand-body">
-      <p>Parasocial relationship adalah hubungan emosional satu arah. Otak tidak punya mekanisme untuk membedakan ini dari hubungan nyata.</p>
-      <p>Tidak berbahaya selama kamu <strong>sadar batasnya</strong>: kamu tahu tentang mereka, tapi tidak kenal mereka.</p>
-      <div class="book-ref"><span class="book-ref-icon">📰</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">Mass Communication and Para-Social Interaction</div><div class="book-ref-author">Horton &amp; Wohl — Psychiatry Journal, 1956</div></div></div>
-    </div></div>
-  </div>
+  <div id="jurnalList" class="a3"></div>
 </div></div>
 
 <div class="slide" id="s7"><div class="slide-inner">
   <div class="section-tag a1">Quotes</div>
   <h2 class="page-title a2">Kata-kata<br>Orang Hebat</h2>
   <p class="page-subtitle a3">Kutipan asli, sumber terverifikasi. Tap untuk konteks.</p>
-  <div class="quote-card a3" onclick="toggleQuote(this)">
-    <div class="quote-text">"The people who are crazy enough to think they can change the world are the ones who do."</div>
-    <div class="quote-author"><div class="quote-av">🍎</div><div><div class="quote-name">Steve Jobs</div><div class="quote-src">Think Different Ad Campaign, Apple — 1997</div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Kalimat ini muncul di iklan ikonik Apple "Think Different" (1997), saat Jobs baru kembali ke Apple yang hampir bangkrut. <strong>Ini bukan sekadar slogan</strong> — ini adalah deklarasi filosofi yang mengubah arah perusahaan dan industri teknologi.</div></div>
+  <div class="admin-bar a2" id="quoteAdminBar" style="display:none;">
+    <div class="admin-dot"></div>
+    <span>Mode Admin Aktif</span>
+    <button class="btn btn-primary btn-sm" onclick="openQuoteModal()">+ Quote Baru</button>
   </div>
-  <div class="quote-card a4" onclick="toggleQuote(this)">
-    <div class="quote-text">"It does not matter how slowly you go as long as you do not stop."</div>
-    <div class="quote-author"><div class="quote-av">☯️</div><div><div class="quote-name">Konfusius</div><div class="quote-src">The Analects — ~500 SM, Tiongkok</div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Konfusius mengajarkan bahwa <strong>kesabaran dan konsistensi melampaui kecepatan</strong>. Di era di mana semua serba instan, kutipan ini terasa makin relevan.</div></div>
-  </div>
-  <div class="quote-card a5" onclick="toggleQuote(this)">
-    <div class="quote-text">"Education is the most powerful weapon which you can use to change the world."</div>
-    <div class="quote-author"><div class="quote-av">✊</div><div><div class="quote-name">Nelson Mandela</div><div class="quote-src">Pidato di Madison Park High School, Boston — 23 Juni 1990</div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Mandela bicara ini setelah 27 tahun dipenjara. <strong>Orang yang tahu betapa mahalnya harga kebebasan</strong> — dan ia memilih untuk bicara soal pendidikan.</div></div>
-  </div>
-  <div class="quote-card a6" onclick="toggleQuote(this)">
-    <div class="quote-text">"I have not failed. I've just found 10,000 ways that won't work."</div>
-    <div class="quote-author"><div class="quote-av">💡</div><div><div class="quote-name">Thomas Edison</div><div class="quote-src">Dikutip oleh Harper's Monthly Magazine — 1890</div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Edison tidak menemukan bohlam di percobaan pertama. Yang membedakannya bukan bakat, tapi <strong>cara mendefinisikan ulang kegagalan</strong> sebagai data, bukan kekalahan.</div></div>
-  </div>
-  <div class="quote-card" onclick="toggleQuote(this)">
-    <div class="quote-text">"Wherever you are, be all there."</div>
-    <div class="quote-author"><div class="quote-av">🌿</div><div><div class="quote-name">Jim Elliot</div><div class="quote-src">Jurnal Pribadi Jim Elliot — 1948</div></div></div>
-    <div class="quote-context"><div class="quote-ctx-body">Di era multitasking dan notifikasi tanpa henti, kalimat ini adalah antidot. <strong>Hadir sepenuhnya</strong> — bukan secara fisik, tapi secara mental dan emosional.</div></div>
-  </div>
+  <div id="quoteList" class="a3"></div>
 </div></div>
 
 <div class="slide" id="s8"><div class="slide-inner">
@@ -677,7 +695,33 @@ const db = getFirestore(app);
 let currentImageBase64 = null;
 window.isAdmin = false;
 window.editingId = null;
+window.editingType = null;
 window.blogPosts = [];
+window.ilmuPosts = [];
+window.jurnalPosts = [];
+window.quotePosts = [];
+
+const staticIlmu = [
+  {id:'il1',num:'001',title:'Kenapa Suhu 350°C Ideal untuk Soldering?',short:'Sweet spot solder timah-timbal yang nggak merusak komponen.',body:['Solder alloy Sn63/Pb37 punya titik leleh di sekitar <strong>183°C</strong> — tapi kenapa iron disetel 350°C? Karena ada thermal transfer lag antara ujung iron dan pad PCB.','Di atas 380°C, risiko delamination PCB meningkat drastis. <strong>350°C adalah titik aman yang efisien</strong> — panas cukup, risiko minimal.'],source:'IPC J-STD-001 Standard — Soldering Quality Requirements',isStatic:true},
+  {id:'il2',num:'002',title:'Hukum Moore: Setiap 2 Tahun, Chip Berlipat Ganda',short:'Prediksi 1965 yang mendorong revolusi teknologi selama 5 dekade.',body:['Gordon Moore mengobservasi pada 1965 bahwa jumlah transistor dalam IC berlipat ganda tiap ~2 tahun. Ini <strong>pengamatan empiris yang jadi self-fulfilling prophecy</strong>.','Hasilnya: prosesor yang hari ini ada di HP murah lebih powerful dari superkomputer 1990-an. Tapi sejak 2016, laju ini mulai melambat karena batas fisik atom semakin terasa.'],source:'Gordon Moore, Electronics Magazine — April 1965',isStatic:true},
+  {id:'il3',num:'003',title:'Gen Z: Generasi Pertama yang Lahir di Era Internet',short:'Bukan cuma "pakai internet" — tapi dunia mereka memang terbentuk di sana.',body:['Millennial tumbuh bersama internet — tapi punya memori dunia tanpa smartphone. Gen Z (1997–2012) <strong>tidak punya baseline itu</strong>. Otak mereka berkembang dengan koneksi konstan sejak kecil.','Pola pikir, cara belajar, cara membangun hubungan Gen Z terbentuk di ekosistem yang sama sekali berbeda dari generasi sebelumnya.'],source:'Pew Research Center, "Defining generations" — 2019',isStatic:true},
+  {id:'il4',num:'004',title:'Efek Dunning-Kruger: Makin Tahu, Makin Merasa Bodoh',short:'Paradoks kompetensi yang penting banget dipahami sebelum belajar apa pun.',body:['Orang yang baru belajar sesuatu cenderung overestimate kemampuan mereka. Ini yang disebut "<strong>peak of Mount Stupid</strong>" dalam kurva Dunning-Kruger.','Ironisnya, orang yang benar-benar ahli justru paling sering meragukan diri sendiri. <strong>Rendah hati bukan kelemahan — itu tanda kamu sudah cukup dalam.</strong>'],source:'Dunning &amp; Kruger, Journal of Personality and Social Psychology — 1999',isStatic:true}
+];
+
+const staticJurnal = [
+  {id:'jr1',label:'Kesehatan Mental',title:'Doom Scrolling &amp; Kecemasan: Kenapa Kita Tidak Bisa Berhenti?',short:'Algoritma dirancang untuk mengeksploitasi negativity bias otak kita.',tags:['Dopamin','Algoritma','Kecemasan'],body:['Otak manusia punya <strong>negativity bias</strong> — secara evolusi, kita lebih waspada terhadap ancaman. Platform sosmed mengeksploitasi ini: konten yang memancing rasa takut dapat lebih banyak engagement.','Hasilnya: kita scroll terus karena setiap scroll berpotensi kasih reward baru. Ini adalah <strong>variable reward schedule</strong> — mekanisme yang sama dengan mesin slot kasino.'],sourceTitle:'The Social Dilemma',sourceAuthor:'Tristan Harris — Center for Humane Technology, 2020',isStatic:true},
+  {id:'jr2',label:'Self-Awareness',title:'Quarter-Life Crisis: Normal Banget di Usia 17–25',short:'"Aku mau jadi apa?" bukan tanda gagal — itu tanda kamu lagi tumbuh.',tags:['Normal','Identitas','Gen Z'],body:['Quarter-life crisis adalah periode kebingungan identitas dan arah. Untuk Gen Z, ini sering dimulai lebih awal — sekitar 17–19 tahun — karena <strong>tekanan sosial dan perbandingan di sosmed jauh lebih intens</strong>.','Kunci: bedakan antara <strong>perbandingan yang menggerakkan</strong> (inspirasi) vs <strong>perbandingan yang melumpuhkan</strong> (iri).'],sourceTitle:'Quarterlife Crisis',sourceAuthor:'Robbins &amp; Wilner — Tarcher/Putnam, 2001',isStatic:true},
+  {id:'jr3',label:'Produktivitas',title:'Kenapa Fokus Makin Susah di Era Digital?',short:'Bukan ADHD — tapi "acquired attention deficit" yang kita latih sendiri.',tags:['Fokus','Pomodoro','Digital Detox'],body:['Notifikasi dan short-video melatih otak kita untuk mengharapkan <strong>reward instan</strong>. Ini bukan ADHD klinis — itu <strong>kondisi yang kita bangun sendiri melalui kebiasaan</strong>.','Mulai dengan 25 menit focus block tanpa gangguan (teknik Pomodoro). Dan ingat: <strong>boring time is training time</strong>.'],sourceTitle:'Deep Work',sourceAuthor:'Cal Newport — Grand Central Publishing, 2016',isStatic:true},
+  {id:'jr4',label:'Hubungan Sosial',title:'Parasocial Relationship: Kenapa Kita Merasa "Kenal" Konten Kreator?',short:'Otak tidak bisa bedakan hubungan satu arah dan dua arah.',tags:['Sosial','Konten','Self-Aware'],body:['Parasocial relationship adalah hubungan emosional satu arah. Otak tidak punya mekanisme untuk membedakan ini dari hubungan nyata.','Tidak berbahaya selama kamu <strong>sadar batasnya</strong>: kamu tahu tentang mereka, tapi tidak kenal mereka.'],sourceTitle:'Mass Communication and Para-Social Interaction',sourceAuthor:'Horton &amp; Wohl — Psychiatry Journal, 1956',isStatic:true}
+];
+
+const staticQuotes = [
+  {id:'q1',text:'The people who are crazy enough to think they can change the world are the ones who do.',name:'Steve Jobs',avatar:'🍎',source:'Think Different Ad Campaign, Apple — 1997',context:'Kalimat ini muncul di iklan ikonik Apple "Think Different" (1997), saat Jobs baru kembali ke Apple yang hampir bangkrut. <strong>Ini bukan sekadar slogan</strong> — ini adalah deklarasi filosofi yang mengubah arah perusahaan dan industri teknologi.',isStatic:true},
+  {id:'q2',text:'It does not matter how slowly you go as long as you do not stop.',name:'Konfusius',avatar:'☯️',source:'The Analects — ~500 SM, Tiongkok',context:'Konfusius mengajarkan bahwa <strong>kesabaran dan konsistensi melampaui kecepatan</strong>. Di era di mana semua serba instan, kutipan ini terasa makin relevan.',isStatic:true},
+  {id:'q3',text:'Education is the most powerful weapon which you can use to change the world.',name:'Nelson Mandela',avatar:'✊',source:'Pidato di Madison Park High School, Boston — 23 Juni 1990',context:'Mandela bicara ini setelah 27 tahun dipenjara. <strong>Orang yang tahu betapa mahalnya harga kebebasan</strong> — dan ia memilih untuk bicara soal pendidikan.',isStatic:true},
+  {id:'q4',text:'I have not failed. I\'ve just found 10,000 ways that won\'t work.',name:'Thomas Edison',avatar:'💡',source:'Dikutip oleh Harper\'s Monthly Magazine — 1890',context:'Edison tidak menemukan bohlam di percobaan pertama. Yang membedakannya bukan bakat, tapi <strong>cara mendefinisikan ulang kegagalan</strong> sebagai data, bukan kekalahan.',isStatic:true},
+  {id:'q5',text:'Wherever you are, be all there.',name:'Jim Elliot',avatar:'🌿',source:'Jurnal Pribadi Jim Elliot — 1948',context:'Di era multitasking dan notifikasi tanpa henti, kalimat ini adalah antidot. <strong>Hadir sepenuhnya</strong> — bukan secara fisik, tapi secara mental dan emosional.',isStatic:true}
+];
 
 const staticPosts = [
   {id:'s1',emoji:'🔧',sourceLabel:'Catatan PKL',title:'Pengalaman PKL 6 Bulan: Belajar dari Dua Dunia',date:'14 Mei 2025',preview:'POLYTRON dan MEGATRON — dua tempat PKL yang ngajarin hal berbeda tapi saling melengkapi...',tags:['Pengalaman','PKL'],tagColors:['','green'],content:['Hari pertama di POLYTRON, aku langsung dikasih motherboard rusak dan diminta diagnosa. Tanpa buku, tanpa guru di sebelah — cuma aku, multimeter, dan insting.','Tiga bulan di sana ngajarin aku cara kerja dunia servis elektronik yang sesungguhnya: kecepatan, akurasi, dan komunikasi sama pelanggan yang tidak selalu sabar.','Tiga bulan berikutnya di MEGATRON terasa berbeda — lebih terstruktur, lebih beragam jenis perangkat, dan lebih dalam secara teknis.','Total 6 bulan PKL adalah pengalaman terbaik yang aku dapat selama di SMK. <strong>Pengalaman nyata punya tekstur yang tidak bisa didapat dari nilai ujian</strong>.'],sourceBy:{title:'Refleksi Pribadi PKL',author:'Fastend Muchammad · 2025'},isStatic:true},
@@ -689,12 +733,236 @@ onAuthStateChanged(auth, (user) => {
   if (user && user.email === 'fastendmuhammad@gmail.com') {
     window.isAdmin = true;
     document.getElementById('adminBar').style.display = 'flex';
+    document.getElementById('ilmuAdminBar').style.display = 'flex';
+    document.getElementById('jurnalAdminBar').style.display = 'flex';
+    document.getElementById('quoteAdminBar').style.display = 'flex';
   } else {
     window.isAdmin = false;
     document.getElementById('adminBar').style.display = 'none';
+    document.getElementById('ilmuAdminBar').style.display = 'none';
+    document.getElementById('jurnalAdminBar').style.display = 'none';
+    document.getElementById('quoteAdminBar').style.display = 'none';
   }
-  loadBlogPosts();
+  loadAllContent();
 });
+
+async function loadAllContent() {
+  window.ilmuPosts = [...staticIlmu];
+  window.jurnalPosts = [...staticJurnal];
+  window.quotePosts = [...staticQuotes];
+  await loadBlogPosts();
+  renderIlmuPosts();
+  renderJurnalPosts();
+  renderQuotePosts();
+}
+
+function renderIlmuPosts() {
+  const list = document.getElementById('ilmuList');
+  list.innerHTML = window.ilmuPosts.map((post,i) => `
+    <div class="ilmu-card" onclick="toggleIlmu(this)">
+      <div class="ilmu-num">// ${post.num}</div>
+      <h3>${sanitizeHTML(post.title)}</h3>
+      <p class="ilmu-short">${sanitizeHTML(post.short)}</p>
+      <div class="expand-panel"><div class="expand-body">
+        ${(Array.isArray(post.body)?post.body:[post.body||'']).map(p=>`<p>${sanitizeHTML(p)}</p>`).join('')}
+        <span class="src">${sanitizeHTML(post.source)}</span>
+        ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editIlmu('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('ilmu','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
+      </div></div>
+    </div>`).join('');
+}
+
+function renderJurnalPosts() {
+  const list = document.getElementById('jurnalList');
+  list.innerHTML = window.jurnalPosts.map(post => `
+    <div class="jurnal-card" onclick="toggleJurnal(this)">
+      <div class="jurnal-label">${sanitizeHTML(post.label)}</div>
+      <h3>${sanitizeHTML(post.title)}</h3>
+      <p class="jurnal-short">${sanitizeHTML(post.short)}</p>
+      <div class="jurnal-footer">${(post.tags||[]).map(t=>`<span class="tag">${sanitizeHTML(t)}</span>`).join('')}</div>
+      <div class="expand-panel"><div class="expand-body">
+        ${(Array.isArray(post.body)?post.body:[post.body||'']).map(p=>`<p>${sanitizeHTML(p)}</p>`).join('')}
+        ${post.sourceTitle ? `<div class="book-ref"><span class="book-ref-icon">📖</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">${sanitizeHTML(post.sourceTitle)}</div><div class="book-ref-author">${sanitizeHTML(post.sourceAuthor)}</div></div></div>` : ''}
+        ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editJurnal('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('jurnal','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
+      </div></div>
+    </div>`).join('');
+}
+
+function renderQuotePosts() {
+  const list = document.getElementById('quoteList');
+  list.innerHTML = window.quotePosts.map(post => `
+    <div class="quote-card" onclick="toggleQuote(this)">
+      <div class="quote-text">"${sanitizeHTML(post.text)}"</div>
+      <div class="quote-author"><div class="quote-av">${post.avatar}</div><div><div class="quote-name">${sanitizeHTML(post.name)}</div><div class="quote-src">${sanitizeHTML(post.source)}</div></div></div>
+      <div class="quote-context"><div class="quote-ctx-body">
+        ${sanitizeHTML(post.context)}
+        ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editQuote('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('quote','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
+      </div></div>
+    </div>`).join('');
+}
+
+window.openIlmuModal = function() {
+  window.editingId = null;
+  window.editingType = 'ilmu';
+  document.getElementById('ilmuModalTitle').textContent = 'Ilmu Baru';
+  ['ilmuNum','ilmuTitle','ilmuShort','ilmuBody','ilmuSource'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('saveIlmuLabel').textContent = 'Simpan';
+  openModal('ilmuModal');
+};
+
+window.editIlmu = function(id) {
+  const post = window.ilmuPosts.find(p=>p.id===id);
+  if (!post) return;
+  window.editingId = id;
+  window.editingType = 'ilmu';
+  document.getElementById('ilmuModalTitle').textContent = 'Edit Ilmu';
+  document.getElementById('ilmuNum').value = post.num||'';
+  document.getElementById('ilmuTitle').value = post.title||'';
+  document.getElementById('ilmuShort').value = post.short||'';
+  document.getElementById('ilmuBody').value = (Array.isArray(post.body)?post.body:[post.body||'']).join('\n\n');
+  document.getElementById('ilmuSource').value = post.source||'';
+  document.getElementById('saveIlmuLabel').textContent = 'Simpan Perubahan';
+  openModal('ilmuModal');
+};
+
+window.saveIlmu = async function() {
+  if (!window.isAdmin) return;
+  const title = document.getElementById('ilmuTitle').value.trim();
+  const body = document.getElementById('ilmuBody').value.trim();
+  if (!title||!body) { showToast('❌ Judul dan isi wajib diisi','error'); return; }
+  const data = {
+    num: document.getElementById('ilmuNum').value.trim()||'001',
+    title, short: document.getElementById('ilmuShort').value.trim(),
+    body: body.split(/\n\n+/).filter(p=>p.trim()),
+    source: document.getElementById('ilmuSource').value.trim(),
+    updatedAt: new Date()
+  };
+  try {
+    if (window.editingId) {
+      const idx = window.ilmuPosts.findIndex(p=>p.id===window.editingId);
+      if (idx!==-1) window.ilmuPosts[idx] = {...window.ilmuPosts[idx],...data};
+    } else {
+      window.ilmuPosts.unshift({id:'ilmu-'+Date.now(),...data,isStatic:false});
+    }
+    renderIlmuPosts();
+    showToast('✅ Ilmu berhasil disimpan!','success');
+    closeModal('ilmuModal');
+  } catch(e) { showToast('❌ Gagal: '+e.message,'error'); }
+};
+
+window.openJurnalModal = function() {
+  window.editingId = null;
+  window.editingType = 'jurnal';
+  document.getElementById('jurnalModalTitle').textContent = 'Jurnal Baru';
+  ['jurnalLabel','jurnalTitle','jurnalShort','jurnalTag1','jurnalTag2','jurnalTag3','jurnalBody','jurnalSourceTitle','jurnalSourceAuthor'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('saveJurnalLabel').textContent = 'Simpan';
+  openModal('jurnalModal');
+};
+
+window.editJurnal = function(id) {
+  const post = window.jurnalPosts.find(p=>p.id===id);
+  if (!post) return;
+  window.editingId = id;
+  window.editingType = 'jurnal';
+  document.getElementById('jurnalModalTitle').textContent = 'Edit Jurnal';
+  document.getElementById('jurnalLabel').value = post.label||'';
+  document.getElementById('jurnalTitle').value = post.title||'';
+  document.getElementById('jurnalShort').value = post.short||'';
+  document.getElementById('jurnalTag1').value = post.tags?.[0]||'';
+  document.getElementById('jurnalTag2').value = post.tags?.[1]||'';
+  document.getElementById('jurnalTag3').value = post.tags?.[2]||'';
+  document.getElementById('jurnalBody').value = (Array.isArray(post.body)?post.body:[post.body||'']).join('\n\n');
+  document.getElementById('jurnalSourceTitle').value = post.sourceTitle||'';
+  document.getElementById('jurnalSourceAuthor').value = post.sourceAuthor||'';
+  document.getElementById('saveJurnalLabel').textContent = 'Simpan Perubahan';
+  openModal('jurnalModal');
+};
+
+window.saveJurnal = async function() {
+  if (!window.isAdmin) return;
+  const title = document.getElementById('jurnalTitle').value.trim();
+  const body = document.getElementById('jurnalBody').value.trim();
+  if (!title||!body) { showToast('❌ Judul dan isi wajib diisi','error'); return; }
+  const tags = [document.getElementById('jurnalTag1').value.trim(),document.getElementById('jurnalTag2').value.trim(),document.getElementById('jurnalTag3').value.trim()].filter(Boolean);
+  const data = {
+    label: document.getElementById('jurnalLabel').value.trim(),
+    title, short: document.getElementById('jurnalShort').value.trim(),
+    tags, body: body.split(/\n\n+/).filter(p=>p.trim()),
+    sourceTitle: document.getElementById('jurnalSourceTitle').value.trim(),
+    sourceAuthor: document.getElementById('jurnalSourceAuthor').value.trim(),
+    updatedAt: new Date()
+  };
+  try {
+    if (window.editingId) {
+      const idx = window.jurnalPosts.findIndex(p=>p.id===window.editingId);
+      if (idx!==-1) window.jurnalPosts[idx] = {...window.jurnalPosts[idx],...data};
+    } else {
+      window.jurnalPosts.unshift({id:'jurnal-'+Date.now(),...data,isStatic:false});
+    }
+    renderJurnalPosts();
+    showToast('✅ Jurnal berhasil disimpan!','success');
+    closeModal('jurnalModal');
+  } catch(e) { showToast('❌ Gagal: '+e.message,'error'); }
+};
+
+window.openQuoteModal = function() {
+  window.editingId = null;
+  window.editingType = 'quote';
+  document.getElementById('quoteModalTitle').textContent = 'Quote Baru';
+  ['quoteText','quoteName','quoteAvatar','quoteSource','quoteContext'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('saveQuoteLabel').textContent = 'Simpan';
+  openModal('quoteModal');
+};
+
+window.editQuote = function(id) {
+  const post = window.quotePosts.find(p=>p.id===id);
+  if (!post) return;
+  window.editingId = id;
+  window.editingType = 'quote';
+  document.getElementById('quoteModalTitle').textContent = 'Edit Quote';
+  document.getElementById('quoteText').value = post.text||'';
+  document.getElementById('quoteName').value = post.name||'';
+  document.getElementById('quoteAvatar').value = post.avatar||'';
+  document.getElementById('quoteSource').value = post.source||'';
+  document.getElementById('quoteContext').value = post.context||'';
+  document.getElementById('saveQuoteLabel').textContent = 'Simpan Perubahan';
+  openModal('quoteModal');
+};
+
+window.saveQuote = async function() {
+  if (!window.isAdmin) return;
+  const text = document.getElementById('quoteText').value.trim();
+  const name = document.getElementById('quoteName').value.trim();
+  if (!text||!name) { showToast('❌ Kutipan dan nama harus diisi','error'); return; }
+  const data = {
+    text, name,
+    avatar: document.getElementById('quoteAvatar').value.trim()||'💭',
+    source: document.getElementById('quoteSource').value.trim(),
+    context: document.getElementById('quoteContext').value.trim(),
+    updatedAt: new Date()
+  };
+  try {
+    if (window.editingId) {
+      const idx = window.quotePosts.findIndex(p=>p.id===window.editingId);
+      if (idx!==-1) window.quotePosts[idx] = {...window.quotePosts[idx],...data};
+    } else {
+      window.quotePosts.unshift({id:'quote-'+Date.now(),...data,isStatic:false});
+    }
+    renderQuotePosts();
+    showToast('✅ Quote berhasil disimpan!','success');
+    closeModal('quoteModal');
+  } catch(e) { showToast('❌ Gagal: '+e.message,'error'); }
+};
+
+window.deleteContent = function(type, id) {
+  if (!confirm('Hapus '+type+' ini?')) return;
+  if (type === 'ilmu') window.ilmuPosts = window.ilmuPosts.filter(p=>p.id!==id);
+  else if (type === 'jurnal') window.jurnalPosts = window.jurnalPosts.filter(p=>p.id!==id);
+  else if (type === 'quote') window.quotePosts = window.quotePosts.filter(p=>p.id!==id);
+  if (type === 'ilmu') renderIlmuPosts();
+  else if (type === 'jurnal') renderJurnalPosts();
+  else if (type === 'quote') renderQuotePosts();
+  showToast('🗑️ Terhapus','success');
+};
 
 async function loadBlogPosts() {
   let dyn = [];
