@@ -263,6 +263,44 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 <body>
 <div class="toast" id="toast"></div>
 
+<div class="modal-overlay" id="bgModal">
+  <div class="modal" style="position:relative;">
+    <button class="modal-close" onclick="closeModal('bgModal')">✕</button>
+    <h2>Edit Background Slide</h2>
+    <div class="form-group">
+      <label class="form-label">Pilih Slide</label>
+      <select class="form-input" id="bgSlideSelect">
+        <option value="s0">Home</option>
+        <option value="s1">Tentang</option>
+        <option value="s2">Pengalaman</option>
+        <option value="s3">Skills</option>
+        <option value="s4">Blog</option>
+        <option value="s5">Ilmu Baru</option>
+        <option value="s6">Jurnal</option>
+        <option value="s7">Quotes</option>
+        <option value="s8">Contact</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Upload Gambar (PNG/JPG, max 5MB)</label>
+      <div class="img-upload-area" onclick="document.getElementById('bgImageInput').click()">
+        <input type="file" id="bgImageInput" accept="image/*" style="display:none" onchange="handleBgImageUpload(event)"/>
+        <div style="font-size:1.4rem">🖼️</div>
+        <p>Tap untuk upload gambar background</p>
+        <img id="bgImgPreview" class="img-preview" src="" alt="preview"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Opacity (0-100%)</label>
+      <input class="form-input" id="bgOpacity" type="number" min="0" max="100" value="15" placeholder="15"/>
+    </div>
+    <div style="display:flex;gap:.55rem;">
+      <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('bgModal')">Batal</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="saveBgImage()"><span id="saveBgLabel">Simpan</span></button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="loginModal">
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
@@ -600,6 +638,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
     <div class="admin-dot"></div>
     <span>Mode Admin Aktif</span>
     <button class="btn btn-primary btn-sm" onclick="openBlogModal()">+ Tulis Post</button>
+    <button class="btn btn-ghost btn-sm" onclick="openBgModal()">🖼️ Background</button>
     <button class="btn btn-ghost btn-sm" onclick="doLogout()">Keluar</button>
   </div>
   <div class="blog-section-header a3">
@@ -704,6 +743,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let currentImageBase64 = null;
+let currentBgImageBase64 = null;
 window.isAdmin = false;
 window.editingId = null;
 window.editingType = null;
@@ -711,6 +751,7 @@ window.blogPosts = [];
 window.ilmuPosts = [];
 window.jurnalPosts = [];
 window.quotePosts = [];
+window.bgImages = {};
 
 const staticIlmu = [
   {id:'il1',num:'001',title:'Kenapa Suhu 350°C Ideal untuk Soldering?',short:'Sweet spot solder timah-timbal yang nggak merusak komponen.',body:['Solder alloy Sn63/Pb37 punya titik leleh di sekitar <strong>183°C</strong> — tapi kenapa iron disetel 350°C? Karena ada thermal transfer lag antara ujung iron dan pad PCB.','Di atas 380°C, risiko delamination PCB meningkat drastis. <strong>350°C adalah titik aman yang efisien</strong> — panas cukup, risiko minimal.'],source:'IPC J-STD-001 Standard — Soldering Quality Requirements',isStatic:true},
@@ -762,6 +803,7 @@ async function loadAllContent() {
   window.jurnalPosts = [...staticJurnal];
   window.quotePosts = [...staticQuotes];
   await loadBlogPosts();
+  loadBgImages();
   renderIlmuPosts();
   renderJurnalPosts();
   renderQuotePosts();
@@ -974,6 +1016,67 @@ window.deleteContent = function(type, id) {
   else if (type === 'quote') renderQuotePosts();
   showToast('🗑️ Terhapus','success');
 };
+
+window.openBgModal = function() {
+  currentBgImageBase64 = null;
+  document.getElementById('bgSlideSelect').value = 's0';
+  document.getElementById('bgOpacity').value = '15';
+  document.getElementById('bgImgPreview').style.display = 'none';
+  openModal('bgModal');
+};
+
+window.handleBgImageUpload = function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 5*1024*1024) {
+    showToast('❌ Gambar terlalu besar (max 5MB)','error');
+    return;
+  }
+  const r = new FileReader();
+  r.onload = (ev) => {
+    currentBgImageBase64 = ev.target.result;
+    const p = document.getElementById('bgImgPreview');
+    p.src = currentBgImageBase64; p.style.display = 'block';
+  };
+  r.readAsDataURL(file);
+};
+
+window.saveBgImage = function() {
+  if (!currentBgImageBase64) {
+    showToast('❌ Silahkan upload gambar terlebih dahulu','error');
+    return;
+  }
+  const slideId = document.getElementById('bgSlideSelect').value;
+  const opacity = document.getElementById('bgOpacity').value || '15';
+  const slide = document.getElementById(slideId);
+  
+  if (slide) {
+    slide.style.setProperty('--bg-opacity', opacity / 100);
+    slide.querySelector('::before')?.style?.setProperty('opacity', opacity / 100);
+    
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `#${slideId}::before { background-image: url('${currentBgImageBase64}') !important; opacity: ${opacity / 100} !important; }`;
+    document.head.appendChild(styleEl);
+    
+    window.bgImages[slideId] = { image: currentBgImageBase64, opacity };
+    localStorage.setItem('bgImages', JSON.stringify(window.bgImages));
+    
+    showToast('✅ Background berhasil diupdate!','success');
+    closeModal('bgModal');
+  }
+};
+
+function loadBgImages() {
+  const saved = localStorage.getItem('bgImages');
+  if (saved) {
+    window.bgImages = JSON.parse(saved);
+    Object.entries(window.bgImages).forEach(([slideId, data]) => {
+      const styleEl = document.createElement('style');
+      styleEl.textContent = `#${slideId}::before { background-image: url('${data.image}') !important; opacity: ${data.opacity / 100} !important; }`;
+      document.head.appendChild(styleEl);
+    });
+  }
+}
 
 async function loadBlogPosts() {
   let dyn = [];
