@@ -756,14 +756,36 @@ async function loadAllContent() {
 }
 
 /* ── BG IMAGE SYSTEM ── */
+function compressImage(dataUrl, maxW, quality) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(c.toDataURL('image/jpeg', quality));
+    };
+    img.src = dataUrl;
+  });
+}
+
 window.handleBgUpload = function(e) {
   const file = e.target.files[0]; if(!file) return;
-  if(file.size > 5*1024*1024){showToast('❌ Max 5MB','error');return;}
+  if(file.size > 10*1024*1024){showToast('❌ Max 10MB','error');return;}
+  const lbl = document.getElementById('saveBgLabel');
+  lbl.innerHTML = '<span class="loading-spinner"></span>';
   const r = new FileReader();
-  r.onload = ev => {
-    currentBgBase64 = ev.target.result;
+  r.onload = async ev => {
+    const compressed = await compressImage(ev.target.result, 1200, 0.72);
+    currentBgBase64 = compressed;
     const p = document.getElementById('bgPreview');
-    p.src = currentBgBase64; p.style.display = 'block';
+    p.src = compressed; p.style.display = 'block';
+    const kb = Math.round(compressed.length * 0.75 / 1024);
+    lbl.textContent = 'Simpan';
+    showToast(`✅ Gambar siap (${kb}KB)`, 'success');
   };
   r.readAsDataURL(file);
 };
@@ -773,20 +795,24 @@ window.saveBg = function() {
   const idx = document.getElementById('bgSlideSelect').value;
   const op = parseFloat(document.getElementById('bgOpacity').value||'22')/100;
   applyBg(idx, currentBgBase64, op);
-  saveBgToStorage(idx, currentBgBase64, op);
-  showToast('✅ Background disimpan!','success');
-  closeModal('bgModal');
-  currentBgBase64 = null;
-  document.getElementById('bgPreview').style.display='none';
+  const ok = saveBgToStorage(idx, currentBgBase64, op);
+  if(ok) {
+    showToast('✅ Background disimpan!','success');
+    closeModal('bgModal');
+    currentBgBase64 = null;
+    document.getElementById('bgPreview').style.display='none';
+  }
 };
 
 window.removeBg = function() {
   const idx = document.getElementById('bgSlideSelect').value;
   clearBg(idx);
-  const stored = JSON.parse(localStorage.getItem('stenBg')||'{}');
-  delete stored[idx];
-  localStorage.setItem('stenBg', JSON.stringify(stored));
-  showToast('🗑️ Background dihapus','success');
+  try {
+    localStorage.removeItem('stenBg_' + idx);
+    showToast('🗑️ Background dihapus','success');
+  } catch(e) {
+    showToast('❌ Gagal hapus','error');
+  }
   closeModal('bgModal');
 };
 
@@ -814,16 +840,31 @@ function clearBg(idx) {
 }
 
 function saveBgToStorage(idx, src, op) {
-  const stored = JSON.parse(localStorage.getItem('stenBg')||'{}');
-  stored[idx] = {src, op};
-  localStorage.setItem('stenBg', JSON.stringify(stored));
+  try {
+    localStorage.setItem('stenBg_' + idx, JSON.stringify({src, op}));
+    return true;
+  } catch(e) {
+    if(e.name === 'QuotaExceededError') {
+      showToast('❌ Storage penuh — coba hapus BG slide lain dulu','error');
+    } else {
+      showToast('❌ Gagal simpan: ' + e.message,'error');
+    }
+    return false;
+  }
 }
 
 function loadBgImages() {
-  try {
-    const stored = JSON.parse(localStorage.getItem('stenBg')||'{}');
-    Object.entries(stored).forEach(([idx, data]) => applyBg(idx, data.src, data.op));
-  } catch(e) { console.warn('BG load err', e); }
+  for(let i = 0; i < 9; i++) {
+    try {
+      const raw = localStorage.getItem('stenBg_' + i);
+      if(raw) {
+        const data = JSON.parse(raw);
+        applyBg(String(i), data.src, data.op);
+      }
+    } catch(e) {
+      console.warn('BG load err slide', i, e);
+    }
+  }
 }
 
 /* ── ILMU ── */
