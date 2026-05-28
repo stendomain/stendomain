@@ -689,7 +689,7 @@ const FIREBASE_CONFIG = {
 };
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const app = initializeApp(FIREBASE_CONFIG);
 const auth = getAuth(app);
@@ -745,14 +745,8 @@ onAuthStateChanged(auth, (user) => {
   loadAllContent();
 });
 
-/* ── LOAD ALL ── */
 async function loadAllContent() {
-  window.ilmuPosts = [...staticIlmu];
-  window.jurnalPosts = [...staticJurnal];
-  window.quotePosts = [...staticQuotes];
-  await loadBlogPosts();
-  loadBgImages();
-  renderIlmu(); renderJurnal(); renderQuotes();
+  await Promise.all([loadIlmuPosts(), loadJurnalPosts(), loadQuotePosts(), loadBlogPosts(), loadBgFromFirestore()]);
 }
 
 /* ── BG IMAGE SYSTEM ── */
@@ -790,29 +784,30 @@ window.handleBgUpload = function(e) {
   r.readAsDataURL(file);
 };
 
-window.saveBg = function() {
+window.saveBg = async function() {
   if(!currentBgBase64){showToast('❌ Upload gambar dulu','error');return;}
   const idx = document.getElementById('bgSlideSelect').value;
   const op = parseFloat(document.getElementById('bgOpacity').value||'22')/100;
-  applyBg(idx, currentBgBase64, op);
-  const ok = saveBgToStorage(idx, currentBgBase64, op);
-  if(ok) {
+  const lbl = document.getElementById('saveBgLabel');
+  lbl.innerHTML = '<span class="loading-spinner"></span>';
+  try {
+    await setDoc(doc(db,'bgImages','slide_'+idx), {src: currentBgBase64, op, updatedAt: new Date()});
+    applyBg(idx, currentBgBase64, op);
     showToast('✅ Background disimpan!','success');
     closeModal('bgModal');
     currentBgBase64 = null;
     document.getElementById('bgPreview').style.display='none';
-  }
+  } catch(e) { showToast('❌ Gagal simpan: '+e.message,'error'); }
+  lbl.textContent = 'Simpan';
 };
 
-window.removeBg = function() {
+window.removeBg = async function() {
   const idx = document.getElementById('bgSlideSelect').value;
   clearBg(idx);
   try {
-    localStorage.removeItem('stenBg_' + idx);
+    await deleteDoc(doc(db,'bgImages','slide_'+idx));
     showToast('🗑️ Background dihapus','success');
-  } catch(e) {
-    showToast('❌ Gagal hapus','error');
-  }
+  } catch(e) { showToast('❌ Gagal hapus','error'); }
   closeModal('bgModal');
 };
 
@@ -839,32 +834,14 @@ function clearBg(idx) {
   if(phEl) phEl.style.display = 'flex';
 }
 
-function saveBgToStorage(idx, src, op) {
+async function loadBgFromFirestore() {
   try {
-    localStorage.setItem('stenBg_' + idx, JSON.stringify({src, op}));
-    return true;
-  } catch(e) {
-    if(e.name === 'QuotaExceededError') {
-      showToast('❌ Storage penuh — coba hapus BG slide lain dulu','error');
-    } else {
-      showToast('❌ Gagal simpan: ' + e.message,'error');
-    }
-    return false;
-  }
-}
-
-function loadBgImages() {
-  for(let i = 0; i < 9; i++) {
-    try {
-      const raw = localStorage.getItem('stenBg_' + i);
-      if(raw) {
-        const data = JSON.parse(raw);
-        applyBg(String(i), data.src, data.op);
-      }
-    } catch(e) {
-      console.warn('BG load err slide', i, e);
-    }
-  }
+    const snap = await getDocs(collection(db,'bgImages'));
+    snap.forEach(d => {
+      const idx = d.id.replace('slide_','');
+      applyBg(idx, d.data().src, d.data().op);
+    });
+  } catch(e) { console.warn('BG load err', e); }
 }
 
 /* ── ILMU ── */
@@ -901,15 +878,26 @@ window.editIlmu = function(id) {
   document.getElementById('saveIlmuLabel').textContent='Simpan Perubahan';
   openModal('ilmuModal');
 };
-window.saveIlmu = function() {
+async function loadIlmuPosts() {
+  let dyn=[];
+  try { const snap=await getDocs(query(collection(db,'ilmuPosts'),orderBy('createdAt','desc'))); dyn=snap.docs.map(d=>({id:d.id,...d.data(),isStatic:false})); } catch(e){ console.warn(e); }
+  window.ilmuPosts=[...dyn,...staticIlmu];
+  renderIlmu();
+}
+
+window.saveIlmu = async function() {
   if(!window.isAdmin) return;
   const title=document.getElementById('ilmuTitle').value.trim();
   const body=document.getElementById('ilmuBody').value.trim();
   if(!title||!body){showToast('❌ Judul dan isi wajib','error');return;}
-  const data={num:document.getElementById('ilmuNum').value.trim()||'001',title,short:document.getElementById('ilmuShort').value.trim(),body:body.split(/\n\n+/).filter(Boolean),source:document.getElementById('ilmuSource').value.trim()};
-  if(window.editingId){const i=window.ilmuPosts.findIndex(p=>p.id===window.editingId);if(i!==-1)window.ilmuPosts[i]={...window.ilmuPosts[i],...data};}
-  else window.ilmuPosts.unshift({id:'il-'+Date.now(),...data,isStatic:false});
-  renderIlmu(); showToast('✅ Ilmu disimpan!','success'); closeModal('ilmuModal');
+  document.getElementById('saveIlmuLabel').innerHTML='<span class="loading-spinner"></span>';
+  const data={num:document.getElementById('ilmuNum').value.trim()||'001',title,short:document.getElementById('ilmuShort').value.trim(),body:body.split(/\n\n+/).filter(Boolean),source:document.getElementById('ilmuSource').value.trim(),updatedAt:new Date()};
+  try {
+    if(window.editingId) await updateDoc(doc(db,'ilmuPosts',window.editingId),data);
+    else { data.createdAt=new Date(); await addDoc(collection(db,'ilmuPosts'),data); }
+    await loadIlmuPosts(); showToast('✅ Ilmu disimpan!','success'); closeModal('ilmuModal');
+  } catch(e){ showToast('❌ Gagal: '+e.message,'error'); }
+  document.getElementById('saveIlmuLabel').textContent=window.editingId?'Simpan Perubahan':'Simpan';
 };
 
 /* ── JURNAL ── */
@@ -951,16 +939,27 @@ window.editJurnal = function(id) {
   document.getElementById('saveJurnalLabel').textContent='Simpan Perubahan';
   openModal('jurnalModal');
 };
-window.saveJurnal = function() {
+async function loadJurnalPosts() {
+  let dyn=[];
+  try { const snap=await getDocs(query(collection(db,'jurnalPosts'),orderBy('createdAt','desc'))); dyn=snap.docs.map(d=>({id:d.id,...d.data(),isStatic:false})); } catch(e){ console.warn(e); }
+  window.jurnalPosts=[...dyn,...staticJurnal];
+  renderJurnal();
+}
+
+window.saveJurnal = async function() {
   if(!window.isAdmin) return;
   const title=document.getElementById('jurnalTitle').value.trim();
   const body=document.getElementById('jurnalBody').value.trim();
   if(!title||!body){showToast('❌ Judul dan isi wajib','error');return;}
+  document.getElementById('saveJurnalLabel').innerHTML='<span class="loading-spinner"></span>';
   const tags=[document.getElementById('jurnalTag1').value.trim(),document.getElementById('jurnalTag2').value.trim(),document.getElementById('jurnalTag3').value.trim()].filter(Boolean);
-  const data={label:document.getElementById('jurnalLabel').value.trim(),title,short:document.getElementById('jurnalShort').value.trim(),tags,body:body.split(/\n\n+/).filter(Boolean),sourceTitle:document.getElementById('jurnalSrcTitle').value.trim(),sourceAuthor:document.getElementById('jurnalSrcAuthor').value.trim()};
-  if(window.editingId){const i=window.jurnalPosts.findIndex(p=>p.id===window.editingId);if(i!==-1)window.jurnalPosts[i]={...window.jurnalPosts[i],...data};}
-  else window.jurnalPosts.unshift({id:'jr-'+Date.now(),...data,isStatic:false});
-  renderJurnal(); showToast('✅ Jurnal disimpan!','success'); closeModal('jurnalModal');
+  const data={label:document.getElementById('jurnalLabel').value.trim(),title,short:document.getElementById('jurnalShort').value.trim(),tags,body:body.split(/\n\n+/).filter(Boolean),sourceTitle:document.getElementById('jurnalSrcTitle').value.trim(),sourceAuthor:document.getElementById('jurnalSrcAuthor').value.trim(),updatedAt:new Date()};
+  try {
+    if(window.editingId) await updateDoc(doc(db,'jurnalPosts',window.editingId),data);
+    else { data.createdAt=new Date(); await addDoc(collection(db,'jurnalPosts'),data); }
+    await loadJurnalPosts(); showToast('✅ Jurnal disimpan!','success'); closeModal('jurnalModal');
+  } catch(e){ showToast('❌ Gagal: '+e.message,'error'); }
+  document.getElementById('saveJurnalLabel').textContent=window.editingId?'Simpan Perubahan':'Simpan';
 };
 
 /* ── QUOTES ── */
@@ -995,24 +994,39 @@ window.editQuote = function(id) {
   document.getElementById('saveQuoteLabel').textContent='Simpan Perubahan';
   openModal('quoteModal');
 };
-window.saveQuote = function() {
+async function loadQuotePosts() {
+  let dyn=[];
+  try { const snap=await getDocs(query(collection(db,'quotePosts'),orderBy('createdAt','desc'))); dyn=snap.docs.map(d=>({id:d.id,...d.data(),isStatic:false})); } catch(e){ console.warn(e); }
+  window.quotePosts=[...dyn,...staticQuotes];
+  renderQuotes();
+}
+
+window.saveQuote = async function() {
   if(!window.isAdmin) return;
   const text=document.getElementById('quoteText').value.trim();
   const name=document.getElementById('quoteName').value.trim();
   if(!text||!name){showToast('❌ Kutipan dan nama wajib','error');return;}
-  const data={text,name,avatar:document.getElementById('quoteAvatar').value.trim()||'💭',source:document.getElementById('quoteSource').value.trim(),context:document.getElementById('quoteCtx').value.trim()};
-  if(window.editingId){const i=window.quotePosts.findIndex(p=>p.id===window.editingId);if(i!==-1)window.quotePosts[i]={...window.quotePosts[i],...data};}
-  else window.quotePosts.unshift({id:'q-'+Date.now(),...data,isStatic:false});
-  renderQuotes(); showToast('✅ Quote disimpan!','success'); closeModal('quoteModal');
+  document.getElementById('saveQuoteLabel').innerHTML='<span class="loading-spinner"></span>';
+  const data={text,name,avatar:document.getElementById('quoteAvatar').value.trim()||'💭',source:document.getElementById('quoteSource').value.trim(),context:document.getElementById('quoteCtx').value.trim(),updatedAt:new Date()};
+  try {
+    if(window.editingId) await updateDoc(doc(db,'quotePosts',window.editingId),data);
+    else { data.createdAt=new Date(); await addDoc(collection(db,'quotePosts'),data); }
+    await loadQuotePosts(); showToast('✅ Quote disimpan!','success'); closeModal('quoteModal');
+  } catch(e){ showToast('❌ Gagal: '+e.message,'error'); }
+  document.getElementById('saveQuoteLabel').textContent=window.editingId?'Simpan Perubahan':'Simpan';
 };
 
 /* ── DELETE ── */
-window.delItem = function(type, id) {
+window.delItem = async function(type, id) {
   if(!confirm('Hapus ini?')) return;
-  if(type==='ilmu') { window.ilmuPosts=window.ilmuPosts.filter(p=>p.id!==id); renderIlmu(); }
-  else if(type==='jurnal') { window.jurnalPosts=window.jurnalPosts.filter(p=>p.id!==id); renderJurnal(); }
-  else if(type==='quote') { window.quotePosts=window.quotePosts.filter(p=>p.id!==id); renderQuotes(); }
-  showToast('🗑️ Terhapus','success');
+  const colMap = {ilmu:'ilmuPosts', jurnal:'jurnalPosts', quote:'quotePosts'};
+  try {
+    await deleteDoc(doc(db, colMap[type], id));
+    if(type==='ilmu') await loadIlmuPosts();
+    else if(type==='jurnal') await loadJurnalPosts();
+    else if(type==='quote') await loadQuotePosts();
+    showToast('🗑️ Terhapus','success');
+  } catch(e) { showToast('❌ Gagal hapus: '+e.message,'error'); }
 };
 
 /* ── BLOG ── */
