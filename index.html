@@ -5,264 +5,870 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <title>Stenight</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Editorial+New:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400;1,9..40,500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
+/* ═══════════════════════════════════════════════
+   BLOOMBERG-INSPIRED PALETTE — STARK + EDITORIAL
+═══════════════════════════════════════════════ */
 :root[data-theme="dark"]{
-  --bg:#0a0a0b;
-  --bg2:#111214;
-  --bg3:#18191d;
-  --surface:#111214;
-  --border:#1e2026;
-  --border2:#2a2d35;
-  --text:#ececec;
-  --text2:#888b94;
-  --text3:#3e4148;
-  --accent:#1a73e8;
-  --accent2:#4d9fff;
-  --green:#2db870;
-  --yellow:#e8a020;
-  --red:#e05252;
-  --shadow:rgba(0,0,0,.6);
-  --nav-bg:rgba(10,10,11,.96);
-  --card-border:rgba(255,255,255,.055);
-  --card-hover:rgba(255,255,255,.025);
-  --img-overlay:linear-gradient(to bottom, transparent 40%, rgba(10,10,11,.7) 100%);
-  --blog-img-h:110px;
-  --sep:#1e2026;
+  --bg:#0c0c0c;
+  --bg2:#121212;
+  --bg3:#1a1a1a;
+  --surface:#111111;
+  --border:#222222;
+  --border2:#333333;
+  --text:#f0ede8;
+  --text2:#999896;
+  --text3:#444240;
+  --accent:#f5a623;          /* Bloomberg amber */
+  --accent2:#e8821a;         /* deeper orange */
+  --accent3:#ff6b2b;         /* vivid orange */
+  --green:#5cba8a;
+  --yellow:#f5a623;
+  --red:#d94f38;
+  --white:#f0ede8;
+  --black:#0c0c0c;
+  --nav-bg:rgba(12,12,12,.98);
+  --card-border:rgba(255,255,255,.06);
+  --card-hover:rgba(255,255,255,.02);
+  --sep:#1e1e1e;
+  --sep2:#2a2a2a;
+  --orange-glow:rgba(245,166,35,.12);
+  --orange-blur:rgba(232,130,26,.07);
+  --card-img-h:90px;
 }
 :root[data-theme="light"]{
-  --bg:#f2f2ed;
-  --bg2:#e8e8e3;
-  --bg3:#ddddd8;
+  --bg:#f5f3ef;
+  --bg2:#eceae5;
+  --bg3:#e2dfda;
   --surface:#ffffff;
-  --border:#e0dfd8;
-  --border2:#c8c7c0;
-  --text:#0a0a0b;
-  --text2:#555860;
-  --text3:#aaaaaa;
-  --accent:#0063be;
-  --accent2:#1a73e8;
-  --green:#0f8c4a;
-  --yellow:#a86800;
-  --red:#c03030;
-  --shadow:rgba(0,0,0,.08);
-  --nav-bg:rgba(242,242,237,.97);
+  --border:#dddbd6;
+  --border2:#c8c6c1;
+  --text:#0c0c0c;
+  --text2:#5a5855;
+  --text3:#aaa9a6;
+  --accent:#d4820a;
+  --accent2:#b86d08;
+  --accent3:#e8621a;
+  --green:#2e8a5f;
+  --yellow:#d4820a;
+  --red:#b83225;
+  --white:#0c0c0c;
+  --black:#f5f3ef;
+  --nav-bg:rgba(245,243,239,.98);
   --card-border:rgba(0,0,0,.07);
   --card-hover:rgba(0,0,0,.02);
-  --img-overlay:linear-gradient(to bottom, transparent 40%, rgba(242,242,237,.55) 100%);
-  --blog-img-h:110px;
-  --sep:#e0dfd8;
+  --sep:#dddbd6;
+  --sep2:#c8c6c1;
+  --orange-glow:rgba(212,130,10,.1);
+  --orange-blur:rgba(184,109,8,.05);
+  --card-img-h:90px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s;}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:50px;padding:0 1.1rem;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);border-bottom:1px solid var(--sep);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background .35s,border-color .35s;}
-.nav-logo{font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);letter-spacing:.5px;cursor:pointer;user-select:none;text-transform:uppercase;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s,color .3s;
+}
+
+/* ── HEADER BAR ────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:48px;padding:0 1.25rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--nav-bg);
+  border-bottom:3px solid var(--accent); /* Bloomberg thick top bar */
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  transition:background .3s;
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;font-weight:900;
+  color:var(--text);
+  letter-spacing:.5px;cursor:pointer;user-select:none;
+  text-transform:uppercase;
+}
 .nav-logo span{color:var(--accent);}
-.nav-right{display:flex;align-items:center;gap:.5rem;}
-.dot-nav{display:flex;gap:4px;align-items:center;}
-.dot-nav-item{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .3s;}
-.dot-nav-item.active{background:var(--accent);width:18px;border-radius:3px;}
-.theme-btn{width:32px;height:32px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;transition:all .2s;}
+.nav-right{display:flex;align-items:center;gap:.6rem;}
+.dot-nav{display:flex;gap:3px;align-items:center;}
+.dot-nav-item{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--border2);cursor:pointer;
+  transition:all .25s;
+}
+.dot-nav-item.active{background:var(--accent);width:16px;border-radius:2px;}
+.theme-btn{
+  width:30px;height:30px;border-radius:2px;
+  border:1px solid var(--border2);background:transparent;
+  color:var(--text2);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:.85rem;transition:all .2s;
+}
 .theme-btn:hover{border-color:var(--accent);color:var(--accent);}
-#carousel{position:fixed;top:50px;left:0;right:0;bottom:0;display:flex;transition:transform .48s cubic-bezier(.4,0,.2,1);will-change:transform;}
-.slide{min-width:100vw;height:100%;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;position:relative;}
-.slide::before{content:'';position:fixed;top:50px;left:0;right:0;height:50vh;background-size:cover;background-position:center top;background-repeat:no-repeat;z-index:0;opacity:.15;pointer-events:none;}
-.slide::after{content:'';position:fixed;top:50px;left:0;right:0;height:50vh;background:linear-gradient(to bottom,transparent 0%,var(--bg) 100%);z-index:0;pointer-events:none;}
-#s0::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231a73e8" width="1200" height="600"/><circle cx="300" cy="200" r="150" fill="%234d9fff" opacity="0.3"/><circle cx="900" cy="400" r="200" fill="%232db870" opacity="0.2"/></svg>');}
-#s1::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><path d="M0 300 Q300 200 600 300 T1200 300" stroke="%231a73e8" stroke-width="2" fill="none" opacity="0.3"/></svg>');}
-#s2::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><circle cx="200" cy="150" r="80" fill="%231a73e8" opacity="0.2"/><circle cx="1000" cy="450" r="120" fill="%232db870" opacity="0.15"/><line x1="0" y1="300" x2="1200" y2="300" stroke="%234d9fff" stroke-width="1" opacity="0.1"/></svg>');}
-#s3::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><rect x="100" y="100" width="200" height="200" fill="%231a73e8" opacity="0.2" transform="rotate(45 200 200)"/><rect x="900" y="300" width="150" height="150" fill="%234d9fff" opacity="0.15" transform="rotate(20 975 375)"/></svg>');}
-#s4::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><polygon points="600,100 800,300 600,500 400,300" fill="%231a73e8" opacity="0.2"/><circle cx="150" cy="450" r="60" fill="%232db870" opacity="0.15"/></svg>');}
-#s5::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><circle cx="600" cy="300" r="200" fill="%231a73e8" opacity="0.15"/><path d="M0 200 L1200 400" stroke="%234d9fff" stroke-width="2" opacity="0.2"/></svg>');}
-#s6::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><path d="M0 100 Q300 300 600 100 T1200 100" fill="%231a73e8" opacity="0.1"/><circle cx="100" cy="500" r="100" fill="%232db870" opacity="0.12"/><circle cx="1100" cy="150" r="80" fill="%234d9fff" opacity="0.1"/></svg>');}
-#s7::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><circle cx="300" cy="150" r="100" fill="%231a73e8" opacity="0.2"/><circle cx="900" cy="450" r="120" fill="%232db870" opacity="0.15"/><path d="M400 0 L600 600" stroke="%234d9fff" stroke-width="1" opacity="0.1"/></svg>');}
-#s8::before{background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111214" width="1200" height="600"/><rect width="1200" height="600" fill="%231a73e8" opacity="0.08"/><circle cx="600" cy="300" r="150" fill="%234d9fff" opacity="0.1"/></svg>');}
+
+/* ── CAROUSEL ──────────────────────────────── */
+#carousel{
+  position:fixed;top:48px;left:0;right:0;bottom:0;
+  display:flex;
+  transition:transform .44s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.slide{
+  min-width:100vw;height:100%;
+  overflow-y:auto;overflow-x:hidden;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+  position:relative;
+}
+/* Ambient orange blur panels behind slides */
+.slide::before{
+  content:'';position:fixed;
+  top:48px;left:0;right:0;height:45vh;
+  background-size:cover;background-position:center top;
+  background-repeat:no-repeat;z-index:0;
+  opacity:.08;pointer-events:none;
+  filter:blur(40px);
+}
+.slide::after{
+  content:'';position:fixed;
+  top:48px;left:0;right:0;height:45vh;
+  background:linear-gradient(to bottom,transparent 0%,var(--bg) 100%);
+  z-index:0;pointer-events:none;
+}
+#s0::before{background:radial-gradient(ellipse at 30% 40%, var(--accent3) 0%, transparent 65%), radial-gradient(ellipse at 80% 70%, var(--accent) 0%, transparent 55%);}
+#s1::before{background:radial-gradient(ellipse at 60% 30%, var(--accent2) 0%, transparent 60%);}
+#s2::before{background:radial-gradient(ellipse at 20% 50%, var(--accent) 0%, transparent 60%), radial-gradient(ellipse at 90% 20%, var(--accent3) 0%, transparent 50%);}
+#s3::before{background:radial-gradient(ellipse at 50% 40%, var(--accent2) 0%, transparent 55%);}
+#s4::before{background:radial-gradient(ellipse at 30% 30%, var(--accent3) 0%, transparent 60%);}
+#s5::before{background:radial-gradient(ellipse at 70% 40%, var(--accent) 0%, transparent 60%);}
+#s6::before{background:radial-gradient(ellipse at 40% 30%, var(--accent2) 0%, transparent 55%);}
+#s7::before{background:radial-gradient(ellipse at 60% 50%, var(--accent3) 0%, transparent 60%);}
+#s8::before{background:radial-gradient(ellipse at 30% 40%, var(--accent) 0%, transparent 55%);}
 .slide::-webkit-scrollbar{display:none;}
 .slide{-ms-overflow-style:none;scrollbar-width:none;}
-.slide-inner{min-height:100%;padding:1.75rem 1.15rem 6rem;max-width:680px;margin:0 auto;position:relative;z-index:1;}
-.section-tag{display:inline-flex;align-items:center;gap:.35rem;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:1.2rem;}
-.section-tag::before{content:'';display:inline-block;width:18px;height:1px;background:var(--accent);}
-h1.hero-name{font-family:'Libre Baskerville',serif;font-weight:700;font-size:clamp(2.4rem,8.5vw,3.8rem);line-height:1.05;letter-spacing:-1.5px;margin-bottom:1rem;}
-h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
-.page-title{font-family:'Libre Baskerville',serif;font-weight:700;font-size:clamp(1.6rem,5vw,2.4rem);letter-spacing:-1px;line-height:1.1;margin-bottom:.4rem;}
-.page-subtitle{color:var(--text2);font-size:.85rem;margin-bottom:1.6rem;max-width:440px;line-height:1.75;font-weight:300;}
-.hero-bio{color:var(--text2);font-size:.9rem;line-height:1.8;max-width:440px;margin-bottom:1.6rem;font-weight:300;}
-.status-badge{display:inline-flex;align-items:center;gap:.45rem;background:transparent;border:1px solid var(--border2);border-radius:3px;padding:.28rem .9rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text2);margin-bottom:1.6rem;letter-spacing:.5px;}
-.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;flex-shrink:0;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-.nickname-badge{display:inline-flex;align-items:center;gap:.3rem;background:transparent;border:1px solid var(--border2);border-radius:3px;padding:.2rem .55rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text2);margin-right:.3rem;margin-bottom:.3rem;}
+.slide-inner{
+  min-height:100%;
+  padding:1.75rem 1.2rem 5.5rem;
+  max-width:680px;margin:0 auto;
+  position:relative;z-index:1;
+}
+
+/* ── EDITORIAL TYPOGRAPHY ─────────────────── */
+.section-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'DM Mono',monospace;
+  font-size:.58rem;color:var(--accent);
+  text-transform:uppercase;letter-spacing:3px;
+  margin-bottom:1.1rem;
+  border-left:2px solid var(--accent);
+  padding-left:.6rem;
+}
+h1.hero-name{
+  font-family:'Playfair Display',serif;
+  font-weight:900;
+  font-size:clamp(2.5rem,9vw,4rem);
+  line-height:1.0;letter-spacing:-2px;
+  margin-bottom:1rem;
+}
+h1.hero-name .dim{
+  color:var(--text2);font-weight:400;
+  font-style:italic;
+}
+.page-title{
+  font-family:'Playfair Display',serif;
+  font-weight:900;
+  font-size:clamp(1.7rem,5.5vw,2.6rem);
+  letter-spacing:-1px;line-height:1.05;
+  margin-bottom:.35rem;
+}
+.page-subtitle{
+  color:var(--text2);
+  font-family:'DM Sans',sans-serif;
+  font-style:italic;
+  font-size:.88rem;
+  margin-bottom:1.6rem;
+  max-width:440px;line-height:1.7;font-weight:300;
+}
+.hero-bio{
+  color:var(--text2);
+  font-family:'DM Sans',sans-serif;
+  font-style:italic;
+  font-size:.92rem;line-height:1.8;
+  max-width:440px;margin-bottom:1.6rem;font-weight:300;
+}
+
+/* Status & badges */
+.status-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;
+  border:1px solid var(--border2);
+  border-radius:1px;
+  padding:.3rem 1rem;
+  font-family:'DM Mono',monospace;font-size:.62rem;
+  color:var(--text2);margin-bottom:1.5rem;letter-spacing:.8px;
+}
+.status-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  animation:pulse 2.2s infinite;flex-shrink:0;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.nickname-badge{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:transparent;border:1px solid var(--border2);
+  border-radius:1px;
+  padding:.2rem .55rem;
+  font-family:'DM Mono',monospace;font-size:.62rem;
+  color:var(--text2);margin-right:.3rem;margin-bottom:.3rem;
+}
+
+/* ── BUTTONS ──────────────────────────────── */
 .btn-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:3px;font-size:.8rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .18s;font-family:'DM Sans',sans-serif;letter-spacing:.3px;}
-.btn-primary{background:var(--accent);color:#fff;}
-.btn-primary:hover{opacity:.88;transform:translateY(-1px);}
+.btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.55rem 1.15rem;
+  border-radius:1px;
+  font-size:.78rem;font-weight:600;
+  text-decoration:none;cursor:pointer;border:none;
+  transition:all .17s;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.btn-primary{background:var(--accent);color:#000;}
+.btn-primary:hover{background:var(--accent3);transform:translateY(-1px);}
 .btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);}
 .btn-ghost:hover{border-color:var(--text2);color:var(--text);}
-.btn-danger{background:transparent;color:var(--red);border:1px solid rgba(224,82,82,.3);}
-.btn-danger:hover{background:rgba(224,82,82,.08);}
-.btn-sm{padding:.3rem .7rem;font-size:.72rem;}
-.card{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.15rem 1.25rem;margin-bottom:.55rem;transition:border-color .2s,box-shadow .2s;cursor:pointer;position:relative;overflow:hidden;}
-.card:hover{border-color:var(--border2);box-shadow:0 3px 16px var(--shadow);}
-.card.expanded{border-color:rgba(26,115,232,.22);}
-.card:active{transform:scale(.985);}
+.btn-danger{background:transparent;color:var(--red);border:1px solid rgba(217,79,56,.3);}
+.btn-danger:hover{background:rgba(217,79,56,.07);}
+.btn-sm{padding:.28rem .65rem;font-size:.68rem;}
+
+/* ── CARDS ────────────────────────────────── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-left:2px solid var(--border2);
+  border-radius:0;
+  padding:1.1rem 1.15rem;
+  margin-bottom:.5rem;
+  transition:border-color .2s,box-shadow .2s;
+  cursor:pointer;position:relative;overflow:hidden;
+}
+.card:hover{border-color:var(--border2);border-left-color:var(--accent);box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.card.expanded{border-left-color:var(--accent);}
+.card:active{transform:scale(.988);}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.7rem;}
-.card-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem;}
-.card-chevron{color:var(--text3);font-size:.85rem;margin-top:.1rem;transition:transform .3s;flex-shrink:0;}
+.card-icon{font-size:1.25rem;flex-shrink:0;margin-top:.05rem;}
+.card-chevron{color:var(--text3);font-size:.9rem;margin-top:.1rem;transition:transform .3s;flex-shrink:0;}
 .card.expanded .card-chevron{transform:rotate(90deg);color:var(--accent);}
-.card h3{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.18rem;letter-spacing:-.2px;}
-.card .card-short{color:var(--text2);font-size:.78rem;line-height:1.6;}
-.card-meta{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.65rem;}
-.tag{background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:'DM Mono',monospace;font-size:.58rem;padding:.15rem .48rem;border-radius:2px;letter-spacing:.5px;text-transform:uppercase;}
-.tag.green{border-color:rgba(45,184,112,.3);color:var(--green);}
-.tag.yellow{border-color:rgba(232,160,32,.3);color:var(--yellow);}
+.card h3{
+  font-family:'Playfair Display',serif;
+  font-size:.92rem;font-weight:700;
+  margin-bottom:.15rem;letter-spacing:-.2px;
+}
+.card .card-short{
+  color:var(--text2);font-size:.79rem;
+  line-height:1.65;font-style:italic;
+}
+.card-meta{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.6rem;}
+.tag{
+  background:transparent;
+  border:1px solid var(--border2);
+  color:var(--text2);
+  font-family:'DM Mono',monospace;
+  font-size:.56rem;padding:.13rem .46rem;
+  border-radius:0;letter-spacing:.6px;text-transform:uppercase;
+}
+.tag.green{border-color:rgba(92,186,138,.3);color:var(--green);}
+.tag.yellow,.tag.amber{border-color:rgba(245,166,35,.35);color:var(--accent);}
+.tag.orange{border-color:rgba(255,107,43,.3);color:var(--accent3);}
 .expand-panel{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
-.expand-panel.open{max-height:700px;}
+.expand-panel.open{max-height:800px;}
 .expand-body{padding-top:.85rem;border-top:1px solid var(--sep);margin-top:.85rem;}
-.expand-body p{color:var(--text2);font-size:.81rem;line-height:1.8;font-weight:300;}
+.expand-body p{color:var(--text2);font-size:.82rem;line-height:1.85;font-weight:300;font-style:italic;}
 .expand-body p+p{margin-top:.55rem;}
-.expand-body strong{color:var(--text);font-weight:600;}
-.expand-body .src{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.72rem;color:var(--text3);margin-top:.65rem;display:block;}
+.expand-body strong{color:var(--text);font-weight:600;font-style:normal;}
+.expand-body .src{
+  font-family:'DM Mono',monospace;
+  font-style:normal;font-size:.6rem;
+  color:var(--text3);margin-top:.7rem;display:block;
+  letter-spacing:.8px;
+}
+
+/* ── SKILL BARS ───────────────────────────── */
 .skill-wrap{margin-bottom:.9rem;}
 .skill-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;}
 .skill-name{font-size:.8rem;font-weight:500;color:var(--text);}
-.skill-pct{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--accent);}
-.skill-track{height:3px;background:var(--bg3);border-radius:999px;overflow:hidden;}
-.skill-fill{height:100%;border-radius:999px;background:var(--accent);width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1);}
+.skill-pct{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);}
+.skill-track{height:2px;background:var(--bg3);border-radius:0;}
+.skill-fill{height:100%;border-radius:0;background:var(--accent);width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+
+/* ── TIMELINE ──────────────────────────────── */
 .timeline{position:relative;padding-left:1.6rem;}
-.timeline::before{content:'';position:absolute;left:.3rem;top:.5rem;bottom:.5rem;width:1px;background:linear-gradient(to bottom,var(--accent),transparent);}
-.tl-item{position:relative;margin-bottom:1.8rem;cursor:pointer;}
-.tl-dot{position:absolute;left:-1.4rem;top:.3rem;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);}
-.tl-dot.now{box-shadow:0 0 8px var(--accent);animation:gdot 2s infinite;}
-@keyframes gdot{0%,100%{box-shadow:0 0 6px var(--accent);}50%{box-shadow:0 0 16px var(--accent);}}
-.tl-year{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);margin-bottom:.22rem;letter-spacing:.8px;}
-.tl-title{font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.2rem;}
-.tl-short{color:var(--text2);font-size:.78rem;line-height:1.6;font-weight:300;}
-.blog-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;overflow:hidden;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);}
+.timeline::before{
+  content:'';position:absolute;left:.3rem;top:.5rem;bottom:.5rem;
+  width:1px;background:linear-gradient(to bottom,var(--accent),transparent);
+}
+.tl-item{position:relative;margin-bottom:1.9rem;cursor:pointer;}
+.tl-dot{
+  position:absolute;left:-1.4rem;top:.3rem;
+  width:8px;height:8px;border-radius:0; /* square dot */
+  background:var(--accent);border:2px solid var(--bg);
+  transform:rotate(45deg);
+}
+.tl-dot.now{box-shadow:0 0 10px var(--accent);animation:gdot 2.2s infinite;}
+@keyframes gdot{0%,100%{box-shadow:0 0 6px var(--accent);}50%{box-shadow:0 0 18px var(--accent);}}
+.tl-year{
+  font-family:'DM Mono',monospace;font-size:.6rem;
+  color:var(--accent);margin-bottom:.22rem;letter-spacing:1px;
+}
+.tl-title{
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.2rem;
+}
+.tl-short{color:var(--text2);font-size:.79rem;line-height:1.6;font-weight:300;font-style:italic;}
+
+/* ── BLOG CARDS — with integrated imagery ── */
+.blog-card{
+  background:var(--surface);
+  border:0;
+  border-bottom:1px solid var(--sep);
+  overflow:hidden;
+  cursor:pointer;
+  transition:background .2s;
+  position:relative;
+}
 .blog-card:first-child{border-top:1px solid var(--sep);}
-.blog-card:hover{background:var(--card-hover);}
+.blog-card:hover{background:var(--bg2);}
 .blog-card.expanded{background:var(--bg2);}
-.blog-card:active{opacity:.9;}
-.blog-img{height:var(--blog-img-h);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden;flex-shrink:0;}
-.blog-img img.cover-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
-.blog-img .emoji-layer{position:relative;z-index:1;opacity:.45;}
-.blog-img::after{content:'';position:absolute;inset:0;background:var(--img-overlay);pointer-events:none;}
-.blog-body{padding:.85rem 1rem 1rem;}
-.blog-date{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);margin-bottom:.18rem;letter-spacing:.8px;text-transform:uppercase;}
-.blog-source-label{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:.35rem;font-weight:500;}
-.blog-card h3{font-family:'Libre Baskerville',serif;font-size:.97rem;font-weight:700;letter-spacing:-.3px;line-height:1.4;margin-bottom:.4rem;color:var(--text);}
-.blog-card .blog-preview{color:var(--text2);font-size:.79rem;line-height:1.65;font-style:italic;font-family:'Libre Baskerville',serif;font-weight:400;}
-.card-meta.blog-tags{margin-top:.6rem;}
-.blog-full{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);padding:0;}
-.blog-full.open{max-height:2000px;padding:0 1rem .9rem;}
-.blog-full p{color:var(--text2);font-size:.82rem;line-height:1.85;margin-top:.7rem;font-weight:300;}
+.blog-card:active{opacity:.92;}
+
+/* Bloomberg-style card with side image */
+.blog-card-inner{display:flex;align-items:stretch;min-height:110px;}
+.blog-img-side{
+  width:110px;min-width:110px;
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+.blog-img-side img.cover-img{
+  width:100%;height:100%;
+  object-fit:cover;position:absolute;inset:0;
+  filter:grayscale(20%) contrast(1.05);
+}
+/* Gradient fade from image into content */
+.blog-img-side::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right, transparent 50%, var(--surface) 100%);
+  z-index:1;pointer-events:none;
+  transition:background .2s;
+}
+.blog-card:hover .blog-img-side::after,
+.blog-card.expanded .blog-img-side::after{
+  background:linear-gradient(to right, transparent 50%, var(--bg2) 100%);
+}
+.blog-img-side .emoji-layer{position:relative;z-index:2;opacity:.5;}
+.blog-body-side{
+  flex:1;padding:.9rem 1rem .9rem .85rem;
+  display:flex;flex-direction:column;justify-content:center;
+  min-width:0;
+}
+.blog-date{
+  font-family:'DM Mono',monospace;font-size:.58rem;
+  color:var(--text3);margin-bottom:.15rem;letter-spacing:1px;text-transform:uppercase;
+}
+.blog-source-label{
+  font-family:'DM Mono',monospace;font-size:.55rem;
+  color:var(--accent);text-transform:uppercase;
+  letter-spacing:2.5px;margin-bottom:.3rem;font-weight:500;
+}
+.blog-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:.94rem;font-weight:700;
+  letter-spacing:-.2px;line-height:1.35;
+  margin-bottom:.35rem;color:var(--text);
+}
+.blog-card .blog-preview{
+  color:var(--text2);font-size:.77rem;
+  line-height:1.6;font-style:italic;
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  /* clamp to 2 lines */
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-meta.blog-tags{margin-top:.5rem;}
+.blog-full{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s cubic-bezier(.4,0,.2,1);
+  padding:0;
+}
+.blog-full.open{max-height:2400px;padding:0 1rem .9rem;}
+.blog-full p{color:var(--text2);font-size:.83rem;line-height:1.88;margin-top:.75rem;font-weight:300;font-style:italic;}
 .blog-full p+p{margin-top:.5rem;}
-.blog-sourceby{display:flex;align-items:center;gap:.55rem;margin-top:1rem;padding:.65rem .85rem;background:var(--bg3);border-left:2px solid var(--accent);border-radius:0;}
-.blog-sourceby-icon{font-size:1rem;flex-shrink:0;opacity:.6;}
-.blog-sourceby-lbl{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.1rem;}
-.blog-sourceby-title{font-size:.78rem;font-weight:600;color:var(--text);font-family:'Libre Baskerville',serif;}
-.blog-sourceby-author{font-size:.71rem;color:var(--text2);font-style:italic;}
-.blog-admin-btns{display:flex;gap:.4rem;padding:.55rem 1rem .75rem;border-top:1px solid var(--sep);}
-.blog-section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem;}
-.blog-section-header::after{content:'';flex:1;height:1px;background:var(--sep);}
-.blog-section-title{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;white-space:nowrap;}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.25rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+.blog-full strong{color:var(--text);font-style:normal;font-weight:600;}
+.blog-sourceby{
+  display:flex;align-items:center;gap:.55rem;
+  margin-top:1rem;padding:.6rem .8rem;
+  background:var(--bg3);
+  border-left:2px solid var(--accent);
+}
+.blog-sourceby-icon{font-size:.95rem;flex-shrink:0;opacity:.55;}
+.blog-sourceby-lbl{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.08rem;}
+.blog-sourceby-title{font-size:.78rem;font-weight:700;color:var(--text);font-family:'Playfair Display',serif;font-style:italic;}
+.blog-sourceby-author{font-size:.7rem;color:var(--text2);font-style:italic;}
+.blog-admin-btns{
+  display:flex;gap:.4rem;
+  padding:.5rem 1rem .7rem;
+  border-top:1px solid var(--sep);
+}
+.blog-section-header{
+  display:flex;align-items:center;gap:.75rem;margin-bottom:.85rem;
+}
+.blog-section-header::after{content:'';flex:1;height:1px;background:var(--sep2);}
+.blog-section-title{
+  font-family:'DM Mono',monospace;font-size:.6rem;
+  color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;white-space:nowrap;
+}
+
+/* ── ILMU CARDS ─────────────────────────────
+   With generated gradient "image" header      */
+.ilmu-card{
+  background:var(--surface);
+  border:0;border-bottom:1px solid var(--sep);
+  overflow:hidden;cursor:pointer;
+  transition:background .2s;
+  position:relative;
+}
+.ilmu-card:first-child{border-top:1px solid var(--sep);}
+.ilmu-card:hover{background:var(--bg2);}
+.ilmu-card.expanded{background:var(--bg2);}
+/* Gradient header banner */
+.ilmu-img{
+  height:60px;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;padding:0 1.1rem;
+  flex-shrink:0;
+}
+/* Each item gets different orange gradient via nth-child */
+.ilmu-card:nth-child(1) .ilmu-img{background:linear-gradient(115deg, #1a1200 0%, #2e1d00 40%, #0c0c0c 100%);}
+.ilmu-card:nth-child(2) .ilmu-img{background:linear-gradient(115deg, #1a0c00 0%, #2e1500 40%, #0c0c0c 100%);}
+.ilmu-card:nth-child(3) .ilmu-img{background:linear-gradient(115deg, #0f1400 0%, #1a2200 40%, #0c0c0c 100%);}
+.ilmu-card:nth-child(4) .ilmu-img{background:linear-gradient(115deg, #1a0800 0%, #2e1000 40%, #0c0c0c 100%);}
+.ilmu-card:nth-child(5) .ilmu-img{background:linear-gradient(115deg, #1a1500 0%, #2a2000 40%, #0c0c0c 100%);}
+.ilmu-card:nth-child(n+6) .ilmu-img{background:linear-gradient(115deg, #180c00 0%, #2a1800 40%, #0c0c0c 100%);}
+/* gradient fade to card body */
+.ilmu-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom, transparent 30%, var(--surface) 100%);
+  pointer-events:none;
+}
+.ilmu-card:hover .ilmu-img::after,.ilmu-card.expanded .ilmu-img::after{
+  background:linear-gradient(to bottom, transparent 30%, var(--bg2) 100%);
+}
+.ilmu-img-num{
+  font-family:'DM Mono',monospace;font-size:1.6rem;
+  color:var(--accent);opacity:.25;
+  font-weight:500;position:relative;z-index:1;letter-spacing:-2px;
+}
+/* orange glowing orb */
+.ilmu-img::before{
+  content:'';position:absolute;
+  width:120px;height:120px;border-radius:50%;
+  right:-20px;top:-40px;
+  background:var(--accent);opacity:.07;
+  filter:blur(25px);
+}
+.ilmu-body{padding:.75rem 1.1rem .9rem;}
+.ilmu-num-label{
+  font-family:'DM Mono',monospace;font-size:.58rem;
+  color:var(--text3);margin-bottom:.25rem;letter-spacing:1px;
+}
+.ilmu-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:.93rem;font-weight:700;
+  letter-spacing:-.2px;margin-bottom:.3rem;line-height:1.38;
+}
+.ilmu-short{
+  color:var(--text2);font-size:.79rem;
+  line-height:1.62;font-style:italic;
+}
+
+/* ── JURNAL CARDS ───────────────────────────*/
+.jurnal-card{
+  background:var(--surface);
+  border:0;border-bottom:1px solid var(--sep);
+  overflow:hidden;cursor:pointer;
+  transition:background .2s;
+  position:relative;
+}
+.jurnal-card:first-child{border-top:1px solid var(--sep);}
+.jurnal-card:hover{background:var(--bg2);}
+.jurnal-card.expanded{background:var(--bg2);}
+/* Horizontal thick left stripe + gradient image */
+.jurnal-img{
+  height:52px;position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;padding:0 1.1rem .6rem;
+}
+.jurnal-card:nth-child(1) .jurnal-img{background:linear-gradient(135deg,#200800 0%,#1a0c00 35%,#0c0c0c 100%);}
+.jurnal-card:nth-child(2) .jurnal-img{background:linear-gradient(135deg,#001820 0%,#001520 35%,#0c0c0c 100%);}
+.jurnal-card:nth-child(3) .jurnal-img{background:linear-gradient(135deg,#1a1000 0%,#221800 35%,#0c0c0c 100%);}
+.jurnal-card:nth-child(4) .jurnal-img{background:linear-gradient(135deg,#001a0a 0%,#001510 35%,#0c0c0c 100%);}
+.jurnal-card:nth-child(n+5) .jurnal-img{background:linear-gradient(135deg,#1a0500 0%,#200a00 35%,#0c0c0c 100%);}
+.jurnal-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 20%, var(--surface) 100%);
+}
+.jurnal-card:hover .jurnal-img::after,.jurnal-card.expanded .jurnal-img::after{
+  background:linear-gradient(to bottom,transparent 20%, var(--bg2) 100%);
+}
+.jurnal-img::before{
+  content:'';position:absolute;
+  width:100px;height:100px;border-radius:50%;
+  right:10px;top:-25px;
+  background:var(--accent3);opacity:.06;
+  filter:blur(20px);
+}
+.jurnal-body{padding:.75rem 1.1rem .9rem;}
+.jurnal-label{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-family:'DM Mono',monospace;font-size:.56rem;
+  color:var(--accent);text-transform:uppercase;
+  letter-spacing:2.5px;margin-bottom:.38rem;
+}
+.jurnal-label::before{content:'▸';font-size:.5rem;}
+.jurnal-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:.93rem;font-weight:700;
+  letter-spacing:-.2px;margin-bottom:.3rem;line-height:1.38;
+}
+.jurnal-card .jurnal-short{
+  color:var(--text2);font-size:.79rem;
+  line-height:1.6;font-style:italic;
+  font-family:'DM Sans',sans-serif;
+}
+.jurnal-footer{margin-top:.6rem;display:flex;gap:.3rem;flex-wrap:wrap;}
+.book-ref{
+  display:flex;align-items:center;gap:.5rem;
+  margin-top:.85rem;padding:.55rem .8rem;
+  background:var(--bg3);border-left:2px solid var(--accent);
+}
+.book-ref-icon{font-size:.95rem;flex-shrink:0;opacity:.55;}
+.book-ref-lbl{font-family:'DM Mono',monospace;font-size:.52rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;}
+.book-ref-title{font-family:'Playfair Display',serif;font-size:.77rem;font-weight:700;color:var(--text);font-style:italic;}
+.book-ref-author{font-size:.7rem;color:var(--text2);font-style:italic;}
+
+/* ── QUOTE CARDS ────────────────────────────*/
+.quote-card{
+  background:var(--surface);
+  border:0;border-bottom:1px solid var(--sep);
+  overflow:hidden;cursor:pointer;
+  transition:background .2s;
+  position:relative;
+}
+.quote-card:first-child{border-top:1px solid var(--sep);}
+.quote-card:hover{background:var(--bg2);}
+.quote-card.expanded{background:var(--bg2);}
+/* Decorative gradient top strip */
+.quote-img-strip{
+  height:44px;position:relative;overflow:hidden;
+}
+.quote-card:nth-child(1) .quote-img-strip{background:linear-gradient(90deg,#1a0e00,#0c0c0c 60%);}
+.quote-card:nth-child(2) .quote-img-strip{background:linear-gradient(90deg,#001a0a,#0c0c0c 60%);}
+.quote-card:nth-child(3) .quote-img-strip{background:linear-gradient(90deg,#1a0500,#0c0c0c 60%);}
+.quote-card:nth-child(4) .quote-img-strip{background:linear-gradient(90deg,#001220,#0c0c0c 60%);}
+.quote-card:nth-child(5) .quote-img-strip{background:linear-gradient(90deg,#1a1200,#0c0c0c 60%);}
+.quote-card:nth-child(n+6) .quote-img-strip{background:linear-gradient(90deg,#0e1800,#0c0c0c 60%);}
+.quote-img-strip::before{
+  content:'\201C';
+  position:absolute;left:.6rem;top:-1rem;
+  font-family:'Playfair Display',serif;
+  font-size:5rem;font-weight:900;
+  color:var(--accent);opacity:.18;line-height:1;
+}
+.quote-img-strip::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 30%,var(--surface) 100%);
+}
+.quote-card:hover .quote-img-strip::after,
+.quote-card.expanded .quote-img-strip::after{
+  background:linear-gradient(to bottom,transparent 30%,var(--bg2) 100%);
+}
+.quote-body{padding:.1rem 1.1rem .9rem;}
+.quote-text{
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;font-style:italic;
+  font-weight:400;line-height:1.62;
+  margin-bottom:.75rem;letter-spacing:-.1px;
+  color:var(--text);
+}
+.quote-author{display:flex;align-items:center;gap:.5rem;}
+.quote-av{
+  width:28px;height:28px;border-radius:0;
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;flex-shrink:0;
+  border:1px solid var(--border2);
+}
+.quote-name{font-size:.8rem;font-weight:700;color:var(--text);font-family:'Playfair Display',serif;}
+.quote-src{font-family:'DM Mono',monospace;font-style:normal;font-size:.6rem;color:var(--text3);letter-spacing:.5px;}
+.quote-context{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
+.quote-context.open{max-height:300px;}
+.quote-ctx-body{
+  border-top:1px solid var(--sep);margin-top:.8rem;
+  padding-top:.75rem;color:var(--text2);
+  font-size:.8rem;line-height:1.82;font-weight:300;font-style:italic;
+}
+.quote-ctx-body strong{font-style:normal;color:var(--text);font-weight:600;}
+
+/* ── CONTACT ────────────────────────────────*/
+.contact-item{
+  display:flex;align-items:center;gap:.85rem;
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-left:2px solid var(--border2);
+  border-radius:0;
+  padding:.88rem 1.1rem;
+  text-decoration:none;color:var(--text);
+  transition:all .2s;margin-bottom:.45rem;
+}
+.contact-item:hover{border-left-color:var(--accent);transform:translateX(3px);}
+.contact-icon{
+  width:34px;height:34px;border-radius:0;
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.contact-label{font-weight:700;font-size:.84rem;font-family:'Playfair Display',serif;}
+.contact-sub{font-size:.69rem;color:var(--text3);font-family:'DM Mono',monospace;letter-spacing:.3px;}
+.contact-arr{margin-left:auto;color:var(--text3);transition:transform .2s;font-size:.85rem;}
+.contact-item:hover .contact-arr{transform:translateX(3px);color:var(--accent);}
+
+/* ── ABOUT BOX ──────────────────────────────*/
+.about-box{
+  background:var(--surface);
+  border:1px solid var(--card-border);
+  border-left:2px solid var(--border2);
+  border-radius:0;padding:1.1rem 1.2rem;margin-bottom:.75rem;
+  transition:border-color .2s;
+}
+.about-box:hover{border-left-color:var(--accent);}
+.about-box p{
+  color:var(--text2);font-size:.84rem;
+  line-height:1.82;font-weight:300;font-style:italic;
+}
+.about-box p+p{margin-top:.5rem;}
+.about-box strong{color:var(--text);font-weight:600;font-style:normal;}
+.birth-tag{
+  display:inline-flex;align-items:center;gap:.32rem;
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:0;padding:.24rem .7rem;
+  margin-top:.8rem;
+  font-family:'DM Mono',monospace;font-size:.62rem;color:var(--text2);
+}
+.birth-tag span{color:var(--accent);}
+.animal-grid{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem;}
+.animal-tag{
+  background:transparent;border:1px solid rgba(92,186,138,.2);
+  color:var(--green);font-size:.7rem;padding:.17rem .52rem;
+  border-radius:0;display:flex;align-items:center;gap:.28rem;
+  font-style:italic;
+}
+.org-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--sep);}
+.org-item:last-child{border-bottom:none;}
+.org-icon{font-size:1.15rem;flex-shrink:0;}
+.org-name{font-weight:700;font-size:.82rem;font-family:'Playfair Display',serif;}
+.org-desc{font-size:.72rem;color:var(--text3);font-style:italic;}
+
+/* ── MODALS ─────────────────────────────────*/
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  z-index:1000;display:flex;align-items:center;justify-content:center;
+  padding:1.25rem;
+  opacity:0;pointer-events:none;transition:opacity .28s;
+}
 .modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:4px;padding:1.6rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;transform:translateY(16px);transition:transform .3s;}
+.modal{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-top:2px solid var(--accent);
+  border-radius:0;padding:1.6rem;
+  width:100%;max-width:480px;max-height:90vh;
+  overflow-y:auto;
+  transform:translateY(14px);transition:transform .28s;
+}
 .modal-overlay.open .modal{transform:translateY(0);}
-.modal h2{font-family:'Libre Baskerville',serif;font-size:1.15rem;font-weight:700;margin-bottom:1.2rem;letter-spacing:-.3px;}
-.modal-close{position:absolute;top:1rem;right:1rem;width:30px;height:30px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;}
-.form-group{margin-bottom:.9rem;}
-.form-label{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.38rem;display:block;}
-.form-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;padding:.6rem .8rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.83rem;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.modal h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:900;
+  margin-bottom:1.2rem;letter-spacing:-.3px;
+}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;
+  width:28px;height:28px;border-radius:0;
+  border:1px solid var(--border2);background:transparent;
+  color:var(--text2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;
+}
+.form-group{margin-bottom:.85rem;}
+.form-label{
+  font-family:'DM Mono',monospace;font-size:.58rem;
+  color:var(--accent);text-transform:uppercase;
+  letter-spacing:1.5px;margin-bottom:.38rem;display:block;
+}
+.form-input{
+  width:100%;background:var(--bg3);
+  border:1px solid var(--border2);
+  border-radius:0;padding:.6rem .8rem;
+  color:var(--text);font-family:'DM Sans',sans-serif;
+  font-size:.83rem;outline:none;transition:border-color .2s;
+  -webkit-appearance:none;
+}
 .form-input:focus{border-color:var(--accent);}
 .form-textarea{min-height:115px;resize:vertical;line-height:1.6;}
 .form-row{display:flex;gap:.55rem;}
 .form-row .form-group{flex:1;}
-.img-upload-area{border:1px dashed var(--border2);border-radius:3px;padding:1rem;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
-.img-upload-area:hover{border-color:var(--accent);background:rgba(26,115,232,.04);}
-.img-upload-area p{font-size:.72rem;color:var(--text3);margin-top:.2rem;}
-.img-preview{width:100%;height:70px;object-fit:cover;border-radius:2px;margin-top:.5rem;display:none;}
-.admin-bar{display:flex;align-items:center;gap:.5rem;background:transparent;border:1px solid rgba(26,115,232,.2);border-radius:3px;padding:.55rem .9rem;margin-bottom:.9rem;}
-.admin-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);flex-shrink:0;}
-.admin-bar span{font-family:'DM Mono',monospace;font-size:.64rem;color:var(--accent);flex:1;}
-.loading-spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;}
+.img-upload-area{
+  border:1px dashed var(--border2);border-radius:0;
+  padding:.9rem;text-align:center;cursor:pointer;
+  transition:all .2s;position:relative;
+}
+.img-upload-area:hover{border-color:var(--accent);background:rgba(245,166,35,.03);}
+.img-upload-area p{font-size:.7rem;color:var(--text3);margin-top:.18rem;font-style:italic;}
+.img-preview{width:100%;height:65px;object-fit:cover;border-radius:0;margin-top:.5rem;display:none;}
+
+/* ── ADMIN BAR ──────────────────────────────*/
+.admin-bar{
+  display:flex;align-items:center;gap:.5rem;
+  background:transparent;
+  border:1px solid rgba(245,166,35,.25);
+  border-radius:0;padding:.5rem .9rem;margin-bottom:.9rem;
+}
+.admin-dot{width:7px;height:7px;border-radius:0;background:var(--green);box-shadow:0 0 6px var(--green);flex-shrink:0;transform:rotate(45deg);}
+.admin-bar span{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);flex:1;letter-spacing:.5px;}
+
+/* ── MISC ───────────────────────────────────*/
+.loading-spinner{
+  display:inline-block;width:13px;height:13px;
+  border:2px solid var(--border2);border-top-color:var(--accent);
+  border-radius:50%;animation:spin .65s linear infinite;
+}
 @keyframes spin{to{transform:rotate(360deg);}}
-.toast{position:fixed;bottom:4.5rem;left:50%;transform:translateX(-50%) translateY(16px);background:var(--surface);border:1px solid var(--border2);border-radius:3px;padding:.55rem 1.15rem;font-size:.78rem;font-weight:500;z-index:2000;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap;}
+.toast{
+  position:fixed;bottom:4.5rem;left:50%;
+  transform:translateX(-50%) translateY(14px);
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-top:2px solid var(--accent);
+  border-radius:0;padding:.52rem 1.1rem;
+  font-family:'DM Mono',monospace;
+  font-size:.72rem;letter-spacing:.5px;
+  z-index:2000;opacity:0;transition:all .25s;
+  pointer-events:none;white-space:nowrap;
+}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.toast.success{border-color:var(--green);color:var(--green);}
-.toast.error{border-color:var(--red);color:var(--red);}
-.quote-card{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.4rem;margin-bottom:.55rem;position:relative;overflow:hidden;transition:all .2s;cursor:pointer;}
-.quote-card::before{content:'\201C';position:absolute;top:-1.2rem;left:.6rem;font-family:'Libre Baskerville',serif;font-size:7rem;font-weight:700;color:var(--accent);opacity:.05;line-height:1;pointer-events:none;}
-.quote-card:hover{border-color:var(--border2);}
-.quote-card.expanded{border-color:rgba(26,115,232,.22);}
-.quote-text{font-family:'Libre Baskerville',serif;font-size:.92rem;font-style:italic;font-weight:400;line-height:1.6;margin-bottom:.85rem;letter-spacing:-.1px;position:relative;z-index:1;}
-.quote-author{display:flex;align-items:center;gap:.5rem;}
-.quote-av{width:28px;height:28px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;border:1px solid var(--border2);}
-.quote-name{font-size:.78rem;font-weight:700;color:var(--text);}
-.quote-src{font-family:'Libre Baskerville',serif;font-style:italic;font-size:.67rem;color:var(--text3);}
-.quote-context{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1);}
-.quote-context.open{max-height:300px;}
-.quote-ctx-body{border-top:1px solid var(--sep);margin-top:.85rem;padding-top:.75rem;color:var(--text2);font-size:.78rem;line-height:1.8;font-weight:300;}
-.jurnal-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;padding:1.2rem;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);border-left:2px solid var(--accent);}
-.jurnal-card:first-child{border-top:1px solid var(--sep);}
-.jurnal-card:hover{background:var(--card-hover);}
-.jurnal-card.expanded{background:var(--bg2);}
-.jurnal-label{display:inline-flex;align-items:center;gap:.3rem;font-family:'DM Mono',monospace;font-size:.58rem;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:.5rem;}
-.jurnal-card h3{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.38rem;line-height:1.4;}
-.jurnal-card .jurnal-short{color:var(--text2);font-size:.79rem;line-height:1.6;font-style:italic;font-family:'Libre Baskerville',serif;}
-.jurnal-footer{margin-top:.7rem;display:flex;gap:.3rem;flex-wrap:wrap;}
-.book-ref{display:flex;align-items:center;gap:.5rem;margin-top:.85rem;padding:.55rem .8rem;background:var(--bg3);border-left:2px solid var(--accent);border-radius:0;}
-.book-ref-icon{font-size:1rem;flex-shrink:0;opacity:.6;}
-.book-ref-lbl{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;}
-.book-ref-title{font-family:'Libre Baskerville',serif;font-size:.77rem;font-weight:700;color:var(--text);}
-.book-ref-author{font-size:.7rem;color:var(--text2);font-style:italic;}
-.ilmu-card{background:var(--surface);border:1px solid var(--card-border);border-radius:0;padding:1.2rem;margin-bottom:0;transition:background .2s;cursor:pointer;border-bottom:1px solid var(--sep);}
-.ilmu-card:first-child{border-top:1px solid var(--sep);}
-.ilmu-card:hover{background:var(--card-hover);}
-.ilmu-card.expanded{background:var(--bg2);}
-.ilmu-num{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);margin-bottom:.3rem;letter-spacing:1px;}
-.ilmu-card h3{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.38rem;line-height:1.4;}
-.ilmu-short{color:var(--text2);font-size:.79rem;line-height:1.6;font-style:italic;}
-.contact-item{display:flex;align-items:center;gap:.85rem;background:var(--surface);border:1px solid var(--card-border);border-radius:3px;padding:.88rem 1.1rem;text-decoration:none;color:var(--text);transition:all .2s;margin-bottom:.45rem;}
-.contact-item:hover{border-color:var(--border2);transform:translateX(3px);}
-.contact-icon{width:34px;height:34px;border-radius:3px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
-.contact-label{font-weight:700;font-size:.84rem;}
-.contact-sub{font-size:.71rem;color:var(--text3);font-family:'DM Mono',monospace;}
-.contact-arr{margin-left:auto;color:var(--text3);transition:transform .2s;font-size:.8rem;}
-.contact-item:hover .contact-arr{transform:translateX(3px);color:var(--accent);}
-.about-box{background:var(--surface);border:1px solid var(--card-border);border-radius:4px;padding:1.2rem;margin-bottom:.75rem;}
-.about-box p{color:var(--text2);font-size:.84rem;line-height:1.8;font-weight:300;}
-.about-box p+p{margin-top:.55rem;}
-.about-box strong{color:var(--text);font-weight:600;}
-.birth-tag{display:inline-flex;align-items:center;gap:.32rem;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;padding:.24rem .7rem;margin-top:.8rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text2);}
-.birth-tag span{color:var(--accent);}
-.animal-grid{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem;}
-.animal-tag{background:transparent;border:1px solid rgba(45,184,112,.25);color:var(--green);font-size:.72rem;padding:.18rem .55rem;border-radius:2px;display:flex;align-items:center;gap:.28rem;}
-.org-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--sep);}
-.org-item:last-child{border-bottom:none;}
-.org-icon{font-size:1.2rem;flex-shrink:0;}
-.org-name{font-weight:700;font-size:.83rem;}
-.org-desc{font-size:.73rem;color:var(--text3);}
-.sdiv{height:1px;background:var(--sep);margin:1.3rem 0;}
-.sec-label{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:.75rem;}
-.add-hint{border:1px dashed var(--border2);border-radius:3px;padding:1.2rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-top:.9rem;}
+.toast.success{border-top-color:var(--green);color:var(--green);}
+.toast.error{border-top-color:var(--red);color:var(--red);}
+.sdiv{height:1px;background:var(--sep2);margin:1.3rem 0;}
+.sec-label{
+  font-family:'DM Mono',monospace;font-size:.58rem;
+  color:var(--text3);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:.75rem;
+}
+.add-hint{
+  border:1px dashed var(--border2);border-radius:0;
+  padding:1.2rem;text-align:center;cursor:pointer;
+  transition:border-color .2s;margin-top:.9rem;
+}
 .add-hint:hover{border-color:var(--accent);}
-.add-hint h3{font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;margin-bottom:.2rem;}
-.add-hint p{font-size:.76rem;color:var(--text3);}
-.swipe-hint{position:fixed;bottom:.8rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.5rem;background:rgba(10,10,11,.92);border:1px solid var(--border2);border-radius:2px;padding:.3rem .9rem;font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);backdrop-filter:blur(12px);z-index:50;transition:opacity .4s;pointer-events:none;letter-spacing:.8px;}
+.add-hint h3{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;margin-bottom:.2rem;}
+.add-hint p{font-size:.75rem;color:var(--text3);font-style:italic;}
+.swipe-hint{
+  position:fixed;bottom:.8rem;left:50%;
+  transform:translateX(-50%);
+  display:flex;align-items:center;gap:.5rem;
+  background:rgba(12,12,12,.95);
+  border:1px solid var(--border2);border-top:1px solid var(--accent);
+  border-radius:0;padding:.28rem .9rem;
+  font-family:'DM Mono',monospace;font-size:.58rem;
+  color:var(--text3);backdrop-filter:blur(14px);
+  z-index:50;transition:opacity .4s;pointer-events:none;letter-spacing:1px;
+}
 .swipe-hint.gone{opacity:0;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-.a1{animation:fadeUp .5s .05s ease both;}
-.a2{animation:fadeUp .5s .13s ease both;}
-.a3{animation:fadeUp .5s .22s ease both;}
-.a4{animation:fadeUp .5s .3s ease both;}
-.a5{animation:fadeUp .5s .38s ease both;}
-.a6{animation:fadeUp .5s .46s ease both;}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.a1{animation:fadeUp .45s .04s ease both;}
+.a2{animation:fadeUp .45s .12s ease both;}
+.a3{animation:fadeUp .45s .2s ease both;}
+.a4{animation:fadeUp .45s .28s ease both;}
+.a5{animation:fadeUp .45s .36s ease both;}
+.a6{animation:fadeUp .45s .44s ease both;}
+
+/* Expanded panels for all list-item types */
+.ilmu-expand,.jurnal-expand,.quote-expand-inner{
+  max-height:0;overflow:hidden;
+  transition:max-height .45s cubic-bezier(.4,0,.2,1);
+}
+.ilmu-expand.open,.jurnal-expand.open,.quote-expand-inner.open{max-height:800px;}
+.ilmu-expand-body,.jurnal-expand-body,.quote-expand-body{
+  padding:.75rem 1.1rem .9rem;
+  border-top:1px solid var(--sep);
+}
+.ilmu-expand-body p,.jurnal-expand-body p,.quote-expand-body p{
+  color:var(--text2);font-size:.82rem;line-height:1.88;
+  font-weight:300;font-style:italic;
+}
+.ilmu-expand-body p+p,.jurnal-expand-body p+p,.quote-expand-body p+p{margin-top:.5rem;}
+.ilmu-expand-body strong,.jurnal-expand-body strong,.quote-expand-body strong{
+  color:var(--text);font-style:normal;font-weight:600;
+}
+.ilmu-expand-body .src,.jurnal-expand-body .src,.quote-expand-body .src{
+  font-family:'DM Mono',monospace;font-style:normal;
+  font-size:.58rem;color:var(--text3);
+  margin-top:.65rem;display:block;letter-spacing:.8px;
+}
+
+/* Light theme adjustments */
+:root[data-theme="light"] .ilmu-card:nth-child(1) .ilmu-img{background:linear-gradient(115deg,#fff3d6 0%,#ffeab8 40%,#f5f3ef 100%);}
+:root[data-theme="light"] .ilmu-card:nth-child(2) .ilmu-img{background:linear-gradient(115deg,#ffebd6 0%,#ffd8b0 40%,#f5f3ef 100%);}
+:root[data-theme="light"] .ilmu-card:nth-child(3) .ilmu-img{background:linear-gradient(115deg,#e8f4ea 0%,#d0ead3 40%,#f5f3ef 100%);}
+:root[data-theme="light"] .ilmu-card:nth-child(4) .ilmu-img{background:linear-gradient(115deg,#fff0d6 0%,#ffe5b4 40%,#f5f3ef 100%);}
+:root[data-theme="light"] .ilmu-card:nth-child(n+5) .ilmu-img{background:linear-gradient(115deg,#ffeedd 0%,#ffd5aa 40%,#f5f3ef 100%);}
+:root[data-theme="light"] .ilmu-img::after{background:linear-gradient(to bottom,transparent 30%,#ffffff 100%);}
+:root[data-theme="light"] .ilmu-card:hover .ilmu-img::after,.ilmu-card.expanded .ilmu-img::after{background:linear-gradient(to bottom,transparent 30%,#eceae5 100%);}
+:root[data-theme="light"] .ilmu-img-num{color:var(--accent);opacity:.3;}
+:root[data-theme="light"] .jurnal-card:nth-child(1) .jurnal-img{background:linear-gradient(135deg,#fff0d0 0%,#ffe5a8 35%,#f5f3ef 100%);}
+:root[data-theme="light"] .jurnal-card:nth-child(2) .jurnal-img{background:linear-gradient(135deg,#d6f0f8 0%,#b8e3f5 35%,#f5f3ef 100%);}
+:root[data-theme="light"] .jurnal-card:nth-child(3) .jurnal-img{background:linear-gradient(135deg,#fff3cc 0%,#ffe8a0 35%,#f5f3ef 100%);}
+:root[data-theme="light"] .jurnal-card:nth-child(4) .jurnal-img{background:linear-gradient(135deg,#d6f4e8 0%,#b8ecda 35%,#f5f3ef 100%);}
+:root[data-theme="light"] .jurnal-img::after{background:linear-gradient(to bottom,transparent 20%,#ffffff 100%);}
+:root[data-theme="light"] .quote-card:nth-child(1) .quote-img-strip{background:linear-gradient(90deg,#fff0cc,#f5f3ef 60%);}
+:root[data-theme="light"] .quote-card:nth-child(2) .quote-img-strip{background:linear-gradient(90deg,#d6f0e8,#f5f3ef 60%);}
+:root[data-theme="light"] .quote-card:nth-child(3) .quote-img-strip{background:linear-gradient(90deg,#fde0d0,#f5f3ef 60%);}
+:root[data-theme="light"] .quote-card:nth-child(4) .quote-img-strip{background:linear-gradient(90deg,#d0e8f8,#f5f3ef 60%);}
+:root[data-theme="light"] .quote-card:nth-child(5) .quote-img-strip{background:linear-gradient(90deg,#fff5cc,#f5f3ef 60%);}
+:root[data-theme="light"] .quote-img-strip::after{background:linear-gradient(to bottom,transparent 30%,#ffffff 100%);}
+:root[data-theme="light"] .quote-card:hover .quote-img-strip::after,.quote-card.expanded .quote-img-strip::after{background:linear-gradient(to bottom,transparent 30%,#eceae5 100%);}
+
+/* Horizontal separator lines — Bloomberg-style thick borders */
+.horiz-rule{
+  width:100%;height:3px;
+  background:linear-gradient(to right,var(--accent),var(--accent3) 30%,transparent 70%);
+  margin:1.4rem 0;
+  border:none;
+}
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
 
+<!-- MODALS -->
 <div class="modal-overlay" id="bgModal">
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('bgModal')">✕</button>
@@ -270,14 +876,10 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
     <div class="form-group">
       <label class="form-label">Pilih Slide</label>
       <select class="form-input" id="bgSlideSelect">
-        <option value="s0">Home</option>
-        <option value="s1">Tentang</option>
-        <option value="s2">Pengalaman</option>
-        <option value="s3">Skills</option>
-        <option value="s4">Blog</option>
-        <option value="s5">Ilmu Baru</option>
-        <option value="s6">Jurnal</option>
-        <option value="s7">Quotes</option>
+        <option value="s0">Home</option><option value="s1">Tentang</option>
+        <option value="s2">Pengalaman</option><option value="s3">Skills</option>
+        <option value="s4">Blog</option><option value="s5">Ilmu Baru</option>
+        <option value="s6">Jurnal</option><option value="s7">Quotes</option>
         <option value="s8">Contact</option>
       </select>
     </div>
@@ -285,13 +887,13 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
       <label class="form-label">Upload Gambar (PNG/JPG, max 5MB)</label>
       <div class="img-upload-area" onclick="document.getElementById('bgImageInput').click()">
         <input type="file" id="bgImageInput" accept="image/*" style="display:none" onchange="handleBgImageUpload(event)"/>
-        <div style="font-size:1.4rem">🖼️</div>
+        <div style="font-size:1.3rem">🖼️</div>
         <p>Tap untuk upload gambar background</p>
         <img id="bgImgPreview" class="img-preview" src="" alt="preview"/>
       </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Opacity (0-100%)</label>
+      <label class="form-label">Opacity (0–100%)</label>
       <input class="form-input" id="bgOpacity" type="number" min="0" max="100" value="15" placeholder="15"/>
     </div>
     <div style="display:flex;gap:.55rem;">
@@ -313,7 +915,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
       <label class="form-label">Password</label>
       <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
     </div>
-    <div id="loginError" style="color:var(--red);font-size:.75rem;margin-bottom:.75rem;display:none;"></div>
+    <div id="loginError" style="color:var(--red);font-size:.75rem;margin-bottom:.75rem;display:none;font-family:'DM Mono',monospace;"></div>
     <button class="btn btn-primary" style="width:100%;" id="loginBtn" onclick="doLogin()">Masuk</button>
   </div>
 </div>
@@ -322,26 +924,11 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('ilmuModal')">✕</button>
     <h2 id="ilmuModalTitle">Ilmu Baru</h2>
-    <div class="form-group">
-      <label class="form-label">Nomor (001, 002, dst)</label>
-      <input class="form-input" id="ilmuNum" placeholder="001"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Judul</label>
-      <input class="form-input" id="ilmuTitle" placeholder="Judul ilmu baru..."/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Ringkas (1 kalimat)</label>
-      <input class="form-input" id="ilmuShort" placeholder="Ringkasan singkat..."/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Penjelasan Lengkap</label>
-      <textarea class="form-input form-textarea" id="ilmuBody" placeholder="Tulis penjelasan...&#10;&#10;Paragraf baru."></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Sumber</label>
-      <input class="form-input" id="ilmuSource" placeholder="Nama buku/jurnal, tahun"/>
-    </div>
+    <div class="form-group"><label class="form-label">Nomor (001, 002, dst)</label><input class="form-input" id="ilmuNum" placeholder="001"/></div>
+    <div class="form-group"><label class="form-label">Judul</label><input class="form-input" id="ilmuTitle" placeholder="Judul ilmu baru..."/></div>
+    <div class="form-group"><label class="form-label">Ringkas (1 kalimat)</label><input class="form-input" id="ilmuShort" placeholder="Ringkasan singkat..."/></div>
+    <div class="form-group"><label class="form-label">Penjelasan Lengkap</label><textarea class="form-input form-textarea" id="ilmuBody" placeholder="Tulis penjelasan...&#10;&#10;Paragraf baru."></textarea></div>
+    <div class="form-group"><label class="form-label">Sumber</label><input class="form-input" id="ilmuSource" placeholder="Nama buku/jurnal, tahun"/></div>
     <div style="display:flex;gap:.55rem;">
       <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('ilmuModal')">Batal</button>
       <button class="btn btn-primary" style="flex:1;" onclick="saveIlmu()"><span id="saveIlmuLabel">Simpan</span></button>
@@ -353,42 +940,15 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('jurnalModal')">✕</button>
     <h2 id="jurnalModalTitle">Jurnal Baru</h2>
-    <div class="form-group">
-      <label class="form-label">Kategori</label>
-      <input class="form-input" id="jurnalLabel" placeholder="Kesehatan Mental"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Judul</label>
-      <input class="form-input" id="jurnalTitle" placeholder="Judul jurnal..."/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Ringkas (1 kalimat)</label>
-      <input class="form-input" id="jurnalShort" placeholder="Ringkasan singkat..."/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tag 1</label>
-      <input class="form-input" id="jurnalTag1" placeholder="Dopamin"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tag 2 (opsional)</label>
-      <input class="form-input" id="jurnalTag2" placeholder="Algoritma"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tag 3 (opsional)</label>
-      <input class="form-input" id="jurnalTag3" placeholder="Kecemasan"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Isi Jurnal</label>
-      <textarea class="form-input form-textarea" id="jurnalBody" placeholder="Tulis isi jurnal...&#10;&#10;Paragraf baru."></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Source By (Judul Buku/Artikel)</label>
-      <input class="form-input" id="jurnalSourceTitle" placeholder="The Social Dilemma"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Penulis</label>
-      <input class="form-input" id="jurnalSourceAuthor" placeholder="Nama Penulis — Tahun"/>
-    </div>
+    <div class="form-group"><label class="form-label">Kategori</label><input class="form-input" id="jurnalLabel" placeholder="Kesehatan Mental"/></div>
+    <div class="form-group"><label class="form-label">Judul</label><input class="form-input" id="jurnalTitle" placeholder="Judul jurnal..."/></div>
+    <div class="form-group"><label class="form-label">Ringkas (1 kalimat)</label><input class="form-input" id="jurnalShort" placeholder="Ringkasan singkat..."/></div>
+    <div class="form-group"><label class="form-label">Tag 1</label><input class="form-input" id="jurnalTag1" placeholder="Dopamin"/></div>
+    <div class="form-group"><label class="form-label">Tag 2 (opsional)</label><input class="form-input" id="jurnalTag2" placeholder="Algoritma"/></div>
+    <div class="form-group"><label class="form-label">Tag 3 (opsional)</label><input class="form-input" id="jurnalTag3" placeholder="Kecemasan"/></div>
+    <div class="form-group"><label class="form-label">Isi Jurnal</label><textarea class="form-input form-textarea" id="jurnalBody" placeholder="Tulis isi jurnal...&#10;&#10;Paragraf baru."></textarea></div>
+    <div class="form-group"><label class="form-label">Source By (Judul Buku/Artikel)</label><input class="form-input" id="jurnalSourceTitle" placeholder="The Social Dilemma"/></div>
+    <div class="form-group"><label class="form-label">Penulis</label><input class="form-input" id="jurnalSourceAuthor" placeholder="Nama Penulis — Tahun"/></div>
     <div style="display:flex;gap:.55rem;">
       <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('jurnalModal')">Batal</button>
       <button class="btn btn-primary" style="flex:1;" onclick="saveJurnal()"><span id="saveJurnalLabel">Simpan</span></button>
@@ -400,26 +960,11 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('quoteModal')">✕</button>
     <h2 id="quoteModalTitle">Quote Baru</h2>
-    <div class="form-group">
-      <label class="form-label">Kutipan</label>
-      <textarea class="form-input form-textarea" id="quoteText" placeholder="&quot;Tulis kutipan di sini...&quot;"></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Nama Pembicara</label>
-      <input class="form-input" id="quoteName" placeholder="Steve Jobs"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Avatar/Emoji</label>
-      <input class="form-input" id="quoteAvatar" placeholder="🍎" maxlength="4"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Sumber</label>
-      <input class="form-input" id="quoteSource" placeholder="Think Different Ad Campaign, Apple — 1997"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Konteks/Penjelasan</label>
-      <textarea class="form-input form-textarea" id="quoteContext" placeholder="Tulis konteks di balik quote ini..."></textarea>
-    </div>
+    <div class="form-group"><label class="form-label">Kutipan</label><textarea class="form-input form-textarea" id="quoteText" placeholder="&quot;Tulis kutipan di sini...&quot;"></textarea></div>
+    <div class="form-group"><label class="form-label">Nama Pembicara</label><input class="form-input" id="quoteName" placeholder="Steve Jobs"/></div>
+    <div class="form-group"><label class="form-label">Avatar / Emoji</label><input class="form-input" id="quoteAvatar" placeholder="🍎" maxlength="4"/></div>
+    <div class="form-group"><label class="form-label">Sumber</label><input class="form-input" id="quoteSource" placeholder="Think Different Ad Campaign, Apple — 1997"/></div>
+    <div class="form-group"><label class="form-label">Konteks / Penjelasan</label><textarea class="form-input form-textarea" id="quoteContext" placeholder="Tulis konteks di balik quote ini..."></textarea></div>
     <div style="display:flex;gap:.55rem;">
       <button class="btn btn-ghost" style="flex:1;" onclick="closeModal('quoteModal')">Batal</button>
       <button class="btn btn-primary" style="flex:1;" onclick="saveQuote()"><span id="saveQuoteLabel">Simpan</span></button>
@@ -431,49 +976,25 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div class="modal" style="position:relative;">
     <button class="modal-close" onclick="closeModal('blogModal')">✕</button>
     <h2 id="blogModalTitle">Tulis Blog Baru</h2>
-    <div class="form-group">
-      <label class="form-label">Emoji / Ikon</label>
-      <input class="form-input" id="blogEmoji" placeholder="🔧" maxlength="4"/>
-    </div>
+    <div class="form-group"><label class="form-label">Emoji / Ikon</label><input class="form-input" id="blogEmoji" placeholder="🔧" maxlength="4"/></div>
     <div class="form-group">
       <label class="form-label">Gambar Cover (opsional)</label>
       <div class="img-upload-area" onclick="document.getElementById('blogImageInput').click()">
         <input type="file" id="blogImageInput" accept="image/*" style="display:none" onchange="handleImageUpload(event)"/>
-        <div style="font-size:1.4rem">🖼️</div>
+        <div style="font-size:1.3rem">🖼️</div>
         <p>Tap untuk upload gambar cover</p>
         <img id="imgPreview" class="img-preview" src="" alt="preview"/>
       </div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Source / Nama Jurnal / Buku</label>
-      <input class="form-input" id="blogSourceLabel" placeholder="The Wealth of Nations, dsb..."/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Judul</label>
-      <input class="form-input" id="blogTitle" placeholder="Judul blog..."/>
-    </div>
+    <div class="form-group"><label class="form-label">Source / Nama Jurnal / Buku</label><input class="form-input" id="blogSourceLabel" placeholder="The Wealth of Nations, dsb..."/></div>
+    <div class="form-group"><label class="form-label">Judul</label><input class="form-input" id="blogTitle" placeholder="Judul blog..."/></div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Tanggal</label>
-        <input class="form-input" id="blogDate" type="date"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Tag 1</label>
-        <input class="form-input" id="blogTag1" placeholder="Pengalaman"/>
-      </div>
+      <div class="form-group"><label class="form-label">Tanggal</label><input class="form-input" id="blogDate" type="date"/></div>
+      <div class="form-group"><label class="form-label">Tag 1</label><input class="form-input" id="blogTag1" placeholder="Pengalaman"/></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Tag 2 (opsional)</label>
-      <input class="form-input" id="blogTag2" placeholder="PKL"/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Preview (1 kalimat)</label>
-      <input class="form-input" id="blogPreview" placeholder="Ringkasan singkat..."/>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Isi Blog</label>
-      <textarea class="form-input form-textarea" id="blogContent" placeholder="Tulis isi blog...&#10;&#10;Paragraf baru."></textarea>
-    </div>
+    <div class="form-group"><label class="form-label">Tag 2 (opsional)</label><input class="form-input" id="blogTag2" placeholder="PKL"/></div>
+    <div class="form-group"><label class="form-label">Preview (1 kalimat)</label><input class="form-input" id="blogPreview" placeholder="Ringkasan singkat..."/></div>
+    <div class="form-group"><label class="form-label">Isi Blog</label><textarea class="form-input form-textarea" id="blogContent" placeholder="Tulis isi blog...&#10;&#10;Paragraf baru."></textarea></div>
     <div class="form-group">
       <label class="form-label">Source By</label>
       <div class="form-row">
@@ -488,6 +1009,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div>
 
+<!-- NAV -->
 <nav>
   <div class="nav-logo" id="navLogo">./~<span>Fastend</span></div>
   <div class="nav-right">
@@ -496,8 +1018,10 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </nav>
 
+<!-- CAROUSEL -->
 <div id="carousel">
 
+<!-- SLIDE 0: HOME -->
 <div class="slide" id="s0"><div class="slide-inner">
   <div class="status-badge a1"><div class="status-dot"></div>Open to Collaborate</div>
   <h1 class="hero-name a2">Halo,<br><span class="dim">saya </span>Fastend<br><span class="dim">Muchammad</span></h1>
@@ -506,14 +1030,15 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
     <button class="btn btn-primary" onclick="goTo(1)">Kenalan dulu →</button>
     <button class="btn btn-ghost" onclick="goTo(8)">Hubungi</button>
   </div>
-  <div class="sdiv a5"></div>
+  <hr class="horiz-rule a5"/>
   <div class="about-box a5">
     <p>Namaku <strong>Fastend Muchammad</strong> — sering dipanggil <strong>Sten</strong> atau <strong>Ten</strong> saja. Lahir di <strong>Banjarnegara, Jawa Tengah</strong>, 14 Maret 2007.</p>
     <p>Suka banget sama hewan — reptil, burung, kucing, ikan, hampir semua kecuali serangga kecil. Hobi utama: <strong>game, teknologi,</strong> dan nyerap ilmu baru dengan cara yang unik biar nyantol.</p>
-    <div class="birth-tag"> <span>14 Maret 2007</span> · Banjarnegara</div>
+    <div class="birth-tag"><span>14 Maret 2007</span> · Banjarnegara</div>
   </div>
 </div></div>
 
+<!-- SLIDE 1: TENTANG -->
 <div class="slide" id="s1"><div class="slide-inner">
   <div class="section-tag a1">Tentang Saya</div>
   <h2 class="page-title a2">Siapa itu<br>Fastend?</h2>
@@ -521,7 +1046,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div class="about-box a3">
     <p>Nama lengkapku <strong>Fastend Muchammad</strong>, tapi orang-orang biasa manggil aku <strong>Sten</strong> atau cukup <strong>Ten</strong>.</p>
     <p>Aku lahir dan besar di <strong>Banjarnegara, Jawa Tengah</strong> — kota kecil yang justru bikin aku belajar banyak tentang kreativitas dan keterbatasan yang jadi kekuatan.</p>
-    <div class="birth-tag"> <span>14 Maret 2007</span> · Banjarnegara, Jawa Tengah</div>
+    <div class="birth-tag"><span>14 Maret 2007</span> · Banjarnegara, Jawa Tengah</div>
   </div>
   <div class="sec-label a4">— Nickname</div>
   <div class="a4" style="margin-bottom:1.1rem;">
@@ -533,12 +1058,12 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div class="about-box a4" style="margin-bottom:1.1rem;">
     <p>Aku suka hampir semua hewan. Yang paling aku suka:</p>
     <div class="animal-grid">
-      <span class="animal-tag"> Reptil</span>
-      <span class="animal-tag"> Burung &amp; Unggas</span>
-      <span class="animal-tag"> Kucing &amp; Berbulu</span>
-      <span class="animal-tag"> Ikan</span>
+      <span class="animal-tag">Reptil</span>
+      <span class="animal-tag">Burung &amp; Unggas</span>
+      <span class="animal-tag">Kucing &amp; Berbulu</span>
+      <span class="animal-tag">Ikan</span>
     </div>
-    <p style="margin-top:.65rem;font-size:.76rem;color:var(--text3);">Satu-satunya yang kurang: serangga kecil. Bukan fobia, cuma kurang nyaman aja.</p>
+    <p style="margin-top:.65rem;font-size:.75rem;color:var(--text3);">Satu-satunya yang kurang: serangga kecil. Bukan fobia, cuma kurang nyaman aja.</p>
   </div>
   <div class="sec-label a5">— Minat Utama</div>
   <div class="about-box a5" style="margin-bottom:1.1rem;">
@@ -554,6 +1079,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
+<!-- SLIDE 2: PENGALAMAN -->
 <div class="slide" id="s2"><div class="slide-inner">
   <div class="section-tag a1">Pengalaman</div>
   <h2 class="page-title a2">Perjalanan<br>Hidup</h2>
@@ -594,7 +1120,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
       </div></div>
     </div>
   </div>
-  <div class="sdiv"></div>
+  <hr class="horiz-rule"/>
   <div class="sec-label">— POIN PENTING</div>
   <div class="card" onclick="toggleCard(this)">
     <div class="card-top"><span class="card-icon">👑</span><div style="flex:1"><h3>Duta Genre Kec. Pagedongan</h3><p class="card-short">Generasi Berencana, Banjarnegara. Komunikasi &amp; kepemimpinan tingkat kecamatan.</p></div><span class="card-chevron">›</span></div>
@@ -607,7 +1133,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
   <div class="card" onclick="toggleCard(this)">
     <div class="card-top"><span class="card-icon">🛠️</span><div style="flex:1"><h3>PKL — Hardware Engineer (6 Bulan Total)</h3><p class="card-short">POLYTRON 3 bulan + MEGATRON di sekolah 3 bulan = 6 bulan PKL total.</p></div><span class="card-chevron">›</span></div>
-    <div class="card-meta"><span class="tag">Hardware</span><span class="tag green">POLYTRON</span><span class="tag yellow">MEGATRON</span><span class="tag">6 Bulan</span></div>
+    <div class="card-meta"><span class="tag">Hardware</span><span class="tag green">POLYTRON</span><span class="tag amber">MEGATRON</span><span class="tag">6 Bulan</span></div>
     <div class="expand-panel"><div class="expand-body">
       <p><strong>POLYTRON (3 Bulan)</strong> — Praktik langsung di industri service elektronik profesional. Diagnosa kerusakan, solder SMD, ganti komponen, dan berhadapan sama pelanggan nyata setiap hari.</p>
       <p><strong>MEGATRON di Sekolah (3 Bulan)</strong> — Melanjutkan PKL di laboratorium sekolah. Pendalaman teknis elektronika dengan pendekatan yang lebih terstruktur.</p>
@@ -616,20 +1142,22 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
 </div></div>
 
+<!-- SLIDE 3: SKILLS -->
 <div class="slide" id="s3"><div class="slide-inner">
   <div class="section-tag a1">Skills</div>
   <h2 class="page-title a2">Skill &amp;<br>Kemampuan</h2>
   <p class="page-subtitle a3">Tap item mana saja untuk cerita di baliknya.</p>
   <div class="sec-label a3">— HARD SKILL</div>
   <div id="hardSkills" class="a4"></div>
-  <div class="sdiv"></div>
+  <hr class="horiz-rule"/>
   <div class="sec-label">— SOFT SKILL</div>
   <div id="softSkills"></div>
-  <div class="sdiv"></div>
+  <hr class="horiz-rule"/>
   <div class="sec-label">— HOBI</div>
   <div id="hobiCards"></div>
 </div></div>
 
+<!-- SLIDE 4: BLOG -->
 <div class="slide" id="s4"><div class="slide-inner">
   <div class="section-tag a1">Blog</div>
   <h2 class="page-title a2">Blog<br>Pribadi</h2>
@@ -638,7 +1166,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
     <div class="admin-dot"></div>
     <span>Mode Admin Aktif</span>
     <button class="btn btn-primary btn-sm" onclick="openBlogModal()">+ Tulis Post</button>
-    <button class="btn btn-ghost btn-sm" onclick="openBgModal()">🖼️ Background</button>
+    <button class="btn btn-ghost btn-sm" onclick="openBgModal()">🖼️ BG</button>
     <button class="btn btn-ghost btn-sm" onclick="doLogout()">Keluar</button>
   </div>
   <div class="blog-section-header a3">
@@ -646,12 +1174,13 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   </div>
   <div id="blogList" class="a3"></div>
   <div class="add-hint a6" id="addBlogHint" onclick="checkAdminForNew()">
-    <div style="font-size:1.3rem;margin-bottom:.35rem;">✏️</div>
+    <div style="font-size:1.2rem;margin-bottom:.3rem;">✏️</div>
     <h3 id="addBlogHintText">Punya cerita baru?</h3>
     <p id="addBlogHintSub">Login sebagai admin untuk menulis post baru.</p>
   </div>
 </div></div>
 
+<!-- SLIDE 5: ILMU BARU -->
 <div class="slide" id="s5"><div class="slide-inner">
   <div class="section-tag a1">Ilmu Baru</div>
   <h2 class="page-title a2">Info &amp;<br>Ilmu Baru</h2>
@@ -664,6 +1193,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div id="ilmuList" class="a3"></div>
 </div></div>
 
+<!-- SLIDE 6: JURNAL -->
 <div class="slide" id="s6"><div class="slide-inner">
   <div class="section-tag a1">Jurnal</div>
   <h2 class="page-title a2">Jurnal<br>Psikologi</h2>
@@ -676,6 +1206,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div id="jurnalList" class="a3"></div>
 </div></div>
 
+<!-- SLIDE 7: QUOTES -->
 <div class="slide" id="s7"><div class="slide-inner">
   <div class="section-tag a1">Quotes</div>
   <h2 class="page-title a2">Kata-kata<br>Orang Hebat</h2>
@@ -688,6 +1219,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
   <div id="quoteList" class="a3"></div>
 </div></div>
 
+<!-- SLIDE 8: KONTAK -->
 <div class="slide" id="s8"><div class="slide-inner">
   <div class="section-tag a1">Kontak</div>
   <h2 class="page-title a2">Mari<br>Ngobrol 👋</h2>
@@ -717,13 +1249,15 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
     <div><div class="contact-label">Spotify</div><div class="contact-sub">Fastend Muchammad</div></div>
     <span class="contact-arr">›</span>
   </a>
-  <div class="sdiv a6"></div>
-  <div style="text-align:center;color:var(--text3);font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:1.5px;" class="a6">© 2025 FASTEND MUCHAMMAD</div>
+  <hr class="horiz-rule a6"/>
+  <div style="text-align:center;color:var(--text3);font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:2px;" class="a6">© 2025 FASTEND MUCHAMMAD</div>
 </div></div>
 
-</div>
+</div><!-- /carousel -->
+
 <div class="swipe-hint" id="swipeHint">‹ swipe › navigate</div>
 
+<!-- FIREBASE MODULE -->
 <script type="module">
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyALvLFu8niulNVrnNp8q5vCSwWO4T9ZFDE",
@@ -733,7 +1267,6 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "424739432348",
   appId: "1:424739432348:web:5051e99d8fbccfc0400a59"
 };
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -753,11 +1286,12 @@ window.jurnalPosts = [];
 window.quotePosts = [];
 window.bgImages = {};
 
+/* ─── STATIC DATA ─────────────────────────── */
 const staticIlmu = [
-  {id:'il1',num:'001',title:'Kenapa Suhu 350°C Ideal untuk Soldering?',short:'Sweet spot solder timah-timbal yang nggak merusak komponen.',body:['Solder alloy Sn63/Pb37 punya titik leleh di sekitar <strong>183°C</strong> — tapi kenapa iron disetel 350°C? Karena ada thermal transfer lag antara ujung iron dan pad PCB.','Di atas 380°C, risiko delamination PCB meningkat drastis. <strong>350°C adalah titik aman yang efisien</strong> — panas cukup, risiko minimal.'],source:'IPC J-STD-001 Standard — Soldering Quality Requirements',isStatic:true},
+  {id:'il1',num:'001',title:'Kenapa Suhu 350°C Ideal untuk Soldering?',short:'Sweet spot solder timah-timbal yang tidak merusak komponen.',body:['Solder alloy Sn63/Pb37 punya titik leleh di sekitar <strong>183°C</strong> — tapi kenapa iron disetel 350°C? Karena ada thermal transfer lag antara ujung iron dan pad PCB.','Di atas 380°C, risiko delamination PCB meningkat drastis. <strong>350°C adalah titik aman yang efisien</strong> — panas cukup, risiko minimal.'],source:'IPC J-STD-001 Standard — Soldering Quality Requirements',isStatic:true},
   {id:'il2',num:'002',title:'Hukum Moore: Setiap 2 Tahun, Chip Berlipat Ganda',short:'Prediksi 1965 yang mendorong revolusi teknologi selama 5 dekade.',body:['Gordon Moore mengobservasi pada 1965 bahwa jumlah transistor dalam IC berlipat ganda tiap ~2 tahun. Ini <strong>pengamatan empiris yang jadi self-fulfilling prophecy</strong>.','Hasilnya: prosesor yang hari ini ada di HP murah lebih powerful dari superkomputer 1990-an. Tapi sejak 2016, laju ini mulai melambat karena batas fisik atom semakin terasa.'],source:'Gordon Moore, Electronics Magazine — April 1965',isStatic:true},
   {id:'il3',num:'003',title:'Gen Z: Generasi Pertama yang Lahir di Era Internet',short:'Bukan cuma "pakai internet" — tapi dunia mereka memang terbentuk di sana.',body:['Millennial tumbuh bersama internet — tapi punya memori dunia tanpa smartphone. Gen Z (1997–2012) <strong>tidak punya baseline itu</strong>. Otak mereka berkembang dengan koneksi konstan sejak kecil.','Pola pikir, cara belajar, cara membangun hubungan Gen Z terbentuk di ekosistem yang sama sekali berbeda dari generasi sebelumnya.'],source:'Pew Research Center, "Defining generations" — 2019',isStatic:true},
-  {id:'il4',num:'004',title:'Efek Dunning-Kruger: Makin Tahu, Makin Merasa Bodoh',short:'Paradoks kompetensi yang penting banget dipahami sebelum belajar apa pun.',body:['Orang yang baru belajar sesuatu cenderung overestimate kemampuan mereka. Ini yang disebut "<strong>peak of Mount Stupid</strong>" dalam kurva Dunning-Kruger.','Ironisnya, orang yang benar-benar ahli justru paling sering meragukan diri sendiri. <strong>Rendah hati bukan kelemahan — itu tanda kamu sudah cukup dalam.</strong>'],source:'Dunning &amp; Kruger, Journal of Personality and Social Psychology — 1999',isStatic:true}
+  {id:'il4',num:'004',title:'Efek Dunning-Kruger: Makin Tahu, Makin Merasa Bodoh',short:'Paradoks kompetensi yang penting banget dipahami sebelum belajar apa pun.',body:['Orang yang baru belajar sesuatu cenderung overestimate kemampuan mereka. Ini yang disebut "peak of Mount Stupid" dalam kurva Dunning-Kruger.','Ironisnya, orang yang benar-benar ahli justru paling sering meragukan diri sendiri. <strong>Rendah hati bukan kelemahan — itu tanda kamu sudah cukup dalam.</strong>'],source:'Dunning &amp; Kruger, Journal of Personality and Social Psychology — 1999',isStatic:true}
 ];
 
 const staticJurnal = [
@@ -771,30 +1305,23 @@ const staticQuotes = [
   {id:'q1',text:'The people who are crazy enough to think they can change the world are the ones who do.',name:'Steve Jobs',avatar:'🍎',source:'Think Different Ad Campaign, Apple — 1997',context:'Kalimat ini muncul di iklan ikonik Apple "Think Different" (1997), saat Jobs baru kembali ke Apple yang hampir bangkrut. <strong>Ini bukan sekadar slogan</strong> — ini adalah deklarasi filosofi yang mengubah arah perusahaan dan industri teknologi.',isStatic:true},
   {id:'q2',text:'It does not matter how slowly you go as long as you do not stop.',name:'Konfusius',avatar:'☯️',source:'The Analects — ~500 SM, Tiongkok',context:'Konfusius mengajarkan bahwa <strong>kesabaran dan konsistensi melampaui kecepatan</strong>. Di era di mana semua serba instan, kutipan ini terasa makin relevan.',isStatic:true},
   {id:'q3',text:'Education is the most powerful weapon which you can use to change the world.',name:'Nelson Mandela',avatar:'✊',source:'Pidato di Madison Park High School, Boston — 23 Juni 1990',context:'Mandela bicara ini setelah 27 tahun dipenjara. <strong>Orang yang tahu betapa mahalnya harga kebebasan</strong> — dan ia memilih untuk bicara soal pendidikan.',isStatic:true},
-  {id:'q4',text:'I have not failed. I\'ve just found 10,000 ways that won\'t work.',name:'Thomas Edison',avatar:'💡',source:'Dikutip oleh Harper\'s Monthly Magazine — 1890',context:'Edison tidak menemukan bohlam di percobaan pertama. Yang membedakannya bukan bakat, tapi <strong>cara mendefinisikan ulang kegagalan</strong> sebagai data, bukan kekalahan.',isStatic:true},
+  {id:'q4',text:"I have not failed. I've just found 10,000 ways that won't work.",name:'Thomas Edison',avatar:'💡',source:"Dikutip oleh Harper's Monthly Magazine — 1890",context:'Edison tidak menemukan bohlam di percobaan pertama. Yang membedakannya bukan bakat, tapi <strong>cara mendefinisikan ulang kegagalan</strong> sebagai data, bukan kekalahan.',isStatic:true},
   {id:'q5',text:'Wherever you are, be all there.',name:'Jim Elliot',avatar:'🌿',source:'Jurnal Pribadi Jim Elliot — 1948',context:'Di era multitasking dan notifikasi tanpa henti, kalimat ini adalah antidot. <strong>Hadir sepenuhnya</strong> — bukan secara fisik, tapi secara mental dan emosional.',isStatic:true}
 ];
 
 const staticPosts = [
   {id:'s1',emoji:'🔧',sourceLabel:'Catatan PKL',title:'Pengalaman PKL 6 Bulan: Belajar dari Dua Dunia',date:'14 Mei 2025',preview:'POLYTRON dan MEGATRON — dua tempat PKL yang ngajarin hal berbeda tapi saling melengkapi...',tags:['Pengalaman','PKL'],tagColors:['','green'],content:['Hari pertama di POLYTRON, aku langsung dikasih motherboard rusak dan diminta diagnosa. Tanpa buku, tanpa guru di sebelah — cuma aku, multimeter, dan insting.','Tiga bulan di sana ngajarin aku cara kerja dunia servis elektronik yang sesungguhnya: kecepatan, akurasi, dan komunikasi sama pelanggan yang tidak selalu sabar.','Tiga bulan berikutnya di MEGATRON terasa berbeda — lebih terstruktur, lebih beragam jenis perangkat, dan lebih dalam secara teknis.','Total 6 bulan PKL adalah pengalaman terbaik yang aku dapat selama di SMK. <strong>Pengalaman nyata punya tekstur yang tidak bisa didapat dari nilai ujian</strong>.'],sourceBy:{title:'Refleksi Pribadi PKL',author:'Fastend Muchammad · 2025'},isStatic:true},
-  {id:'s2',emoji:'🎯',sourceLabel:'Kepemimpinan',title:'Jadi Duta Genre: Antara Bangga dan Tanggung Jawab',date:'2 April 2025',preview:'Mewakili generasi muda kecamatan bukan hal mudah. Tapi ini salah satu momen terbaik...',tags:['Kepemimpinan','Sosial'],tagColors:['','yellow'],content:['Waktu pertama kali dengar nama aku disebut sebagai Duta Genre, yang aku rasain bukan bangga — tapi <strong>takut</strong>. Takut nggak bisa memenuhi ekspektasi.','Tapi justru dari situ aku belajar: <strong>kepemimpinan yang baik selalu dimulai dari rasa takut yang dikelola dengan benar</strong>.','Aku belajar bicara di depan orang-orang yang usianya jauh di atasku, belajar dengerin sebelum ngomong, dan belajar bahwa <strong>dampak sosial yang nyata dimulai dari percakapan yang jujur</strong>.'],isStatic:true},
+  {id:'s2',emoji:'🎯',sourceLabel:'Kepemimpinan',title:'Jadi Duta Genre: Antara Bangga dan Tanggung Jawab',date:'2 April 2025',preview:'Mewakili generasi muda kecamatan bukan hal mudah. Tapi ini salah satu momen terbaik...',tags:['Kepemimpinan','Sosial'],tagColors:['','yellow'],content:['Waktu pertama kali dengar nama aku disebut sebagai Duta Genre, yang aku rasain bukan bangga — tapi <strong>takut</strong>. Takut tidak bisa memenuhi ekspektasi.','Tapi justru dari situ aku belajar: <strong>kepemimpinan yang baik selalu dimulai dari rasa takut yang dikelola dengan benar</strong>.','Aku belajar bicara di depan orang-orang yang usianya jauh di atasku, belajar dengerin sebelum ngomong, dan belajar bahwa <strong>dampak sosial yang nyata dimulai dari percakapan yang jujur</strong>.'],isStatic:true},
   {id:'s3',emoji:'💡',sourceLabel:'Masa Kecil',title:'Kenapa Aku Suka Bongkar Elektronik Sejak Kecil',date:'10 Maret 2025',preview:'Rasa penasaran yang bikin ortu was-was tapi ternyata jadi fondasi passion-ku...',tags:['Hardware','Cerita'],tagColors:['',''],content:['Waktu SD, aku pernah bongkar remote TV yang rusak — bukan buat diperbaiki, tapi cuma penasaran ada apa di dalamnya. Hasilnya? Remote makin rusak, dapat marah, tapi aku dapat sesuatu yang lebih berharga: <strong>rasa penasaran yang tidak bisa dihentikan</strong>.','Dari situ aku mulai ngerti bahwa <strong>belajar yang paling nempel adalah belajar yang lahir dari pertanyaan sendiri</strong>, bukan dari suruhan orang lain.'],isStatic:true}
 ];
 
+/* ─── AUTH ─────────────────────────────────── */
 onAuthStateChanged(auth, (user) => {
-  if (user && user.email === 'fastendmuhammad@gmail.com') {
-    window.isAdmin = true;
-    document.getElementById('adminBar').style.display = 'flex';
-    document.getElementById('ilmuAdminBar').style.display = 'flex';
-    document.getElementById('jurnalAdminBar').style.display = 'flex';
-    document.getElementById('quoteAdminBar').style.display = 'flex';
-  } else {
-    window.isAdmin = false;
-    document.getElementById('adminBar').style.display = 'none';
-    document.getElementById('ilmuAdminBar').style.display = 'none';
-    document.getElementById('jurnalAdminBar').style.display = 'none';
-    document.getElementById('quoteAdminBar').style.display = 'none';
-  }
+  const isAdmin = !!(user && user.email === 'fastendmuhammad@gmail.com');
+  window.isAdmin = isAdmin;
+  ['adminBar','ilmuAdminBar','jurnalAdminBar','quoteAdminBar'].forEach(id => {
+    document.getElementById(id).style.display = isAdmin ? 'flex' : 'none';
+  });
   loadAllContent();
 });
 
@@ -809,214 +1336,432 @@ async function loadAllContent() {
   renderQuotePosts();
 }
 
+/* ─── SANITIZE ─────────────────────────────── */
+function sanitizeHTML(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = String(str);
+  return div.innerHTML.replace(/\n/g, '<br>');
+}
+
+/* ─── RENDER: ILMU ─────────────────────────── */
 function renderIlmuPosts() {
   const list = document.getElementById('ilmuList');
-  list.innerHTML = window.ilmuPosts.map((post,i) => `
-    <div class="ilmu-card" onclick="toggleIlmu(this)">
-      <div class="ilmu-num">// ${post.num}</div>
-      <h3>${sanitizeHTML(post.title)}</h3>
-      <p class="ilmu-short">${sanitizeHTML(post.short)}</p>
-      <div class="expand-panel"><div class="expand-body">
-        ${(Array.isArray(post.body)?post.body:[post.body||'']).map(p=>`<p>${sanitizeHTML(p)}</p>`).join('')}
-        <span class="src">${sanitizeHTML(post.source)}</span>
-        ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editIlmu('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('ilmu','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
-      </div></div>
-    </div>`).join('');
+  list.innerHTML = window.ilmuPosts.map((post) => {
+    const bodyParts = Array.isArray(post.body) ? post.body : [post.body || ''];
+    return `<div class="ilmu-card">
+      <div class="ilmu-img"><span class="ilmu-img-num">${sanitizeHTML(post.num)}</span></div>
+      <div class="ilmu-body" onclick="toggleIlmu(this.closest('.ilmu-card'))">
+        <div class="ilmu-num-label">// ${sanitizeHTML(post.num)}</div>
+        <h3>${sanitizeHTML(post.title)}</h3>
+        <p class="ilmu-short">${sanitizeHTML(post.short)}</p>
+      </div>
+      <div class="ilmu-expand">
+        <div class="ilmu-expand-body">
+          ${bodyParts.map(p => `<p>${p}</p>`).join('')}
+          <span class="src">${sanitizeHTML(post.source)}</span>
+          ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editIlmu('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('ilmu','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  // attach click to ilmu-body items
+  document.querySelectorAll('.ilmu-card').forEach(card => {
+    card.addEventListener('click', () => toggleIlmuCard(card));
+  });
 }
 
+/* ─── RENDER: JURNAL ────────────────────────── */
 function renderJurnalPosts() {
   const list = document.getElementById('jurnalList');
-  list.innerHTML = window.jurnalPosts.map(post => `
-    <div class="jurnal-card" onclick="toggleJurnal(this)">
-      <div class="jurnal-label">${sanitizeHTML(post.label)}</div>
-      <h3>${sanitizeHTML(post.title)}</h3>
-      <p class="jurnal-short">${sanitizeHTML(post.short)}</p>
-      <div class="jurnal-footer">${(post.tags||[]).map(t=>`<span class="tag">${sanitizeHTML(t)}</span>`).join('')}</div>
-      <div class="expand-panel"><div class="expand-body">
-        ${(Array.isArray(post.body)?post.body:[post.body||'']).map(p=>`<p>${sanitizeHTML(p)}</p>`).join('')}
-        ${post.sourceTitle ? `<div class="book-ref"><span class="book-ref-icon">📖</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">${sanitizeHTML(post.sourceTitle)}</div><div class="book-ref-author">${sanitizeHTML(post.sourceAuthor)}</div></div></div>` : ''}
-        ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editJurnal('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('jurnal','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
-      </div></div>
-    </div>`).join('');
+  list.innerHTML = window.jurnalPosts.map((post) => {
+    const bodyParts = Array.isArray(post.body) ? post.body : [post.body || ''];
+    const tags = (post.tags || []).map(t => `<span class="tag">${sanitizeHTML(t)}</span>`).join('');
+    const sourceBlock = post.sourceTitle ? `<div class="book-ref"><span class="book-ref-icon">📖</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">${sanitizeHTML(post.sourceTitle)}</div><div class="book-ref-author">${sanitizeHTML(post.sourceAuthor)}</div></div></div>` : '';
+    return `<div class="jurnal-card">
+      <div class="jurnal-img"></div>
+      <div class="jurnal-body" onclick="toggleJurnalCard(this.closest('.jurnal-card'))">
+        <div class="jurnal-label">${sanitizeHTML(post.label)}</div>
+        <h3>${sanitizeHTML(post.title)}</h3>
+        <p class="jurnal-short">${sanitizeHTML(post.short)}</p>
+        <div class="jurnal-footer">${tags}</div>
+      </div>
+      <div class="jurnal-expand">
+        <div class="jurnal-expand-body">
+          ${bodyParts.map(p => `<p>${p}</p>`).join('')}
+          ${sourceBlock}
+          ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editJurnal('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('jurnal','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
+/* ─── RENDER: QUOTES ────────────────────────── */
 function renderQuotePosts() {
   const list = document.getElementById('quoteList');
-  list.innerHTML = window.quotePosts.map(post => `
-    <div class="quote-card" onclick="toggleQuote(this)">
-      <div class="quote-text">"${sanitizeHTML(post.text)}"</div>
-      <div class="quote-author"><div class="quote-av">${post.avatar}</div><div><div class="quote-name">${sanitizeHTML(post.name)}</div><div class="quote-src">${sanitizeHTML(post.source)}</div></div></div>
-      <div class="quote-context"><div class="quote-ctx-body">
-        ${sanitizeHTML(post.context)}
-        ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editQuote('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('quote','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
-      </div></div>
-    </div>`).join('');
+  list.innerHTML = window.quotePosts.map((post) => {
+    return `<div class="quote-card">
+      <div class="quote-img-strip"></div>
+      <div class="quote-body" onclick="toggleQuoteCard(this.closest('.quote-card'))">
+        <div class="quote-text">"${sanitizeHTML(post.text)}"</div>
+        <div class="quote-author">
+          <div class="quote-av">${post.avatar || '💭'}</div>
+          <div>
+            <div class="quote-name">${sanitizeHTML(post.name)}</div>
+            <div class="quote-src">${sanitizeHTML(post.source)}</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-context">
+        <div class="quote-ctx-body">
+          ${post.context || ''}
+          ${window.isAdmin && !post.isStatic ? `<div style="margin-top:.75rem;display:flex;gap:.4rem;"><button class="btn btn-ghost btn-sm" onclick="editQuote('${post.id}');event.stopPropagation()">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="deleteContent('quote','${post.id}');event.stopPropagation()">🗑️ Hapus</button></div>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
+/* ─── RENDER: BLOG ──────────────────────────── */
+async function loadBlogPosts() {
+  let dyn = [];
+  try {
+    const snap = await getDocs(query(collection(db, "blogPosts"), orderBy("createdAt", "desc")));
+    dyn = snap.docs.map(d => ({ id: d.id, ...d.data(), isStatic: false }));
+  } catch(e) { console.warn('Load blogs:', e); }
+  window.blogPosts = [...dyn, ...staticPosts];
+  renderBlogPosts();
+}
+
+function renderBlogPosts() {
+  const list = document.getElementById('blogList');
+  list.innerHTML = window.blogPosts.map((post) => {
+    const dateStr = post.date || (post.createdAt ? (post.createdAt.toDate ? post.createdAt.toDate() : new Date(post.createdAt)).toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'}) : '');
+    const contentHTML = (Array.isArray(post.content) ? post.content : [post.content || '']).map(p => `<p>${p}</p>`).join('');
+    const t1 = post.tags?.[0] || '', t2 = post.tags?.[1] || '';
+    const c1 = post.tagColors?.[0] || '', c2 = post.tagColors?.[1] || '';
+    const imgEl = post.imageBase64
+      ? `<img class="cover-img" src="${post.imageBase64}" alt=""/><span class="emoji-layer">${post.emoji || '📝'}</span>`
+      : `<span class="emoji-layer">${post.emoji || '📝'}</span>`;
+    const sbEl = post.sourceBy?.title ? `<div class="blog-sourceby"><span class="blog-sourceby-icon">📖</span><div><div class="blog-sourceby-lbl">Source By</div><div class="blog-sourceby-title">${sanitizeHTML(post.sourceBy.title)}</div>${post.sourceBy.author ? `<div class="blog-sourceby-author">${sanitizeHTML(post.sourceBy.author)}</div>` : ''}</div></div>` : '';
+    const adminBtns = (window.isAdmin && !post.isStatic) ? `<div class="blog-admin-btns" onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="openEditBlog('${post.id}')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="confirmDelete('${post.id}')">🗑️ Hapus</button></div>` : '';
+    return `<div class="blog-card" onclick="toggleBlog(this)">
+      <div class="blog-card-inner">
+        <div class="blog-img-side">${imgEl}</div>
+        <div class="blog-body-side">
+          <div class="blog-date">${dateStr}</div>
+          ${post.sourceLabel ? `<div class="blog-source-label">${sanitizeHTML(post.sourceLabel)}</div>` : ''}
+          <h3>${sanitizeHTML(post.title)}</h3>
+          <p class="blog-preview">${sanitizeHTML(post.preview)}</p>
+          <div class="card-meta blog-tags">${t1 ? `<span class="tag ${c1}">${sanitizeHTML(t1)}</span>` : ''}${t2 ? `<span class="tag ${c2}">${sanitizeHTML(t2)}</span>` : ''}</div>
+        </div>
+      </div>
+      <div class="blog-full">${contentHTML}${sbEl}</div>
+      ${adminBtns}
+    </div>`;
+  }).join('');
+}
+
+/* ─── TOGGLE FUNCTIONS ──────────────────────── */
+window.toggleIlmuCard = function(el) {
+  const p = el.querySelector('.ilmu-expand');
+  const o = el.classList.contains('expanded');
+  document.querySelectorAll('.ilmu-card.expanded').forEach(c => {
+    c.classList.remove('expanded');
+    c.querySelector('.ilmu-expand').classList.remove('open');
+  });
+  if (!o) {
+    el.classList.add('expanded');
+    p.classList.add('open');
+    setTimeout(() => el.scrollIntoView({behavior:'smooth',block:'nearest'}), 80);
+  }
+};
+window.toggleIlmu = window.toggleIlmuCard;
+
+window.toggleJurnalCard = function(el) {
+  const p = el.querySelector('.jurnal-expand');
+  const o = el.classList.contains('expanded');
+  document.querySelectorAll('.jurnal-card.expanded').forEach(c => {
+    c.classList.remove('expanded');
+    c.querySelector('.jurnal-expand').classList.remove('open');
+  });
+  if (!o) {
+    el.classList.add('expanded');
+    p.classList.add('open');
+    setTimeout(() => el.scrollIntoView({behavior:'smooth',block:'nearest'}), 80);
+  }
+};
+
+window.toggleQuoteCard = function(el) {
+  const c = el.querySelector('.quote-context');
+  const o = el.classList.contains('expanded');
+  document.querySelectorAll('.quote-card.expanded').forEach(x => {
+    x.classList.remove('expanded');
+    x.querySelector('.quote-context').classList.remove('open');
+  });
+  if (!o) {
+    el.classList.add('expanded');
+    c.classList.add('open');
+    setTimeout(() => el.scrollIntoView({behavior:'smooth',block:'nearest'}), 80);
+  }
+};
+
+window.toggleBlog = function(el) {
+  const f = el.querySelector('.blog-full');
+  if (!f) return;
+  const o = f.classList.contains('open');
+  document.querySelectorAll('.blog-full.open').forEach(x => x.classList.remove('open'));
+  document.querySelectorAll('.blog-card.expanded').forEach(x => x.classList.remove('expanded'));
+  if (!o) {
+    f.classList.add('open');
+    el.classList.add('expanded');
+    setTimeout(() => el.scrollIntoView({behavior:'smooth',block:'nearest'}), 80);
+  }
+};
+
+/* ─── ILMU ADMIN ────────────────────────────── */
 window.openIlmuModal = function() {
   window.editingId = null;
-  window.editingType = 'ilmu';
   document.getElementById('ilmuModalTitle').textContent = 'Ilmu Baru';
-  ['ilmuNum','ilmuTitle','ilmuShort','ilmuBody','ilmuSource'].forEach(id=>document.getElementById(id).value='');
+  ['ilmuNum','ilmuTitle','ilmuShort','ilmuBody','ilmuSource'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('saveIlmuLabel').textContent = 'Simpan';
   openModal('ilmuModal');
 };
-
 window.editIlmu = function(id) {
-  const post = window.ilmuPosts.find(p=>p.id===id);
+  const post = window.ilmuPosts.find(p => p.id === id);
   if (!post) return;
   window.editingId = id;
-  window.editingType = 'ilmu';
   document.getElementById('ilmuModalTitle').textContent = 'Edit Ilmu';
-  document.getElementById('ilmuNum').value = post.num||'';
-  document.getElementById('ilmuTitle').value = post.title||'';
-  document.getElementById('ilmuShort').value = post.short||'';
-  document.getElementById('ilmuBody').value = (Array.isArray(post.body)?post.body:[post.body||'']).join('\n\n');
-  document.getElementById('ilmuSource').value = post.source||'';
+  document.getElementById('ilmuNum').value = post.num || '';
+  document.getElementById('ilmuTitle').value = post.title || '';
+  document.getElementById('ilmuShort').value = post.short || '';
+  document.getElementById('ilmuBody').value = (Array.isArray(post.body) ? post.body : [post.body || '']).join('\n\n');
+  document.getElementById('ilmuSource').value = post.source || '';
   document.getElementById('saveIlmuLabel').textContent = 'Simpan Perubahan';
   openModal('ilmuModal');
 };
-
-window.saveIlmu = async function() {
+window.saveIlmu = function() {
   if (!window.isAdmin) return;
   const title = document.getElementById('ilmuTitle').value.trim();
   const body = document.getElementById('ilmuBody').value.trim();
-  if (!title||!body) { showToast('❌ Judul dan isi wajib diisi','error'); return; }
+  if (!title || !body) { showToast('❌ Judul dan isi wajib diisi', 'error'); return; }
   const data = {
-    num: document.getElementById('ilmuNum').value.trim()||'001',
+    num: document.getElementById('ilmuNum').value.trim() || '001',
     title, short: document.getElementById('ilmuShort').value.trim(),
-    body: body.split(/\n\n+/).filter(p=>p.trim()),
+    body: body.split(/\n\n+/).filter(p => p.trim()),
     source: document.getElementById('ilmuSource').value.trim(),
-    updatedAt: new Date()
   };
-  try {
-    if (window.editingId) {
-      const idx = window.ilmuPosts.findIndex(p=>p.id===window.editingId);
-      if (idx!==-1) window.ilmuPosts[idx] = {...window.ilmuPosts[idx],...data};
-    } else {
-      window.ilmuPosts.unshift({id:'ilmu-'+Date.now(),...data,isStatic:false});
-    }
-    renderIlmuPosts();
-    showToast('✅ Ilmu berhasil disimpan!','success');
-    closeModal('ilmuModal');
-  } catch(e) { showToast('❌ Gagal: '+e.message,'error'); }
+  if (window.editingId) {
+    const idx = window.ilmuPosts.findIndex(p => p.id === window.editingId);
+    if (idx !== -1) window.ilmuPosts[idx] = { ...window.ilmuPosts[idx], ...data };
+  } else {
+    window.ilmuPosts.unshift({ id: 'ilmu-' + Date.now(), ...data, isStatic: false });
+  }
+  renderIlmuPosts();
+  showToast('✅ Ilmu berhasil disimpan!', 'success');
+  closeModal('ilmuModal');
 };
 
+/* ─── JURNAL ADMIN ──────────────────────────── */
 window.openJurnalModal = function() {
   window.editingId = null;
-  window.editingType = 'jurnal';
   document.getElementById('jurnalModalTitle').textContent = 'Jurnal Baru';
-  ['jurnalLabel','jurnalTitle','jurnalShort','jurnalTag1','jurnalTag2','jurnalTag3','jurnalBody','jurnalSourceTitle','jurnalSourceAuthor'].forEach(id=>document.getElementById(id).value='');
+  ['jurnalLabel','jurnalTitle','jurnalShort','jurnalTag1','jurnalTag2','jurnalTag3','jurnalBody','jurnalSourceTitle','jurnalSourceAuthor'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('saveJurnalLabel').textContent = 'Simpan';
   openModal('jurnalModal');
 };
-
 window.editJurnal = function(id) {
-  const post = window.jurnalPosts.find(p=>p.id===id);
+  const post = window.jurnalPosts.find(p => p.id === id);
   if (!post) return;
   window.editingId = id;
-  window.editingType = 'jurnal';
   document.getElementById('jurnalModalTitle').textContent = 'Edit Jurnal';
-  document.getElementById('jurnalLabel').value = post.label||'';
-  document.getElementById('jurnalTitle').value = post.title||'';
-  document.getElementById('jurnalShort').value = post.short||'';
-  document.getElementById('jurnalTag1').value = post.tags?.[0]||'';
-  document.getElementById('jurnalTag2').value = post.tags?.[1]||'';
-  document.getElementById('jurnalTag3').value = post.tags?.[2]||'';
-  document.getElementById('jurnalBody').value = (Array.isArray(post.body)?post.body:[post.body||'']).join('\n\n');
-  document.getElementById('jurnalSourceTitle').value = post.sourceTitle||'';
-  document.getElementById('jurnalSourceAuthor').value = post.sourceAuthor||'';
+  document.getElementById('jurnalLabel').value = post.label || '';
+  document.getElementById('jurnalTitle').value = post.title || '';
+  document.getElementById('jurnalShort').value = post.short || '';
+  document.getElementById('jurnalTag1').value = post.tags?.[0] || '';
+  document.getElementById('jurnalTag2').value = post.tags?.[1] || '';
+  document.getElementById('jurnalTag3').value = post.tags?.[2] || '';
+  document.getElementById('jurnalBody').value = (Array.isArray(post.body) ? post.body : [post.body || '']).join('\n\n');
+  document.getElementById('jurnalSourceTitle').value = post.sourceTitle || '';
+  document.getElementById('jurnalSourceAuthor').value = post.sourceAuthor || '';
   document.getElementById('saveJurnalLabel').textContent = 'Simpan Perubahan';
   openModal('jurnalModal');
 };
-
-window.saveJurnal = async function() {
+window.saveJurnal = function() {
   if (!window.isAdmin) return;
   const title = document.getElementById('jurnalTitle').value.trim();
   const body = document.getElementById('jurnalBody').value.trim();
-  if (!title||!body) { showToast('❌ Judul dan isi wajib diisi','error'); return; }
-  const tags = [document.getElementById('jurnalTag1').value.trim(),document.getElementById('jurnalTag2').value.trim(),document.getElementById('jurnalTag3').value.trim()].filter(Boolean);
+  if (!title || !body) { showToast('❌ Judul dan isi wajib diisi', 'error'); return; }
+  const tags = [document.getElementById('jurnalTag1').value.trim(), document.getElementById('jurnalTag2').value.trim(), document.getElementById('jurnalTag3').value.trim()].filter(Boolean);
   const data = {
     label: document.getElementById('jurnalLabel').value.trim(),
     title, short: document.getElementById('jurnalShort').value.trim(),
-    tags, body: body.split(/\n\n+/).filter(p=>p.trim()),
+    tags, body: body.split(/\n\n+/).filter(p => p.trim()),
     sourceTitle: document.getElementById('jurnalSourceTitle').value.trim(),
     sourceAuthor: document.getElementById('jurnalSourceAuthor').value.trim(),
-    updatedAt: new Date()
   };
-  try {
-    if (window.editingId) {
-      const idx = window.jurnalPosts.findIndex(p=>p.id===window.editingId);
-      if (idx!==-1) window.jurnalPosts[idx] = {...window.jurnalPosts[idx],...data};
-    } else {
-      window.jurnalPosts.unshift({id:'jurnal-'+Date.now(),...data,isStatic:false});
-    }
-    renderJurnalPosts();
-    showToast('✅ Jurnal berhasil disimpan!','success');
-    closeModal('jurnalModal');
-  } catch(e) { showToast('❌ Gagal: '+e.message,'error'); }
+  if (window.editingId) {
+    const idx = window.jurnalPosts.findIndex(p => p.id === window.editingId);
+    if (idx !== -1) window.jurnalPosts[idx] = { ...window.jurnalPosts[idx], ...data };
+  } else {
+    window.jurnalPosts.unshift({ id: 'jurnal-' + Date.now(), ...data, isStatic: false });
+  }
+  renderJurnalPosts();
+  showToast('✅ Jurnal berhasil disimpan!', 'success');
+  closeModal('jurnalModal');
 };
 
+/* ─── QUOTE ADMIN ───────────────────────────── */
 window.openQuoteModal = function() {
   window.editingId = null;
-  window.editingType = 'quote';
   document.getElementById('quoteModalTitle').textContent = 'Quote Baru';
-  ['quoteText','quoteName','quoteAvatar','quoteSource','quoteContext'].forEach(id=>document.getElementById(id).value='');
+  ['quoteText','quoteName','quoteAvatar','quoteSource','quoteContext'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('saveQuoteLabel').textContent = 'Simpan';
   openModal('quoteModal');
 };
-
 window.editQuote = function(id) {
-  const post = window.quotePosts.find(p=>p.id===id);
+  const post = window.quotePosts.find(p => p.id === id);
   if (!post) return;
   window.editingId = id;
-  window.editingType = 'quote';
   document.getElementById('quoteModalTitle').textContent = 'Edit Quote';
-  document.getElementById('quoteText').value = post.text||'';
-  document.getElementById('quoteName').value = post.name||'';
-  document.getElementById('quoteAvatar').value = post.avatar||'';
-  document.getElementById('quoteSource').value = post.source||'';
-  document.getElementById('quoteContext').value = post.context||'';
+  document.getElementById('quoteText').value = post.text || '';
+  document.getElementById('quoteName').value = post.name || '';
+  document.getElementById('quoteAvatar').value = post.avatar || '';
+  document.getElementById('quoteSource').value = post.source || '';
+  document.getElementById('quoteContext').value = post.context || '';
   document.getElementById('saveQuoteLabel').textContent = 'Simpan Perubahan';
   openModal('quoteModal');
 };
-
-window.saveQuote = async function() {
+window.saveQuote = function() {
   if (!window.isAdmin) return;
   const text = document.getElementById('quoteText').value.trim();
   const name = document.getElementById('quoteName').value.trim();
-  if (!text||!name) { showToast('❌ Kutipan dan nama harus diisi','error'); return; }
+  if (!text || !name) { showToast('❌ Kutipan dan nama harus diisi', 'error'); return; }
   const data = {
     text, name,
-    avatar: document.getElementById('quoteAvatar').value.trim()||'💭',
+    avatar: document.getElementById('quoteAvatar').value.trim() || '💭',
     source: document.getElementById('quoteSource').value.trim(),
     context: document.getElementById('quoteContext').value.trim(),
+  };
+  if (window.editingId) {
+    const idx = window.quotePosts.findIndex(p => p.id === window.editingId);
+    if (idx !== -1) window.quotePosts[idx] = { ...window.quotePosts[idx], ...data };
+  } else {
+    window.quotePosts.unshift({ id: 'quote-' + Date.now(), ...data, isStatic: false });
+  }
+  renderQuotePosts();
+  showToast('✅ Quote berhasil disimpan!', 'success');
+  closeModal('quoteModal');
+};
+
+/* ─── DELETE ────────────────────────────────── */
+window.deleteContent = function(type, id) {
+  if (!confirm('Hapus ' + type + ' ini?')) return;
+  if (type === 'ilmu') { window.ilmuPosts = window.ilmuPosts.filter(p => p.id !== id); renderIlmuPosts(); }
+  else if (type === 'jurnal') { window.jurnalPosts = window.jurnalPosts.filter(p => p.id !== id); renderJurnalPosts(); }
+  else if (type === 'quote') { window.quotePosts = window.quotePosts.filter(p => p.id !== id); renderQuotePosts(); }
+  showToast('🗑️ Terhapus', 'success');
+};
+
+/* ─── BLOG ADMIN ────────────────────────────── */
+window.checkAdminForNew = function() {
+  if (window.isAdmin) openBlogModal();
+  else { openModal('loginModal'); setTimeout(() => document.getElementById('loginEmail').focus(), 350); }
+};
+window.openBlogModal = function() {
+  window.editingId = null; currentImageBase64 = null;
+  document.getElementById('blogModalTitle').textContent = 'Tulis Blog Baru';
+  ['blogEmoji','blogSourceLabel','blogTitle','blogTag1','blogTag2','blogPreview','blogContent','sourceByTitle','sourceByAuthor'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('blogDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('saveBlogLabel').textContent = 'Simpan';
+  openModal('blogModal');
+};
+window.openEditBlog = function(id) {
+  const post = window.blogPosts.find(p => p.id === id);
+  if (!post) return;
+  window.editingId = id; currentImageBase64 = post.imageBase64 || null;
+  document.getElementById('blogModalTitle').textContent = 'Edit Blog';
+  document.getElementById('blogEmoji').value = post.emoji || '';
+  document.getElementById('blogSourceLabel').value = post.sourceLabel || '';
+  document.getElementById('blogTitle').value = post.title || '';
+  document.getElementById('blogDate').value = post.date || '';
+  document.getElementById('blogTag1').value = post.tags?.[0] || '';
+  document.getElementById('blogTag2').value = post.tags?.[1] || '';
+  document.getElementById('blogPreview').value = post.preview || '';
+  document.getElementById('blogContent').value = Array.isArray(post.content) ? post.content.join('\n\n') : (post.content || '');
+  document.getElementById('sourceByTitle').value = post.sourceBy?.title || '';
+  document.getElementById('sourceByAuthor').value = post.sourceBy?.author || '';
+  const prev = document.getElementById('imgPreview');
+  if (currentImageBase64) { prev.src = currentImageBase64; prev.style.display = 'block'; } else prev.style.display = 'none';
+  document.getElementById('saveBlogLabel').textContent = 'Simpan Perubahan';
+  openModal('blogModal');
+};
+window.saveBlog = async function() {
+  if (!window.isAdmin) return;
+  const title = document.getElementById('blogTitle').value.trim();
+  const content = document.getElementById('blogContent').value.trim();
+  if (!title || !content) { showToast('❌ Judul dan isi wajib diisi', 'error'); return; }
+  document.getElementById('saveBlogLabel').innerHTML = '<span class="loading-spinner"></span>';
+  const t1 = document.getElementById('blogTag1').value.trim(), t2 = document.getElementById('blogTag2').value.trim();
+  const sbt = document.getElementById('sourceByTitle').value.trim(), sba = document.getElementById('sourceByAuthor').value.trim();
+  const data = {
+    emoji: document.getElementById('blogEmoji').value.trim() || '📝',
+    sourceLabel: document.getElementById('blogSourceLabel').value.trim(),
+    title,
+    date: document.getElementById('blogDate').value || new Date().toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'}),
+    tags: [t1, t2].filter(Boolean),
+    tagColors: [t1 ? '' : '', t2 ? 'green' : ''].slice(0, [t1, t2].filter(Boolean).length),
+    preview: document.getElementById('blogPreview').value.trim() || content.substring(0, 80) + '...',
+    content: content.split(/\n\n+/).filter(p => p.trim()),
+    sourceBy: sbt ? { title: sbt, author: sba } : null,
+    imageBase64: currentImageBase64 || null,
     updatedAt: new Date()
   };
   try {
-    if (window.editingId) {
-      const idx = window.quotePosts.findIndex(p=>p.id===window.editingId);
-      if (idx!==-1) window.quotePosts[idx] = {...window.quotePosts[idx],...data};
-    } else {
-      window.quotePosts.unshift({id:'quote-'+Date.now(),...data,isStatic:false});
-    }
-    renderQuotePosts();
-    showToast('✅ Quote berhasil disimpan!','success');
-    closeModal('quoteModal');
-  } catch(e) { showToast('❌ Gagal: '+e.message,'error'); }
+    if (window.editingId) await updateDoc(doc(db, "blogPosts", window.editingId), data);
+    else { data.createdAt = new Date(); await addDoc(collection(db, "blogPosts"), data); }
+    await loadBlogPosts();
+    showToast('✅ Blog berhasil disimpan!', 'success');
+    closeModal('blogModal');
+  } catch(e) { showToast('❌ Gagal menyimpan: ' + e.message, 'error'); }
+  document.getElementById('saveBlogLabel').textContent = window.editingId ? 'Simpan Perubahan' : 'Simpan';
+};
+window.confirmDelete = function(id) { if (!confirm('Hapus post ini?')) return; deleteBlog(id); };
+async function deleteBlog(id) {
+  try {
+    await deleteDoc(doc(db, "blogPosts", id));
+    await loadBlogPosts();
+    showToast('🗑️ Post dihapus', 'success');
+  } catch(e) { showToast('❌ Gagal menghapus', 'error'); }
+}
+
+/* ─── LOGIN / LOGOUT ────────────────────────── */
+window.doLogin = async function() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw = document.getElementById('loginPassword').value;
+  if (!email || !pw) { showToast('❌ Email dan password harus diisi', 'error'); return; }
+  const btn = document.getElementById('loginBtn');
+  btn.innerHTML = '<span class="loading-spinner"></span>';
+  document.getElementById('loginError').style.display = 'none';
+  try {
+    await signInWithEmailAndPassword(auth, email, pw);
+    document.getElementById('loginPassword').value = '';
+    closeModal('loginModal');
+    showToast('✅ Login berhasil', 'success');
+  } catch(e) {
+    document.getElementById('loginError').textContent = e.code === 'auth/invalid-credential' ? 'Email atau password salah.' : 'Error: ' + e.message;
+    document.getElementById('loginError').style.display = 'block';
+  }
+  btn.textContent = 'Masuk';
+};
+window.doLogout = async function() {
+  try { await signOut(auth); showToast('👋 Keluar dari mode admin', 'success'); }
+  catch(e) { showToast('❌ Gagal logout', 'error'); }
 };
 
-window.deleteContent = function(type, id) {
-  if (!confirm('Hapus '+type+' ini?')) return;
-  if (type === 'ilmu') window.ilmuPosts = window.ilmuPosts.filter(p=>p.id!==id);
-  else if (type === 'jurnal') window.jurnalPosts = window.jurnalPosts.filter(p=>p.id!==id);
-  else if (type === 'quote') window.quotePosts = window.quotePosts.filter(p=>p.id!==id);
-  if (type === 'ilmu') renderIlmuPosts();
-  else if (type === 'jurnal') renderJurnalPosts();
-  else if (type === 'quote') renderQuotePosts();
-  showToast('🗑️ Terhapus','success');
-};
-
+/* ─── BACKGROUND IMAGE ──────────────────────── */
 window.openBgModal = function() {
   currentBgImageBase64 = null;
   document.getElementById('bgSlideSelect').value = 's0';
@@ -1024,14 +1769,10 @@ window.openBgModal = function() {
   document.getElementById('bgImgPreview').style.display = 'none';
   openModal('bgModal');
 };
-
 window.handleBgImageUpload = function(e) {
   const file = e.target.files[0];
   if (!file) return;
-  if (file.size > 5*1024*1024) {
-    showToast('❌ Gambar terlalu besar (max 5MB)','error');
-    return;
-  }
+  if (file.size > 5 * 1024 * 1024) { showToast('❌ Gambar terlalu besar (max 5MB)', 'error'); return; }
   const r = new FileReader();
   r.onload = (ev) => {
     currentBgImageBase64 = ev.target.result;
@@ -1040,91 +1781,37 @@ window.handleBgImageUpload = function(e) {
   };
   r.readAsDataURL(file);
 };
-
 window.saveBgImage = function() {
-  if (!currentBgImageBase64) {
-    showToast('❌ Silahkan upload gambar terlebih dahulu','error');
-    return;
-  }
+  if (!currentBgImageBase64) { showToast('❌ Silahkan upload gambar terlebih dahulu', 'error'); return; }
   const slideId = document.getElementById('bgSlideSelect').value;
   const opacity = document.getElementById('bgOpacity').value || '15';
-  const slide = document.getElementById(slideId);
-  
-  if (slide) {
-    slide.style.setProperty('--bg-opacity', opacity / 100);
-    slide.querySelector('::before')?.style?.setProperty('opacity', opacity / 100);
-    
-    const styleEl = document.createElement('style');
-    styleEl.textContent = `#${slideId}::before { background-image: url('${currentBgImageBase64}') !important; opacity: ${opacity / 100} !important; }`;
-    document.head.appendChild(styleEl);
-    
-    window.bgImages[slideId] = { image: currentBgImageBase64, opacity };
-    localStorage.setItem('bgImages', JSON.stringify(window.bgImages));
-    
-    showToast('✅ Background berhasil diupdate!','success');
-    closeModal('bgModal');
-  }
+  const styleEl = document.createElement('style');
+  styleEl.textContent = `#${slideId}::before { background-image: url('${currentBgImageBase64}') !important; opacity: ${opacity / 100} !important; }`;
+  document.head.appendChild(styleEl);
+  window.bgImages[slideId] = { image: currentBgImageBase64, opacity };
+  try { localStorage.setItem('bgImages', JSON.stringify(window.bgImages)); } catch(e) {}
+  showToast('✅ Background berhasil diupdate!', 'success');
+  closeModal('bgModal');
 };
-
 function loadBgImages() {
-  const saved = localStorage.getItem('bgImages');
-  if (saved) {
-    window.bgImages = JSON.parse(saved);
-    Object.entries(window.bgImages).forEach(([slideId, data]) => {
-      const styleEl = document.createElement('style');
-      styleEl.textContent = `#${slideId}::before { background-image: url('${data.image}') !important; opacity: ${data.opacity / 100} !important; }`;
-      document.head.appendChild(styleEl);
-    });
-  }
-}
-
-async function loadBlogPosts() {
-  let dyn = [];
   try {
-    const snap = await getDocs(query(collection(db,"blogPosts"), orderBy("createdAt","desc")));
-    dyn = snap.docs.map(d => ({id:d.id,...d.data(),isStatic:false}));
-  } catch(e) { console.warn('Load blogs:', e); }
-  window.blogPosts = [...dyn, ...staticPosts];
-  renderBlogPosts();
+    const saved = localStorage.getItem('bgImages');
+    if (saved) {
+      window.bgImages = JSON.parse(saved);
+      Object.entries(window.bgImages).forEach(([slideId, data]) => {
+        const styleEl = document.createElement('style');
+        styleEl.textContent = `#${slideId}::before { background-image: url('${data.image}') !important; opacity: ${data.opacity / 100} !important; }`;
+        document.head.appendChild(styleEl);
+      });
+    }
+  } catch(e) {}
 }
 
-function renderBlogPosts() {
-  const list = document.getElementById('blogList');
-  list.innerHTML = window.blogPosts.map((post, i) => {
-    const dateStr = post.date || (post.createdAt ? (post.createdAt.toDate ? post.createdAt.toDate() : new Date(post.createdAt)).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}) : '');
-    const contentHTML = (Array.isArray(post.content) ? post.content : [post.content||'']).map(p=>`<p>${sanitizeHTML(p)}</p>`).join('');
-    const t1=post.tags?.[0]||'', t2=post.tags?.[1]||'', c1=post.tagColors?.[0]||'', c2=post.tagColors?.[1]||'';
-    const imgEl = post.imageBase64 ? `<img class="cover-img" src="${post.imageBase64}" alt=""/><span class="emoji-layer">${post.emoji||'📝'}</span>` : `<span class="emoji-layer">${post.emoji||'📝'}</span>`;
-    const sbEl = post.sourceBy?.title ? `<div class="blog-sourceby"><span class="blog-sourceby-icon">📖</span><div><div class="blog-sourceby-lbl">Source By</div><div class="blog-sourceby-title">${sanitizeHTML(post.sourceBy.title)}</div>${post.sourceBy.author?`<div class="blog-sourceby-author">${sanitizeHTML(post.sourceBy.author)}</div>`:''}</div></div>` : '';
-    const adminBtns = (window.isAdmin && !post.isStatic) ? `<div class="blog-admin-btns" onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="openEditBlog('${post.id}')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="confirmDelete('${post.id}')">🗑️ Hapus</button></div>` : '';
-    return `<div class="blog-card" onclick="toggleBlog(this)">
-      <div class="blog-img">${imgEl}</div>
-      <div class="blog-body">
-        <div class="blog-date">${dateStr}</div>
-        ${post.sourceLabel?`<div class="blog-source-label">${sanitizeHTML(post.sourceLabel)}</div>`:''}
-        <h3>${sanitizeHTML(post.title)}</h3>
-        <p class="blog-preview">${sanitizeHTML(post.preview)}</p>
-        <div class="card-meta blog-tags" style="margin-top:.55rem">${t1?`<span class="tag ${c1}">${sanitizeHTML(t1)}</span>`:''}${t2?`<span class="tag ${c2}">${sanitizeHTML(t2)}</span>`:''}</div>
-      </div>
-      <div class="blog-full">${contentHTML}${sbEl}</div>
-      ${adminBtns}
-    </div>`;
-  }).join('');
-}
-
-function sanitizeHTML(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML.replace(/\n/g, '<br>');
-}
-
+/* ─── IMAGE UPLOAD ──────────────────────────── */
 window.handleImageUpload = function(e) {
   const file = e.target.files[0];
   if (!file) return;
-  if (file.size > 5*1024*1024) {
-    showToast('❌ Gambar terlalu besar (max 5MB)','error');
-    return;
-  }
+  if (file.size > 5 * 1024 * 1024) { showToast('❌ Gambar terlalu besar (max 5MB)', 'error'); return; }
   const r = new FileReader();
   r.onload = (ev) => {
     currentImageBase64 = ev.target.result;
@@ -1134,183 +1821,52 @@ window.handleImageUpload = function(e) {
   r.readAsDataURL(file);
 };
 
-window.doLogin = async function() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pw = document.getElementById('loginPassword').value;
-  if (!email || !pw) {
-    showToast('❌ Email dan password harus diisi','error');
-    return;
-  }
-  const btn = document.getElementById('loginBtn');
-  btn.innerHTML = '<span class="loading-spinner"></span>';
-  try {
-    await signInWithEmailAndPassword(auth, email, pw);
-    document.getElementById('loginPassword').value = '';
-    closeModal('loginModal');
-    showToast('✅ Login berhasil','success');
-  } catch(e) {
-    document.getElementById('loginError').textContent = e.code === 'auth/invalid-credential' ? 'Email atau password salah.' : 'Error: ' + e.message;
-    document.getElementById('loginError').style.display = 'block';
-  }
-  btn.innerHTML = 'Masuk';
-};
-
-window.doLogout = async function() {
-  try {
-    await signOut(auth);
-    showToast('👋 Keluar dari mode admin','success');
-  } catch(e) {
-    showToast('❌ Gagal logout','error');
-  }
-};
-
-window.checkAdminForNew = function() {
-  if (window.isAdmin) openBlogModal();
-  else { openModal('loginModal'); setTimeout(()=>document.getElementById('loginEmail').focus(),350); }
-};
-
-window.openBlogModal = function() {
-  window.editingId = null; currentImageBase64 = null;
-  document.getElementById('blogModalTitle').textContent = 'Tulis Blog Baru';
-  ['blogEmoji','blogSourceLabel','blogTitle','blogTag1','blogTag2','blogPreview','blogContent','sourceByTitle','sourceByAuthor'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('blogDate').value = new Date().toISOString().split('T')[0];
-  document.getElementById('imgPreview').style.display = 'none';
-  document.getElementById('saveBlogLabel').textContent = 'Simpan';
-  openModal('blogModal');
-};
-
-window.openEditBlog = function(id) {
-  const post = window.blogPosts.find(p=>p.id===id);
-  if (!post) return;
-  window.editingId = id; currentImageBase64 = post.imageBase64||null;
-  document.getElementById('blogModalTitle').textContent = 'Edit Blog';
-  document.getElementById('blogEmoji').value = post.emoji||'';
-  document.getElementById('blogSourceLabel').value = post.sourceLabel||'';
-  document.getElementById('blogTitle').value = post.title||'';
-  document.getElementById('blogDate').value = post.date||'';
-  document.getElementById('blogTag1').value = post.tags?.[0]||'';
-  document.getElementById('blogTag2').value = post.tags?.[1]||'';
-  document.getElementById('blogPreview').value = post.preview||'';
-  document.getElementById('blogContent').value = Array.isArray(post.content)?post.content.join('\n\n'):(post.content||'');
-  document.getElementById('sourceByTitle').value = post.sourceBy?.title||'';
-  document.getElementById('sourceByAuthor').value = post.sourceBy?.author||'';
-  const prev = document.getElementById('imgPreview');
-  if (currentImageBase64) { prev.src=currentImageBase64; prev.style.display='block'; } else prev.style.display='none';
-  document.getElementById('saveBlogLabel').textContent = 'Simpan Perubahan';
-  openModal('blogModal');
-};
-
-window.saveBlog = async function() {
-  if (!window.isAdmin) return;
-  const title = document.getElementById('blogTitle').value.trim();
-  const content = document.getElementById('blogContent').value.trim();
-  if (!title||!content) { showToast('❌ Judul dan isi wajib diisi','error'); return; }
-  document.getElementById('saveBlogLabel').innerHTML = '<span class="loading-spinner"></span>';
-  const t1=document.getElementById('blogTag1').value.trim(), t2=document.getElementById('blogTag2').value.trim();
-  const sbt=document.getElementById('sourceByTitle').value.trim(), sba=document.getElementById('sourceByAuthor').value.trim();
-  const data = {
-    emoji:document.getElementById('blogEmoji').value.trim()||'📝',
-    sourceLabel:document.getElementById('blogSourceLabel').value.trim(),
-    title, date:document.getElementById('blogDate').value||new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}),
-    tags:[t1,t2].filter(Boolean), tagColors:['',t2?'green':''].slice(0,[t1,t2].filter(Boolean).length),
-    preview:document.getElementById('blogPreview').value.trim()||content.substring(0,80)+'...',
-    content:content.split(/\n\n+/).filter(p=>p.trim()),
-    sourceBy:sbt?{title:sbt,author:sba}:null,
-    imageBase64:currentImageBase64||null,
-    updatedAt:new Date()
-  };
-  try {
-    if (window.editingId) await updateDoc(doc(db,"blogPosts",window.editingId),data);
-    else { data.createdAt=new Date(); await addDoc(collection(db,"blogPosts"),data); }
-    await loadBlogPosts();
-    showToast('✅ Blog berhasil disimpan!','success');
-    closeModal('blogModal');
-  } catch(e) { showToast('❌ Gagal menyimpan: '+e.message,'error'); }
-  document.getElementById('saveBlogLabel').textContent = window.editingId?'Simpan Perubahan':'Simpan';
-};
-
-window.confirmDelete = function(id) { if (!confirm('Hapus post ini?')) return; deleteBlog(id); };
-async function deleteBlog(id) {
-  try {
-    await deleteDoc(doc(db,"blogPosts",id));
-    await loadBlogPosts();
-    showToast('🗑️ Post dihapus','success');
-  } catch(e) { showToast('❌ Gagal menghapus','error'); }
-}
-
+/* ─── MODAL HELPERS ─────────────────────────── */
 window.openModal = function(id) { document.getElementById(id).classList.add('open'); };
 window.closeModal = function(id) { document.getElementById(id).classList.remove('open'); };
-document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+});
 
-loadBlogPosts();
+/* ─── TOAST ─────────────────────────────────── */
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+window.showToast = showToast;
 </script>
 
+<!-- NON-MODULE SCRIPT -->
 <script>
-const hardSkills=[{icon:'🔧',name:'Teknisi Service',pct:85,detail:'Dari diagnosa awal sampai keputusan komponen mana yang harus diganti — kemampuan ini bukan cuma soal tangan yang terampil, tapi soal <strong>membaca situasi dengan tenang</strong>.'},{icon:'🪛',name:'Solder / Desolder',pct:80,detail:'SMD dan through-hole — dua dunia yang berbeda. Komponen SMD sekecil 0402 butuh presisi tingkat milimeter; satu getaran yang salah bisa merusak pad PCB selamanya.'},{icon:'💻',name:'Hardware Engineering',pct:78,detail:'Bongkar-pasang bukan vandalisme — itu adalah cara paling jujur untuk memahami sebuah sistem. Aku sudah bongkar laptop, HP, motherboard, dan berbagai periferal.'},{icon:'⚡',name:'Software Engineering',pct:40,detail:'Masih dalam tahap eksplorasi — dan aku suka jujur soal ini. Level 40% bukan berarti lemah; itu berarti masih ada 60% petualangan yang menunggu.'}];
-const softSkills=[{icon:'🗣️',name:'Komunikasi',pct:88,detail:'Dilatih langsung di lapangan: ngomong sama remaja sebaya, sama orang tua, sama perangkat kecamatan — dalam satu hari yang sama sebagai Duta Genre.'},{icon:'👑',name:'Leadership',pct:82,detail:'Leadership yang aku percaya bukan soal paling keras suaranya. Tapi soal siapa yang paling konsisten, paling siap, dan paling bisa dipercaya saat situasi tidak pasti.'},{icon:'🎯',name:'Problem Solving',pct:80,detail:'Kebiasaan bongkar elektronik ngajarin aku satu hal: masalah selalu punya penyebab yang logis. Panik itu manusiawi, tapi diagnosis sistematis jauh lebih berguna.'},{icon:'📚',name:'Fast Learner',pct:92,detail:'Aku bisa nyerap materi teknis baru lebih cepat kalau cara penyampaiannya unik dan ada konteks real-world-nya. Kuncinya: rasa penasaran yang tidak pernah aku padamkan.'}];
-const hobi=[{icon:'♟️',name:'Catur',elo:'±1500',detail:'Elo ±1500 berarti aku sudah melewati fase "asal main" dan masuk ke level di mana setiap langkah punya konsekuensi. Catur mengajariku bahwa <strong>keputusan terbaik sering terlihat kontra-intuitif</strong>.'},{icon:'🏐',name:'Voli',detail:'Olahraga tim yang ngajarin hal paling sederhana tapi paling susah: percaya sama orang lain.'},{icon:'🎵',name:'Bernyanyi',detail:'Bukan soal suara bagus atau jelek — tapi soal ekspresi yang tidak bisa dilakukan dengan kata-kata.'},{icon:'🎮',name:'Gaming',detail:'Gaming bukan pelarian — itu laboratorium. Di sana aku belajar strategi, adaptasi cepat, manajemen sumber daya, dan komunikasi tim dalam tekanan.'},{icon:'🎱',name:'Billiard',detail:'Billiard adalah olahraga yang paling "diam" tapi paling intens secara mental. Aku suka bahwa di sini, <strong>tenang adalah senjata utama</strong>.'}];
+/* ─── SKILLS DATA ────────────────────────────── */
+const hardSkills = [
+  {icon:'🔧',name:'Teknisi Service',pct:85,detail:'Dari diagnosa awal sampai keputusan komponen mana yang harus diganti — kemampuan ini bukan cuma soal tangan yang terampil, tapi soal <strong>membaca situasi dengan tenang</strong>.'},
+  {icon:'🪛',name:'Solder / Desolder',pct:80,detail:'SMD dan through-hole — dua dunia yang berbeda. Komponen SMD sekecil 0402 butuh presisi tingkat milimeter; satu getaran yang salah bisa merusak pad PCB selamanya.'},
+  {icon:'💻',name:'Hardware Engineering',pct:78,detail:'Bongkar-pasang bukan vandalisme — itu adalah cara paling jujur untuk memahami sebuah sistem. Aku sudah bongkar laptop, HP, motherboard, dan berbagai periferal.'},
+  {icon:'⚡',name:'Software Engineering',pct:40,detail:'Masih dalam tahap eksplorasi — dan aku suka jujur soal ini. Level 40% bukan berarti lemah; itu berarti masih ada 60% petualangan yang menunggu.'}
+];
+const softSkills = [
+  {icon:'🗣️',name:'Komunikasi',pct:88,detail:'Dilatih langsung di lapangan: ngomong sama remaja sebaya, sama orang tua, sama perangkat kecamatan — dalam satu hari yang sama sebagai Duta Genre.'},
+  {icon:'👑',name:'Leadership',pct:82,detail:'Leadership yang aku percaya bukan soal paling keras suaranya. Tapi soal siapa yang paling konsisten, paling siap, dan paling bisa dipercaya saat situasi tidak pasti.'},
+  {icon:'🎯',name:'Problem Solving',pct:80,detail:'Kebiasaan bongkar elektronik ngajarin aku satu hal: masalah selalu punya penyebab yang logis. Panik itu manusiawi, tapi diagnosis sistematis jauh lebih berguna.'},
+  {icon:'📚',name:'Fast Learner',pct:92,detail:'Aku bisa nyerap materi teknis baru lebih cepat kalau cara penyampaiannya unik dan ada konteks real-world-nya. Kuncinya: rasa penasaran yang tidak pernah aku padamkan.'}
+];
+const hobi = [
+  {icon:'♟️',name:'Catur',elo:'±1500',detail:'Elo ±1500 berarti aku sudah melewati fase "asal main" dan masuk ke level di mana setiap langkah punya konsekuensi. Catur mengajariku bahwa <strong>keputusan terbaik sering terlihat kontra-intuitif</strong>.'},
+  {icon:'🏐',name:'Voli',detail:'Olahraga tim yang ngajarin hal paling sederhana tapi paling susah: percaya sama orang lain.'},
+  {icon:'🎵',name:'Bernyanyi',detail:'Bukan soal suara bagus atau jelek — tapi soal ekspresi yang tidak bisa dilakukan dengan kata-kata.'},
+  {icon:'🎮',name:'Gaming',detail:'Gaming bukan pelarian — itu laboratorium. Di sana aku belajar strategi, adaptasi cepat, manajemen sumber daya, dan komunikasi tim dalam tekanan.'},
+  {icon:'🎱',name:'Billiard',detail:'Billiard adalah olahraga yang paling "diam" tapi paling intens secara mental. Aku suka bahwa di sini, <strong>tenang adalah senjata utama</strong>.'}
+];
 
-function renderSkillCards(arr,id){
-  document.getElementById(id).innerHTML=arr.map((s,i)=>`
-    <div class="card" onclick="toggleCard(this)" style="animation-delay:${.35+i*.08}s">
-      <div class="card-top"><span class="card-icon">${s.icon}</span><div style="flex:1">
-        <h3>${s.name}${s.elo?` <span style="font-family:'DM Mono',monospace;font-size:.67rem;color:var(--accent);font-weight:400"> ELO ${s.elo}</span>`:''}</h3>
-        <div class="skill-wrap" style="margin-top:.45rem;margin-bottom:0"><div class="skill-label-row"><span class="skill-name" style="font-size:.72rem;color:var(--text3)">Penguasaan</span><span class="skill-pct">${s.pct||'—'}${s.pct?'%':''}</span></div>${s.pct?`<div class="skill-track"><div class="skill-fill" data-pct="${s.pct}"></div></div>`:''}</div>
-      </div><span class="card-chevron">›</span></div>
-      <div class="expand-panel"><div class="expand-body"><p>${s.detail}</p></div></div>
-    </div>`).join('');
-}
-function renderHobi(arr,id){
-  document.getElementById(id).innerHTML=arr.map((h,i)=>`
-    <div class="card" onclick="toggleCard(this)" style="animation-delay:${.35+i*.08}s">
-      <div class="card-top"><span class="card-icon">${h.icon}</span><div style="flex:1"><h3>${h.name}${h.elo?` <span style="font-family:'DM Mono',monospace;font-size:.67rem;color:var(--accent);font-weight:400"> ELO ${h.elo}</span>`:''}</h3><p class="card-short">${h.detail.replace(/<[^>]+>/g,'').substring(0,65)}\u2026</p></div><span class="card-chevron">›</span></div>
-      <div class="expand-panel"><div class="expand-body"><p>${h.detail}</p></div></div>
-    </div>`).join('');
-}
-renderSkillCards(hardSkills,'hardSkills');
-renderSkillCards(softSkills,'softSkills');
-renderHobi(hobi,'hobiCards');
-
-function toggleCard(el){const p=el.querySelector('.expand-panel'),was=el.classList.contains('expanded');el.parentElement.querySelectorAll('.card.expanded').forEach(c=>{c.classList.remove('expanded');c.querySelector('.expand-panel').classList.remove('open');});if(!was){el.classList.add('expanded');p.classList.add('open');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),80);}}
-function toggleExpand(id){const p=document.getElementById(id),o=p.classList.contains('open');document.querySelectorAll('.tl-item .expand-panel').forEach(x=>x.classList.remove('open'));if(!o){p.classList.add('open');setTimeout(()=>p.closest('.tl-item').scrollIntoView({behavior:'smooth',block:'nearest'}),80);}}
-function toggleBlog(el){const f=el.querySelector('.blog-full');if(!f)return;const o=f.classList.contains('open');document.querySelectorAll('.blog-full.open').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.blog-card.expanded').forEach(x=>x.classList.remove('expanded'));if(!o){f.classList.add('open');el.classList.add('expanded');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),80);}}
-function toggleQuote(el){const c=el.querySelector('.quote-context'),o=c.classList.contains('open');document.querySelectorAll('.quote-context.open').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.quote-card.expanded').forEach(x=>x.classList.remove('expanded'));if(!o){c.classList.add('open');el.classList.add('expanded');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),80);}}
-function toggleJurnal(el){const p=el.querySelector('.expand-panel'),o=el.classList.contains('expanded');document.querySelectorAll('.jurnal-card.expanded').forEach(c=>{c.classList.remove('expanded');c.querySelector('.expand-panel').classList.remove('open');});if(!o){el.classList.add('expanded');p.classList.add('open');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),80);}}
-function toggleIlmu(el){const p=el.querySelector('.expand-panel'),o=el.classList.contains('expanded');document.querySelectorAll('.ilmu-card.expanded').forEach(c=>{c.classList.remove('expanded');c.querySelector('.expand-panel').classList.remove('open');});if(!o){el.classList.add('expanded');p.classList.add('open');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),80);}}
-
-function showToast(msg,type='success'){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${type} show`;setTimeout(()=>t.classList.remove('show'),3000);}
-window.showToast=showToast;
-
-let lc=0,lt;
-document.getElementById('navLogo').addEventListener('click',()=>{lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,2000);if(lc>=5){lc=0;if(!window.isAdmin){openModal('loginModal');setTimeout(()=>document.getElementById('loginEmail').focus(),350);}}});
-
-const LABELS=['Home','Tentang','Pengalaman','Skills','Blog','Ilmu Baru','Jurnal','Quotes','Kontak'];
-const total=LABELS.length;
-let cur=0;
-const carousel=document.getElementById('carousel');
-const dotNav=document.getElementById('dotNav');
-LABELS.forEach((l,i)=>{const d=document.createElement('div');d.className='dot-nav-item'+(i===0?' active':'');d.title=l;d.onclick=()=>goTo(i);dotNav.appendChild(d);});
-
-function goTo(idx){if(idx<0||idx>=total)return;cur=idx;carousel.style.transform=`translateX(-${cur*100}vw)`;document.querySelectorAll('.dot-nav-item').forEach((d,i)=>d.classList.toggle('active',i===cur));if(cur===3)setTimeout(()=>document.querySelectorAll('.skill-fill').forEach(el=>el.style.width=el.dataset.pct+'%'),250);}
-window.goTo=goTo;
-
-let sx=0,sy=0,dr=false,iH=null;
-carousel.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;dr=true;iH=null;},{passive:true});
-carousel.addEventListener('touchmove',e=>{if(!dr)return;const dx=e.touches[0].clientX-sx,dy=e.touches[0].clientY-sy;if(iH===null)iH=Math.abs(dx)>Math.abs(dy);if(iH){e.preventDefault();carousel.style.transition='none';carousel.style.transform=`translateX(${-(cur*100)+(dx/window.innerWidth*100)}vw)`;}},{passive:false});
-carousel.addEventListener('touchend',e=>{if(!dr)return;dr=false;carousel.style.transition='transform .48s cubic-bezier(.4,0,.2,1)';const dx=e.changedTouches[0].clientX-sx;if(iH){if(dx<-window.innerWidth*.18&&cur<total-1)goTo(cur+1);else if(dx>window.innerWidth*.18&&cur>0)goTo(cur-1);else goTo(cur);}},{passive:true});
-
-let mx=0,md=false;
-carousel.addEventListener('mousedown',e=>{mx=e.clientX;md=true;});
-carousel.addEventListener('mousemove',e=>{if(!md)return;carousel.style.transition='none';carousel.style.transform=`translateX(${-(cur*100)+(e.clientX-mx)/window.innerWidth*100}vw)`;});
-carousel.addEventListener('mouseup',e=>{if(!md)return;md=false;carousel.style.transition='transform .48s cubic-bezier(.4,0,.2,1)';const dx=e.clientX-mx;if(dx<-window.innerWidth*.15&&cur<total-1)goTo(cur+1);else if(dx>window.innerWidth*.15&&cur>0)goTo(cur-1);else goTo(cur);});
-carousel.addEventListener('mouseleave',()=>{if(md){md=false;goTo(cur);}});
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goTo(cur+1);if(e.key==='ArrowLeft')goTo(cur-1);});
-
-let dark=true;
-document.getElementById('themeBtn').onclick=()=>{dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'light');document.getElementById('themeBtn').textContent=dark?'🌙':'☀️';};
-
-setTimeout(()=>document.getElementById('swipeHint').classList.add('gone'),4500);
-goTo(0);
-</script>
-</body>
-</html>
+function renderSkillCards(arr, id) {
+  document.getElementById(id).innerHTML = arr.map((s, i) => `
+    <div class="card" onclick="toggleCard(this)" style="animation-delay:${.3+i*.07}s">
+      <div class="card-top">
+        <span class="card-icon">${s.icon}</span>
+        <div style="flex:1">
+          <h3>${s.name}${s.elo ? ` <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:var(--accent);font-weight:400"> ELO ${s.elo}</span>` : ''}</h3>
+          <div class="skill-wrap" style="margin-top:.45rem;margin-bottom:0">
+            <div class="skill-label-row">
+              <span class="skill-name" style="font-size:.7rem;color:var(--text3);font-s
