@@ -205,11 +205,43 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 .blog-card:first-child{border-top:2px solid var(--O);}
 .blog-card:hover{background:var(--card-hover);}
 .blog-card.expanded{background:var(--bg2);}
-.blog-img{height:110px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;overflow:hidden;}
+
+
+.blog-img{
+  height:140px;
+  background:var(--bg3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2.4rem;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:-28px;
+  z-index:0;
+}
 .blog-img img.cover-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
 .blog-img .emoji-layer{position:relative;z-index:1;opacity:.45;}
-.blog-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,10,11,.7) 100%);pointer-events:none;}
-.blog-body{padding:.85rem 1rem 1rem;}
+.blog-img::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 15%,
+    rgba(10,10,11,.25) 45%,
+    rgba(10,10,11,.75) 72%,
+    var(--surface) 100%
+  );
+  pointer-events:none;
+}
+.blog-body{
+  padding:.85rem 1rem 1rem;
+  position:relative;
+  z-index:1;
+}
+
+
 .blog-date{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--text3);margin-bottom:.18rem;letter-spacing:.8px;text-transform:uppercase;}
 .blog-source-label{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--O);text-transform:uppercase;letter-spacing:2px;margin-bottom:.35rem;font-weight:500;}
 .blog-card h3{font-family:'Libre Baskerville',serif;font-size:.97rem;font-weight:700;letter-spacing:-.3px;line-height:1.4;margin-bottom:.4rem;color:var(--text);}
@@ -463,8 +495,7 @@ h1.hero-name .dim{color:var(--text2);font-weight:400;font-style:italic;}
 <div class="slide" id="s0">
   <div class="slide-bg" id="bg0"><div class="slide-bg-placeholder" id="bgph0"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect width="60" height="60" fill="#18191d"/><text x="30" y="35" text-anchor="middle" font-size="22" fill="#ff6600" opacity=".3">◈</text></svg></div></div>
   <div class="slide-inner">
-    <div class="status-badge a1"><div class="status-dot"></div>Open to Collaborate</div>
-    <h1 class="hero-name a2">Halo,<br><span class="dim">saya </span>Fastend<br><span class="dim">Muchammad</span></h1>
+    <h1 class="hero-name a1">Halo,<br><span class="dim">saya </span>Fastend<br><span class="dim">Muchammad</span></h1>
     <p class="hero-bio a3">Teknisi hardware, Duta Genre &amp; fast learner dari Banjarnegara yang selalu penasaran sama hal baru — dari PCB sampai ngoding, dari catur sampai reptil.</p>
     <div class="btn-row a4">
       <button class="btn btn-primary" onclick="goTo(1)">Kenalan dulu →</button>
@@ -1183,7 +1214,7 @@ window.showToast=showToast;
 
 /* ── NAV SECRET LOGIN (tap logo 5x) ── */
 let lc=0,lt;
-document.getElementById('navLogo').addEventListener('click',()=>{lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,2000);if(lc>=5){lc=0;if(!window.isAdmin){openModal('loginModal');setTimeout(()=>document.getElementById('loginEmail').focus(),350);}}});
+document.getElementById('navLogo').addEventListener('click',()=>{lc++;clearTimeout(lt);lt=setTimeout(()=>lc=0,2000);if(lc>=5){lc=0;if(!window.isAdmin){openModal('loginModal');setTimeout(()=>document.getElementById('loginEmail').focus(),350);}}}); 
 
 /* ── CAROUSEL ── */
 const LABELS=['Home','Tentang','Pengalaman','Skills','Blog','Ilmu Baru','Jurnal','Quotes','Kontak'];
