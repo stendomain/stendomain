@@ -883,7 +883,7 @@ function renderIlmu() {
       <h3>${sH(p.title)}</h3>
       <p class="ilmu-short">${sH(p.short)}</p>
       <div class="expand-panel"><div class="expand-body">
-        ${(Array.isArray(p.body)?p.body:[p.body||'']).map(x=>`<p>${sH(x)}</p>`).join('')}
+        ${(Array.isArray(p.body)?p.body:[p.body||'']).map(x=>`<p>${x}</p>`).join('')}
         <span class="src">${sH(p.source)}</span>
         ${window.isAdmin&&!p.isStatic?`<div style="margin-top:.7rem;display:flex;gap:.4rem;" onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="editIlmu('${p.id}')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="delItem('ilmu','${p.id}')">🗑️</button></div>`:''}
       </div></div>
@@ -940,7 +940,7 @@ function renderJurnal() {
       <p class="jurnal-short">${sH(p.short)}</p>
       <div class="jurnal-footer">${(p.tags||[]).map(t=>`<span class="tag">${sH(t)}</span>`).join('')}</div>
       <div class="expand-panel"><div class="expand-body">
-        ${(Array.isArray(p.body)?p.body:[p.body||'']).map(x=>`<p>${sH(x)}</p>`).join('')}
+        ${(Array.isArray(p.body)?p.body:[p.body||'']).map(x=>`<p>${x}</p>`).join('')}
         ${p.sourceTitle?`<div class="book-ref"><span class="book-ref-icon">📖</span><div><div class="book-ref-lbl">Source By</div><div class="book-ref-title">${sH(p.sourceTitle)}</div><div class="book-ref-author">${sH(p.sourceAuthor)}</div></div></div>`:''}
         ${window.isAdmin&&!p.isStatic?`<div style="margin-top:.7rem;display:flex;gap:.4rem;" onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="editJurnal('${p.id}')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="delItem('jurnal','${p.id}')">🗑️</button></div>`:''}
       </div></div>
@@ -1000,7 +1000,7 @@ function renderQuotes() {
       <div class="quote-text">"${sH(p.text)}"</div>
       <div class="quote-author"><div class="quote-av">${p.avatar}</div><div><div class="quote-name">${sH(p.name)}</div><div class="quote-src">${sH(p.source)}</div></div></div>
       <div class="quote-context"><div class="quote-ctx-body">
-        ${sH(p.context)}
+        ${p.context}
         ${window.isAdmin&&!p.isStatic?`<div style="margin-top:.7rem;display:flex;gap:.4rem;" onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="editQuote('${p.id}')">✏️ Edit</button><button class="btn btn-danger btn-sm" onclick="delItem('quote','${p.id}')">🗑️</button></div>`:''}
       </div></div>
     </div>`).join('');
@@ -1070,7 +1070,7 @@ async function loadBlogPosts() {
 function renderBlog() {
   document.getElementById('blogList').innerHTML = window.blogPosts.map(post=>{
     const dateStr=post.date||(post.createdAt?(post.createdAt.toDate?post.createdAt.toDate():new Date(post.createdAt)).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}):'');
-    const contentHTML=(Array.isArray(post.content)?post.content:[post.content||'']).map(p=>`<p>${sH(p)}</p>`).join('');
+    const contentHTML=(Array.isArray(post.content)?post.content:[post.content||'']).map(p=>`<p>${p}</p>`).join('');
     const t1=post.tags?.[0]||'',t2=post.tags?.[1]||'',c1=post.tagColors?.[0]||'',c2=post.tagColors?.[1]||'';
     const imgEl=post.imageBase64?`<img class="cover-img" src="${post.imageBase64}" alt=""/><span class="emoji-layer">${post.emoji||'📝'}</span>`:`<span class="emoji-layer">${post.emoji||'📝'}</span>`;
     const sbEl=post.sourceBy?.title?`<div class="blog-sourceby"><div><div class="blog-sourceby-lbl">Source By</div><div class="blog-sourceby-title">${sH(post.sourceBy.title)}</div>${post.sourceBy.author?`<div class="blog-sourceby-author">${sH(post.sourceBy.author)}</div>`:''}</div></div>`:'';
